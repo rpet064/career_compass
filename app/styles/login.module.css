@@ -1,0 +1,51 @@
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 32.5%;
+    height: 27.5%;
+    padding-bottom: 0.5em;
+    position: absolute;
+    position: absolute;
+    top: 27.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loginContainer .header{
+    font-size: 2.25rem;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.loginContainer .body{
+    padding: 1rem 0;
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginContainer input{
+    width: 90%;
+    height: 1.5rem;
+    padding: 0.25rem;
+}
+
+.inputLabel{
+    position: absolute;
+}
+
+.loginContainer .footer{
+    height: 20%;
+}
+
+.loginContainer button{
+    width: 4.5rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background: transparent;
+}

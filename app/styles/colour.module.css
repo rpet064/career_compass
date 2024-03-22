@@ -1,0 +1,9 @@
+.grayBorder{
+    border: 1px solid lightgray;
+    box-shadow: 0 0 10px gray;
+}
+
+.orangeBackground{
+    background-color: #FFAF45;
+    color: white;
+}
