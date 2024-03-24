@@ -1,9 +1,32 @@
-.grayBorder{
-    border: 1px solid lightgray;
+.grayBoxShadow{
     box-shadow: 0 0 10px gray;
 }
 
 .orangeBackground{
     background-color: #FFAF45;
     color: white;
+}
+
+.orangeFont{
+    color: #FFAF45;
+}
+
+.whiteFont{
+    color: white;
+}
+
+.grayFont{
+    color: gray;
+}
+
+.lightGrayFont{
+    color: gray;
+}
+
+.redFont{
+    color: red;
+}
+
+.grayBorder{
+    border: 1px solid lightgray;
 }
