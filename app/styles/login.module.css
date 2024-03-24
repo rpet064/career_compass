@@ -13,11 +13,33 @@
 }
 
 .loginContainer .header{
-    font-size: 2.25rem;
     height: 50%;
     width: 100%;
     display: flex;
     flex-direction: row;
+    padding-top: 1rem;
+}
+
+.loginContainer .header svg{
+    font-size: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.loginContainer .header svg{
+    font-size: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.loginContainer .header span{
+    font-size: 2rem;
+    padding-top: 0.25rem;
+}
+
+.loginContainer .header > span:nth-child(3) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 .loginContainer .body{
