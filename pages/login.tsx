@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import styles from "../styles/login.module.css";
-import colours from "../styles/colour.module.css";
+import styles from "../app/styles/login.module.css";
+import colours from "../app/styles/colour.module.css";
 import { FaCompass } from "react-icons/fa";
 
 export default function Login() {
@@ -13,8 +13,8 @@ export default function Login() {
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
    const [displayUsernameInputLabel, setDisplayUsernameInputLabel] = useState<{ display: string }>({ display: "block" });
    const [displayPasswordInputLabel, setDisplayPasswordInputLabel] = useState<{ display: string }>({ display: "block" });
-   const [IsUsernameInputFocused, setIsUsernameInputFocused] = useState(false);
-   const [isPasswordInputFocused, setIsPasswordInputFocused] = useState(false);
+   const [IsUsernameInputFocused, setIsUsernameInputFocused] = useState<boolean>(false);
+   const [isPasswordInputFocused, setIsPasswordInputFocused] = useState<boolean>(false);
 
    // Increase container width if displaying error message
    useEffect(() => {
