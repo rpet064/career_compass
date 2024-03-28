@@ -1,0 +1,23 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.navbar .logoText{
+    font-size: 1.5rem;
+}
+
+.navbar button{
+    color: white;
+    background-color: #FFAF45;
+}
+
+.navbar button:hover{
+    color: black;
+}
+
+.navbar button{
+    border: none;
+}
