@@ -2,6 +2,10 @@
     box-shadow: 0 0 10px gray;
 }
 
+.lightGrayBoxShadow{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .orangeBackground{
     background-color: #FFAF45;
     color: white;

@@ -72,7 +72,7 @@
 
 /* footer */
 
-.footer{
+.loginFooter{
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -80,7 +80,7 @@
     height: 10%;
 }
 
-.footer button{
+.loginFooter button{
     width: 4rem;
     height: 2.25rem;
     border-radius: 0.25rem;
@@ -88,7 +88,7 @@
     font-weight: semibold;
 }
 
-.footer button:hover{
+.loginFooter button:hover{
     background: #FFAF45;
     color: white;
 }

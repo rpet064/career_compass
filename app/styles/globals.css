@@ -1,4 +1,26 @@
-input, button {
-    border: 1px solid lightgray;
+body{
+    margin: 0;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+svg, input, button, a{
     cursor: pointer;
+}
+
+a, svg{
+    color: white;
+    background-color: #FFAF45;
+}
+
+svg:hover, a:hover{
+    color: black;
+}
+
+svg{
+    width: 2rem;
+    height: 2rem;
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../app/styles/login.module.css";
-import colours from "../app/styles/colour.module.css";
+import colour from "../app/styles/colour.module.css";
 import { FaCompass } from "react-icons/fa";
 
 export default function Login() {
@@ -87,19 +87,20 @@ export default function Login() {
 
    return (
       <div style={{ height: loginContainerHeight }}
-         className={`${styles.loginContainer} ${colours.grayBoxShadow}`}>
+         className={`${styles.loginContainer} ${colour.grayBoxShadow}`}>
          {/* Header */}
-         <div className={`${styles.header} ${colours.orangeBackground}`}>
-            <FaCompass className={colours.whiteFont} />
+         <div className={`${styles.header} ${colour.orangeBackground}`}>
+            <FaCompass className={colour.whiteFont} />
             <span>Sign In</span><span>|</span> <span>Career Compass</span>
          </div>
 
          {/* Body */}
          <div className={styles.body}>
             <div className={styles.inputContainer}>
-            {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colours.lightGrayFont}`}
+            {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
             >Username</span>}
                <input
+                  className={colour.grayBorder}
                   type="username"
                   value={username}
                   onFocus={() => setIsUsernameInputFocused(true)}
@@ -109,9 +110,10 @@ export default function Login() {
                >{usernameErrorMessage}</span>
             </div>
             <div className={styles.inputContainer}>
-               {<span style={displayPasswordInputLabel} className={`${styles.inputLabel} ${colours.lightGrayFont}`}
+               {<span style={displayPasswordInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
                >Password</span>}
                <input
+                  className={colour.grayBorder}
                   type="password"
                   value={password}
                   onFocus={() => setIsPasswordInputFocused(true)}
@@ -123,8 +125,8 @@ export default function Login() {
          </div>
 
          {/* Footer */}
-         <div className={styles.footer}>
-            <button className={`${styles.loginButton}`} disabled={buttonDisabled} onClick={handleLogin}>Login</button>
+         <div className={styles.loginFooter}>
+            <button className={`${styles.loginButton} ${colour.grayBorder}`} disabled={buttonDisabled} onClick={handleLogin}>Login</button>
          </div>
       </div>
    );
