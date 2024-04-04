@@ -4,10 +4,11 @@ import Footer from "../app/components/Footer";
 export default function JobApplication() {
     return (
       <main>
-        <Navbar />
-        <h1>User Profile</h1>
-        <p>Here is the job application page</p>
-        <Footer />
+      <Navbar />
+      <section>
+        <h1>This is the job application</h1>
+      </section>
+      <Footer />
       </main>
     );
 }

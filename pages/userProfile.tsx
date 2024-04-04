@@ -4,10 +4,11 @@ import Footer from "../app/components/Footer";
 export default function UserProfile() {
     return (
       <main>
-        <Navbar />
-        <h1>User Profile</h1>
-        <p>Here is the user profile page</p>
-        <Footer />
+      <Navbar />
+      <section>
+        <h1>This is the user profile</h1>
+      </section>
+      <Footer />
       </main>
     );
 }

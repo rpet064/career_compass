@@ -4,9 +4,11 @@ import Footer from "../app/components/Footer";
 export default function Home() {
     return (
       <main>
-        <Navbar />
+      <Navbar />
+      <section>
         <h1>This is home</h1>
-        <Footer />
+      </section>
+      <Footer />
       </main>
     );
   }
