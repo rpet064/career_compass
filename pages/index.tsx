@@ -9,7 +9,7 @@ export default function Main() {
   // Redirect to login page if not authenticated
   useEffect(() => {
     if (!isAuth) {
-      navigate('/authenticateUser');
+      navigate('/login');
     } else {
       navigate('/userProfile');
     }
