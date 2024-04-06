@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import styles from "../app/styles/auth.module.css";
 import colour from "../app/styles/colour.module.css";
-import { FaCompass } from "react-icons/fa";
 import { AuthFooter } from "../app/components/AuthFooter";
+import { AuthHeader } from "@/app/components/AuthHeader";
 
 const Login = () => {
 
@@ -81,12 +81,8 @@ const Login = () => {
    return (
       <div style={{ height: loginContainerHeight }}
          className={`${styles.loginContainer} ${colour.grayBoxShadow}`}>
-         {/* Header */}
-         <div className={`${styles.header} ${colour.orangeBackground}`}>
-            <FaCompass className={colour.whiteFont} />
-            {isLoginScreen? <span>Sign In</span> : <span>Create Account</span>}
-            <span>|</span> <span>Career Compass</span>
-         </div>
+            
+         <AuthHeader isLoginScreen={isLoginScreen} />
 
          {/* Body */}
          <div className={styles.body}>
