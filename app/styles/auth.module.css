@@ -59,6 +59,19 @@
     padding-left: 0.9rem;
 }
 
+.body p{
+    margin-left: 2rem;
+}
+
+.newAccountSpan{
+    color: #6dade0
+}
+
+.newAccountSpan:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .inputLabel{
     position: absolute;
     left : 2.25rem;
