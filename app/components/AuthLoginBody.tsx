@@ -61,30 +61,6 @@ export const AuthLoginBody: FC<AuthHeaderProps> = ({
     }
  }, [username, password, setButtonDisabled]);
 
- // Manage display of label inside username input
- useEffect(() => {
-    let displayInputLabel = displayUsernameInputLabel.display;
-    if(IsUsernameInputFocused)
-       displayInputLabel = "none";
-
-    if(username !== undefined && username.length > 0)
-       displayInputLabel = "none";
-
-    setDisplayUsernameInputLabel({ display: displayInputLabel })
- }, [IsUsernameInputFocused, username, displayUsernameInputLabel]);
-
- // Manage display of label inside password input
- useEffect(() => {
-    let displayInputLabel = displayPasswordInputLabel.display;
-    if(isPasswordInputFocused)
-       displayInputLabel = "none";
-
-    if(password !== undefined && password.length > 0)
-       displayInputLabel = "none";
-
-       setDisplayPasswordInputLabel({ display: displayInputLabel })
- }, [isPasswordInputFocused, password, displayPasswordInputLabel]);
-
     return (
         <div className={styles.body}>
             <AuthRedirectLink isLoginScreen={isLoginScreen} setIsLoginScreen={setIsLoginScreen} />

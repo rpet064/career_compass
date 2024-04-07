@@ -2,10 +2,10 @@ import { useState } from "react";
 import styles from "../app/styles/auth.module.css";
 import colour from "../app/styles/colour.module.css";
 import { AuthHeader } from "../app/components/AuthHeader";
-import { AuthLoginBody } from "../app/components/AuthLoginBody";
+import { AuthSignUpBody } from "../app/components/AuthSignUpBody";
 import { AuthFooter } from "../app/components/AuthFooter";
 
-const Login = () => {
+const CreateAccount = () => {
 
    const [loginContainerHeight, setContainerHeight] = useState<string>("30%");
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
@@ -18,18 +18,18 @@ const Login = () => {
 
          <AuthHeader isLoginScreen={isLoginScreen} />
 
-         <AuthLoginBody isLoginScreen={isLoginScreen}
+         <AuthSignUpBody isLoginScreen={isLoginScreen}
          passwordErrorMessage={passwordErrorMessage} 
          setPasswordErrorMessage={setPasswordErrorMessage}
          setButtonDisabled={setButtonDisabled}
          setIsLoginScreen={setIsLoginScreen}
          setContainerHeight={setContainerHeight}/>
 
-         <AuthFooter isLoginScreen={isLoginScreen}
+         <AuthFooter isLoginScreen={   isLoginScreen} 
          buttonDisabled={buttonDisabled} 
          setPasswordErrorMessage={setPasswordErrorMessage} />
       </div>
    );
 }
 
-export default Login;
+export default CreateAccount;
