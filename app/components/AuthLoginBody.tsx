@@ -1,8 +1,9 @@
 import styles from "../styles/auth.module.css";
-import colour from "../styles/colour.module.css";
 import { FC } from "react";
 import { AuthRedirectLink } from "../components/AuthRedirectLink";
 import { useState, useEffect } from "react";
+import { AuthPasswordContainer } from "../components/AuthPasswordContainer";
+import { AuthUsernameContainer } from "../components/AuthUsernameContainer";
 
 interface AuthHeaderProps {
     isLoginScreen: boolean;
@@ -64,32 +65,19 @@ export const AuthLoginBody: FC<AuthHeaderProps> = ({
     return (
         <div className={styles.body}>
             <AuthRedirectLink isLoginScreen={isLoginScreen} setIsLoginScreen={setIsLoginScreen} />
-            <div className={styles.inputContainer}>
-                {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
-                >Username</span>}
-                <input
-                    className={colour.grayBorder}
-                    type="username"
-                    value={username}
-                    onFocus={() => setIsUsernameInputFocused(true)}
-                    onBlur={() => setIsUsernameInputFocused(false)}
-                    onChange={(e) => setUsername(e.target.value)} />
-                <span className={styles.authenticationLabel}
-                >{usernameErrorMessage}</span>
-            </div>
-            <div className={styles.inputContainer}>
-                {<span style={displayPasswordInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
-                >Password</span>}
-                <input
-                    className={colour.grayBorder}
-                    type="password"
-                    value={password}
-                    onFocus={() => setIsPasswordInputFocused(true)}
-                    onBlur={() => setIsPasswordInputFocused(false)}
-                    onChange={(e) => setPassword(e.target.value)} />
-                <span className={styles.authenticationLabel}
-                >{passwordErrorMessage}</span>
-            </div>
+            <AuthUsernameContainer displayUsernameInputLabel={displayUsernameInputLabel}
+                setIsUsernameInputFocused={setIsUsernameInputFocused}
+                setUsername={setUsername}
+                usernameErrorMessage={usernameErrorMessage}
+                username={username} />
+            <AuthPasswordContainer
+                password={password}
+                setPassword={setPassword}
+                passwordErrorMessage={passwordErrorMessage}
+                setIsPasswordInputFocused={setIsPasswordInputFocused}
+                isPasswordInputFocused={isPasswordInputFocused}
+                displayPasswordInputLabel={displayPasswordInputLabel}
+            />
         </div >
     )
 }
