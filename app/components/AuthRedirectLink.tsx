@@ -1,11 +1,7 @@
 import styles from "../styles/auth.module.css";
 import { FC } from "react";
 import { useNavigation } from "../utility/navigation";
-
-interface AuthRedirectLinkProps {
-    isLoginScreen: boolean;
-    setIsLoginScreen: (isLoginScreen: boolean) => void;
-}
+import { AuthRedirectLinkProps } from "../interfaces/interfaces";
 
  export const AuthRedirectLink: FC<AuthRedirectLinkProps> = ({ isLoginScreen, setIsLoginScreen }) => {
 
