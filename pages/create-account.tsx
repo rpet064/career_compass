@@ -7,14 +7,14 @@ import { AuthFooter } from "../app/components/AuthFooter";
 
 const CreateAccount = () => {
 
-   const [loginContainerHeight, setContainerHeight] = useState<string>("30%");
+   const [newAccountContainerHeight, setNewAccountContainerHeight] = useState<string>("50%");
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
    const [isLoginScreen, setIsLoginScreen] = useState<boolean>(true);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
 
    return (
-      <div style={{ height: loginContainerHeight }} 
-         className={`${styles.loginContainer} ${colour.grayBoxShadow}`}>
+      <div style={{ height: newAccountContainerHeight }} 
+         className={`${styles.loginContainer} ${styles.newAccountContainer} ${colour.grayBoxShadow}`}>
 
          <AuthHeader isLoginScreen={isLoginScreen} />
 
@@ -23,9 +23,9 @@ const CreateAccount = () => {
          setPasswordErrorMessage={setPasswordErrorMessage}
          setButtonDisabled={setButtonDisabled}
          setIsLoginScreen={setIsLoginScreen}
-         setContainerHeight={setContainerHeight}/>
+         setNewAccountContainerHeight={setNewAccountContainerHeight}/>
 
-         <AuthFooter isLoginScreen={   isLoginScreen} 
+         <AuthFooter isLoginScreen={ isLoginScreen} 
          buttonDisabled={buttonDisabled} 
          setPasswordErrorMessage={setPasswordErrorMessage} />
       </div>
