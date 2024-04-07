@@ -4,17 +4,9 @@ import { AuthRedirectLink } from "../components/AuthRedirectLink";
 import { useState, useEffect } from "react";
 import { AuthPasswordContainer } from "../components/AuthPasswordContainer";
 import { AuthUsernameContainer } from "../components/AuthUsernameContainer";
+import { AuthLoginBodyProps } from "../interfaces/interfaces";
 
-interface AuthHeaderProps {
-    isLoginScreen: boolean;
-    setIsLoginScreen: (isLoginScreen: boolean) => void;
-    passwordErrorMessage: string | null;
-    setPasswordErrorMessage: (passwordErrorMessage: string | null) => void;
-    setButtonDisabled: (buttonDisabled: boolean) => void;
-    setContainerHeight: (loginContainerHeight: string) => void;
-}
-
-export const AuthLoginBody: FC<AuthHeaderProps> = ({
+export const AuthLoginBody: FC<AuthLoginBodyProps> = ({
 
     isLoginScreen, passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setContainerHeight, setIsLoginScreen }) => {
 
@@ -63,13 +55,16 @@ export const AuthLoginBody: FC<AuthHeaderProps> = ({
  }, [username, password, setButtonDisabled]);
 
     return (
-        <div className={styles.body}>
+        <div className={styles.loginBody}>
             <AuthRedirectLink isLoginScreen={isLoginScreen} setIsLoginScreen={setIsLoginScreen} />
+
             <AuthUsernameContainer displayUsernameInputLabel={displayUsernameInputLabel}
                 setIsUsernameInputFocused={setIsUsernameInputFocused}
                 setUsername={setUsername}
                 usernameErrorMessage={usernameErrorMessage}
-                username={username} />
+                username={username} 
+                isLoginPage={true} />
+                
             <AuthPasswordContainer
                 password={password}
                 setPassword={setPassword}
@@ -77,7 +72,7 @@ export const AuthLoginBody: FC<AuthHeaderProps> = ({
                 setIsPasswordInputFocused={setIsPasswordInputFocused}
                 isPasswordInputFocused={isPasswordInputFocused}
                 displayPasswordInputLabel={displayPasswordInputLabel}
-            />
+                isLoginPage={true} />
         </div >
     )
 }

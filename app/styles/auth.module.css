@@ -5,7 +5,6 @@
     width: 35%;
     padding-bottom: 0.5em;
     position: absolute;
-    position: absolute;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -21,50 +20,51 @@
     height: 40%;
 }
 
- .header svg{
+ .header svg, .newAccountHeader svg{
     font-size: 3rem;
     padding-right: 0.5rem;
     padding-left: 1rem;
     padding-top: 0.25rem;
 }
 
- .header span{
+ .header span, .newAccountHeader span{
     font-size: 1.75rem;
     padding-top: 0.75rem;
 }
 
- .header > span:nth-child(3) {
+ .header > span:nth-child(3), .newAccountHeader > span:nth-child(3) {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
 
 /* body */
 
- .body{
+ .loginBody{
     padding: 1rem 0;
     height: 50%;
     width: 100%;
 }
 
-.inputContainer{
+.fullWidthInputContainer{
     margin: 1rem 0rem;
     text-align: center;
     padding-left: 5%;
     padding-right: calc(5% + 0.9rem);
 }
 
-.body input{
+.loginBody input{
     width: 100%;
     height: 2rem;
     padding-left: 0.9rem;
 }
 
-.body p{
+.loginBody p{
     margin-left: 2rem;
 }
 
 .newAccountSpan{
-    color: #6dade0
+    color: #6dade0;
+    padding-left: 0.5rem;
 }
 
 .newAccountSpan:hover{
@@ -104,5 +104,60 @@
 .loginFooter button:hover{
     background: #FFAF45;
     color: white;
+}
+
+/* new account styling */
+
+.newAccountContainer{
+    width: 60%!important;
+    top: 40%!important;
+}
+
+.newAccountHeader{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-top: 1rem;
+    height: 15%;
+}
+
+.header svg, .newAccountHeader svg{
+    padding-top: 0.75rem !important;
+}
+
+.newAccountBody{
+    height: 75%;
+}
+
+.newAccountBody > p{
+    margin: 1.25rem 0rem 1.5rem 1.5rem;
+}
+
+.newAccountInputContainer{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 1rem;
+}
+
+.oneThirdWidthInputContainer{
+    width: 33%;
+    height: 25%;
+}
+
+.halfWidthInputContainer{
+    width: 50%;
+    height: 25%;
+}
+
+.oneThirdWidthInputContainer input, .halfWidthInputContainer input{
+    width: 90%;
+    margin: 0.5rem 0rem;
+    padding: 0.75rem;
+}
+
+.selectContainer{
+    width: calc(33% - 1rem);
+    margin: 0.25rem 0.5rem;
 }
 
