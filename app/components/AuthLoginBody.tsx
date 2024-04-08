@@ -1,6 +1,6 @@
 import styles from "../styles/auth.module.css";
 import { FC } from "react";
-import { AuthRedirectLink } from "../components/AuthRedirectLink";
+import { AuthRedirectLink } from "./loginComponents/AuthRedirectLink";
 import { useState, useEffect } from "react";
 import { AuthPasswordContainer } from "../components/AuthPasswordContainer";
 import { AuthUsernameContainer } from "../components/AuthUsernameContainer";
@@ -8,7 +8,7 @@ import { AuthLoginBodyProps } from "../interfaces/interfaces";
 
 export const AuthLoginBody: FC<AuthLoginBodyProps> = ({
 
-    isLoginScreen, passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setContainerHeight, setIsLoginScreen }) => {
+    passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setContainerHeight }) => {
 
     const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
     const [username, setUsername] = useState<string | undefined>(undefined);
@@ -56,7 +56,7 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({
 
     return (
         <div className={styles.loginBody}>
-            <AuthRedirectLink isLoginScreen={isLoginScreen} setIsLoginScreen={setIsLoginScreen} />
+            <AuthRedirectLink />
 
             <AuthUsernameContainer displayUsernameInputLabel={displayUsernameInputLabel}
                 setIsUsernameInputFocused={setIsUsernameInputFocused}

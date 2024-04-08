@@ -1,13 +1,15 @@
 import styles from "../styles/auth.module.css";
+import globals from "../styles/global.module.css";
 import colour from "../styles/colour.module.css";
 import { FC, useState, useEffect } from "react";
-import { AuthRedirectLink } from "../components/AuthRedirectLink";
+import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
 import { AuthPasswordContainer } from "../components/AuthPasswordContainer";
 import { AuthUsernameContainer } from "../components/AuthUsernameContainer";
 import { AuthSignUpBodyProps } from "../interfaces/interfaces";
+import signup from "../styles/signup.module.css";
 
 export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
-    isLoginScreen, passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setNewAccountContainerHeight, setIsLoginScreen }) => {
+    passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setNewAccountContainerHeight}) => {
 
     const [username, setUsername] = useState<string | undefined>(undefined);
     const [password, setPassword] = useState<string | undefined>(undefined);
@@ -77,10 +79,10 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
     }
 
     return (
-        <div className={styles.newAccountBody}>
-            <AuthRedirectLink isLoginScreen={isLoginScreen} setIsLoginScreen={setIsLoginScreen} />
+        <div className={signup.newAccountBody}>
+            <SignupRedirectLink />
 
-            <div className={styles.newAccountInputContainer}>
+            <div className={signup.newAccountInputContainer}>
                 <AuthUsernameContainer displayUsernameInputLabel={displayUsernameInputLabel}
                     setIsUsernameInputFocused={setIsUsernameInputFocused}
                     setUsername={setUsername}
@@ -89,7 +91,7 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     isLoginPage={false}
                 />
 
-                <div className={styles.halfWidthInputContainer}>
+                <div className={globals.halfWidthInputContainer}>
                     {<span style={displayEmailInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
                     >Email</span>}
                     <input
@@ -112,7 +114,7 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     displayPasswordInputLabel={displayPasswordInputLabel}
                     isLoginPage={false} />
 
-                <div className={styles.oneThirdWidthInputContainer}>
+                <div className={globals.oneThirdWidthInputContainer}>
                     {<span style={displayTitleInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
                     >Title</span>}
                     <input
@@ -126,7 +128,7 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     >{emailErrorMessage}</span>
                 </div>
 
-                <div className={styles.oneThirdWidthInputContainer}>
+                <div className={globals.oneThirdWidthInputContainer}>
                     {<span style={displayFirstNameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
                     >First Name</span>}
                     <input
@@ -140,7 +142,7 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     >{emailErrorMessage}</span>
                 </div>
 
-                <div className={styles.oneThirdWidthInputContainer}>
+                <div className={globals.oneThirdWidthInputContainer}>
                     {<span style={displayLastNameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
                     >Last Name</span>}
                     <input
@@ -155,7 +157,7 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                 </div>
 
                 {isAdmin &&
-                    <div className={styles.selectContainer} >
+                    <div className={signup.selectContainer} >
                         <label>Role: </label>
                         <select value={role} onChange={changeRole}>
                             <option value="admin">Admin</option>
