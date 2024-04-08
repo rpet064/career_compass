@@ -2,11 +2,12 @@ import styles from "../styles/auth.module.css";
 import colour from "../styles/colour.module.css";
 import { FC } from "react";
 import { AuthUsernameContainerProps } from "../interfaces/interfaces";
+import globals from "../styles/global.module.css";
 
 export const AuthUsernameContainer: FC<AuthUsernameContainerProps> = ({
     displayUsernameInputLabel, setIsUsernameInputFocused, setUsername, usernameErrorMessage, username, isLoginPage}) => {
     return (
-        <div className={isLoginPage ? styles.fullWidthInputContainer : styles.halfWidthInputContainer}>
+        <div className={isLoginPage ? styles.fullWidthInputContainer : globals.halfWidthInputContainer}>
         {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
         >Username</span>}
         <input
