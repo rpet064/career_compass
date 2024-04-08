@@ -63,7 +63,6 @@
 }
 
 .newAccountSpan{
-    color: #6dade0;
     padding-left: 0.5rem;
 }
 
@@ -104,60 +103,5 @@
 .loginFooter button:hover{
     background: #FFAF45;
     color: white;
-}
-
-/* new account styling */
-
-.newAccountContainer{
-    width: 60%!important;
-    top: 40%!important;
-}
-
-.newAccountHeader{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    padding-top: 1rem;
-    height: 15%;
-}
-
-.header svg, .newAccountHeader svg{
-    padding-top: 0.75rem !important;
-}
-
-.newAccountBody{
-    height: 75%;
-}
-
-.newAccountBody > p{
-    margin: 1.25rem 0rem 1.5rem 1.5rem;
-}
-
-.newAccountInputContainer{
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    margin: 1rem;
-}
-
-.oneThirdWidthInputContainer{
-    width: 33%;
-    height: 25%;
-}
-
-.halfWidthInputContainer{
-    width: 50%;
-    height: 25%;
-}
-
-.oneThirdWidthInputContainer input, .halfWidthInputContainer input{
-    width: 90%;
-    margin: 0.5rem 0rem;
-    padding: 0.75rem;
-}
-
-.selectContainer{
-    width: calc(33% - 1rem);
-    margin: 0.25rem 0.5rem;
 }
 

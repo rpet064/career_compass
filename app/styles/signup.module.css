@@ -1,0 +1,38 @@
+/* new account styling */
+
+.newAccountContainer{
+    width: 60%!important;
+    top: 40%!important;
+}
+
+.newAccountHeader{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-top: 1rem;
+    height: 15%;
+}
+
+.header svg, .newAccountHeader svg{
+    padding-top: 0.75rem !important;
+}
+
+.newAccountBody{
+    height: 75%;
+}
+
+.newAccountBody > p{
+    margin: 1.25rem 0rem 1.5rem 1.5rem;
+}
+
+.newAccountInputContainer{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 1rem;
+}
+
+.selectContainer{
+    width: calc(33% - 1rem);
+    margin: 0.25rem 0.5rem;
+}

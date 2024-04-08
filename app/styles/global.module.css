@@ -1,0 +1,15 @@
+.oneThirdWidthInputContainer{
+    width: 33%;
+    height: 25%;
+}
+
+.halfWidthInputContainer{
+    width: 50%;
+    height: 25%;
+}
+
+.oneThirdWidthInputContainer input, .halfWidthInputContainer input{
+    width: 90%;
+    margin: 0.5rem 0rem;
+    padding: 0.75rem;
+}
