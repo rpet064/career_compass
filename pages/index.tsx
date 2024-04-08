@@ -1,6 +1,7 @@
 import { isAuthenticated } from "../app/utility/isAuthenticated";
 import { useEffect } from 'react';
 import { useNavigation } from "../app/utility/navigation";
+import LoadingSpinner from "../app/components/LoadingSpinner";
 
 export default function Main() {
   const isAuth = isAuthenticated(false);
@@ -17,7 +18,7 @@ export default function Main() {
 
   return (
     <>
-      <div>Loader goes here</div>
+        <LoadingSpinner />
     </>
   );
 }
