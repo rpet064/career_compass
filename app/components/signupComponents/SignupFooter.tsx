@@ -1,4 +1,4 @@
-import styles from "../../styles/auth.module.css";
+import auth from "../../styles/auth.module.css";
 import colour from "../../styles/colour.module.css";
 import { FC} from "react";
 import { AuthFooterProps } from "../../interfaces/interfaces";
@@ -10,7 +10,7 @@ import { AuthFooterProps } from "../../interfaces/interfaces";
      }
 
     return(
-        <div className={styles.loginFooter}>
+        <div className={auth.loginFooter}>
         <button className={colour.grayBorder} disabled={buttonDisabled}
             onClick={() => createNewAccount()}>Create Account</button>
      </div>

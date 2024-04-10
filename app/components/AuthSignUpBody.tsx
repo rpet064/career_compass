@@ -88,11 +88,11 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     setUsername={setUsername}
                     usernameErrorMessage={usernameErrorMessage}
                     username={username}
-                    isLoginPage={false}
-                />
+                    isLoginPage={false}/>
 
                 <div className={globals.halfWidthInputContainer}>
-                    {<span style={displayEmailInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
+                    {<span style={displayEmailInputLabel} className={`${styles.inputLabel} 
+                    ${globals.secondHalfWidthInputLabel} ${colour.lightGrayFont}`}
                     >Email</span>}
                     <input
                         className={colour.grayBorder}
@@ -115,7 +115,8 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     isLoginPage={false} />
 
                 <div className={globals.oneThirdWidthInputContainer}>
-                    {<span style={displayTitleInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
+                    {<span style={displayTitleInputLabel} className={`${styles.inputLabel} 
+                    ${globals.secondHalfWidthInputLabel} ${colour.lightGrayFont}`}
                     >Title</span>}
                     <input
                         className={colour.grayBorder}
@@ -143,7 +144,8 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                 </div>
 
                 <div className={globals.oneThirdWidthInputContainer}>
-                    {<span style={displayLastNameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
+                    {<span style={displayLastNameInputLabel} className={`${styles.inputLabel} 
+                    ${globals.secondThirdWidthInputLabel} ${colour.lightGrayFont}`}
                     >Last Name</span>}
                     <input
                         className={colour.grayBorder}

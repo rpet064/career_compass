@@ -7,6 +7,6 @@ import { useNavigation } from "../../utility/navigation";
     return(
         <p>Create Account
         <span onClick={() => navigate('/create-account')}
-        className={`${styles.newAccountSpan} ${colours.lightBlueFont}`}>Sign up here</span></p>
+        className={`${styles.redirectAuthSpan} ${colours.lightBlueFont}`}>Sign up here</span></p>
     )
 }

@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 35%;
+    width: 35vw;
+    min-width: 500px;
     padding-bottom: 0.5em;
     position: absolute;
     top: 30%;
@@ -11,7 +12,6 @@
 }
 
 /* header */
-
 .header{
     width: 100%;
     display: flex;
@@ -21,10 +21,9 @@
 }
 
  .header svg, .newAccountHeader svg{
-    font-size: 3rem;
     padding-right: 0.5rem;
     padding-left: 1rem;
-    padding-top: 0.25rem;
+    padding-top: 0.75rem;
 }
 
  .header span, .newAccountHeader span{
@@ -46,27 +45,21 @@
 }
 
 .fullWidthInputContainer{
-    margin: 1rem 0rem;
-    text-align: center;
-    padding-left: 5%;
-    padding-right: calc(5% + 0.9rem);
-}
-
-.loginBody input{
     width: 100%;
-    height: 2rem;
-    padding-left: 0.9rem;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0rem !important;
 }
 
 .loginBody p{
     margin-left: 2rem;
 }
 
-.newAccountSpan{
+.redirectAuthSpan{
     padding-left: 0.5rem;
 }
 
-.newAccountSpan:hover{
+.redirectAuthSpan:hover{
     text-decoration: underline;
     cursor: pointer;
 }
@@ -103,5 +96,20 @@
 .loginFooter button:hover{
     background: #FFAF45;
     color: white;
+}
+
+@media screen and (max-width: 500px){
+    .loginContainer{
+        width: 90vw;
+        min-width: 325px;
+    }
+
+    .header span, .newAccountHeader span{
+        font-size: 1.5rem !important;
+    }
+
+    .header svg{
+        padding-left: 1.5rem;
+    }
 }
 

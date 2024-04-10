@@ -1,15 +1,36 @@
+/* input containers */
+
 .oneThirdWidthInputContainer{
     width: 33%;
-    height: 25%;
 }
 
 .halfWidthInputContainer{
     width: 50%;
-    height: 25%;
 }
 
 .oneThirdWidthInputContainer input, .halfWidthInputContainer input{
     width: 90%;
     margin: 0.5rem 0rem;
-    padding: 0.75rem;
+    padding: 1rem 0rem;
+}
+
+/* input label */
+
+.secondHalfWidthInputLabel{
+    margin-left: 49%;
+}
+
+.secondThirdWidthInputLabel{
+    margin-left: 36%;
+}
+
+@media screen and (max-width: 1280px){
+    .oneThirdWidthInputContainer, .halfWidthInputContainer{
+        display: block;
+        width: 100%;
+    }
+
+    .secondHalfWidthInputLabel, .secondThirdWidthInputLabel{
+        margin-left: 0 !important;
+    }
 }

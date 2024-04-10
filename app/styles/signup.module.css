@@ -1,8 +1,7 @@
 /* new account styling */
-
 .newAccountContainer{
-    width: 60%!important;
-    top: 40%!important;
+    width: 60vw;
+    top: 30vw;
 }
 
 .newAccountHeader{
@@ -10,15 +9,8 @@
     display: flex;
     flex-direction: row;
     padding-top: 1rem;
-    height: 15%;
-}
-
-.header svg, .newAccountHeader svg{
-    padding-top: 0.75rem !important;
-}
-
-.newAccountBody{
-    height: 75%;
+    height: 10vh;
+    min-height: 10vh;
 }
 
 .newAccountBody > p{
@@ -33,6 +25,22 @@
 }
 
 .selectContainer{
-    width: calc(33% - 1rem);
-    margin: 0.25rem 0.5rem;
+    margin: auto 0;
+    font-size: 1.1rem;
+    padding-left: 1rem;
+}
+
+.selectContainer > select{
+    width: 15.5rem;
+    font-size: 3rem;
+    margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 1280px){
+    .newAccountContainer{
+        height: 65vw!important;
+        min-height: 65vw!important;
+        top: 40vw;
+        overflow: hidden;
+    }
 }
