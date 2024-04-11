@@ -1,13 +1,22 @@
-export interface AuthFooterProps {
-    buttonDisabled: boolean;
-    setPasswordErrorMessage: (message: string) => void;
-}
-
 export interface AuthSignUpBodyProps {
     passwordErrorMessage: string | null;
     setPasswordErrorMessage: (passwordErrorMessage: string | null) => void;
     setButtonDisabled: (buttonDisabled: boolean) => void;
     setNewAccountContainerHeight: (loginContainerHeight: string) => void;
+    username?: string;
+    password?: string;
+    email?: string;
+    title?: string;
+    firstName?: string;
+    lastName?: string;
+    role?: string;
+    setUsername: (username: string) => void;
+    setPassword: (password: string) => void;
+    setEmail: (email: string) => void;
+    setTitle: (title: string) => void;
+    setFirstName: (firstName: string) => void;
+    setLastName: (lastName: string) => void;
+    setRole: (role: string) => void;
 }
 
 export interface AuthLoginBodyProps {
@@ -15,23 +24,26 @@ export interface AuthLoginBodyProps {
     setPasswordErrorMessage: (passwordErrorMessage: string | null) => void;
     setButtonDisabled: (buttonDisabled: boolean) => void;
     setContainerHeight: (loginContainerHeight: string) => void;
-}
-
-export interface AuthUsernameContainerProps {
-    displayUsernameInputLabel: { display: string };
-    setIsUsernameInputFocused: (isFocused: boolean) => void;
+    username?: string;
+    password?: string;
     setUsername: (username: string) => void;
-    usernameErrorMessage: string | null;
-    username: string | undefined;
-    isLoginPage: boolean;
+    setPassword: (password: string) => void;
+}
+export interface AuthFooterProps {
+    buttonDisabled: boolean;
+    setPasswordErrorMessage: (message: string) => void;
+    username?: string;
+    password?: string;
 }
 
-export interface AuthPasswordContainerProps {
-    password: string | undefined;
-    setPassword: (password: string) => void;
-    passwordErrorMessage: string | null;
-    setIsPasswordInputFocused: (isPasswordInputFocused: boolean) => void;
-    isPasswordInputFocused: boolean;
-    displayPasswordInputLabel: { display: string };
-    isLoginPage: boolean;
+export interface SignupFooterProps {
+    buttonDisabled: boolean;
+    setPasswordErrorMessage: (message: string) => void;
+    username?: string;
+    password?: string;
+    email?: string;
+    title?: string;
+    firstName?: string;
+    lastName?: string;
+    role?: string;
 }

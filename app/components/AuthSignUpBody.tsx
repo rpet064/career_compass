@@ -3,22 +3,14 @@ import globals from "../styles/global.module.css";
 import colour from "../styles/colour.module.css";
 import { FC, useState, useEffect } from "react";
 import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
-import { AuthPasswordContainer } from "../components/AuthPasswordContainer";
-import { AuthUsernameContainer } from "../components/AuthUsernameContainer";
 import { AuthSignUpBodyProps } from "../interfaces/interfaces";
 import signup from "../styles/signup.module.css";
 
 export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
-    passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setNewAccountContainerHeight}) => {
-
-    const [username, setUsername] = useState<string | undefined>(undefined);
-    const [password, setPassword] = useState<string | undefined>(undefined);
-    const [email, setEmail] = useState<string | undefined>(undefined);
-    const [title, setTitle] = useState<string | undefined>(undefined);
-    const [firstName, setFirstName] = useState<string | undefined>(undefined);
-    const [lastName, setLastName] = useState<string | undefined>(undefined);
-    const [role, setRole] = useState<string>("User");
-
+    passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setNewAccountContainerHeight,
+    username, password, email, title, firstName, lastName, role,
+    setUsername, setPassword, setEmail, setTitle, setFirstName, setLastName, setRole  }) => {
+        
     const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
 
@@ -83,12 +75,19 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
             <SignupRedirectLink />
 
             <div className={signup.newAccountInputContainer}>
-                <AuthUsernameContainer displayUsernameInputLabel={displayUsernameInputLabel}
-                    setIsUsernameInputFocused={setIsUsernameInputFocused}
-                    setUsername={setUsername}
-                    usernameErrorMessage={usernameErrorMessage}
-                    username={username}
-                    isLoginPage={false}/>
+                <div className={globals.halfWidthInputContainer}>
+                    {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
+                    >Username</span>}
+                    <input
+                        className={colour.grayBorder}
+                        type="username"
+                        value={username}
+                        onFocus={() => setIsUsernameInputFocused(true)}
+                        onBlur={() => setIsUsernameInputFocused(false)}
+                        onChange={(e) => setUsername(e.target.value)} />
+                    <span className={styles.authenticationLabel}
+                    >{usernameErrorMessage}</span>
+                </div>
 
                 <div className={globals.halfWidthInputContainer}>
                     {<span style={displayEmailInputLabel} className={`${styles.inputLabel} 
@@ -105,14 +104,19 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     >{emailErrorMessage}</span>
                 </div>
 
-                <AuthPasswordContainer
-                    password={password}
-                    setPassword={setPassword}
-                    passwordErrorMessage={passwordErrorMessage}
-                    setIsPasswordInputFocused={setIsPasswordInputFocused}
-                    isPasswordInputFocused={isPasswordInputFocused}
-                    displayPasswordInputLabel={displayPasswordInputLabel}
-                    isLoginPage={false} />
+                <div className={globals.halfWidthInputContainer}>
+                    {<span style={displayPasswordInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
+                    >Password</span>}
+                    <input
+                        className={colour.grayBorder}
+                        type="password"
+                        value={password}
+                        onFocus={() => setIsPasswordInputFocused(true)}
+                        onBlur={() => setIsPasswordInputFocused(false)}
+                        onChange={(e) => setPassword(e.target.value)} />
+                    <span className={styles.authenticationLabel}
+                    >{passwordErrorMessage}</span>
+                </div>
 
                 <div className={globals.oneThirdWidthInputContainer}>
                     {<span style={displayTitleInputLabel} className={`${styles.inputLabel} 

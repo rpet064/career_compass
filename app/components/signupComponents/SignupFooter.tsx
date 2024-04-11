@@ -1,9 +1,10 @@
 import auth from "../../styles/auth.module.css";
 import colour from "../../styles/colour.module.css";
-import { FC} from "react";
-import { AuthFooterProps } from "../../interfaces/interfaces";
+import { FC } from "react";
+import { SignupFooterProps } from "../../interfaces/interfaces";
 
- export const SignupFooter: FC<AuthFooterProps> = ({ buttonDisabled, setPasswordErrorMessage }) => {
+ export const SignupFooter: FC<SignupFooterProps> = ({ 
+    buttonDisabled, setPasswordErrorMessage, username, password, email, title, firstName, lastName, role }) => {
      const createNewAccount = () => {
         setPasswordErrorMessage("Test");
         return

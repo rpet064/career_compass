@@ -3,11 +3,10 @@ import colour from "../../styles/colour.module.css";
 import { FC } from "react";
 import { AuthFooterProps } from "../../interfaces/interfaces";
 
- export const AuthFooter: FC<AuthFooterProps> = ({ buttonDisabled, setPasswordErrorMessage }) => {
+ export const AuthFooter: FC<AuthFooterProps> = ({ buttonDisabled, setPasswordErrorMessage, username, password }) => {
      const handleLogin = () => {
         try {
-            //  const data = await loginUser(username, password);
-            setPasswordErrorMessage("Invalid username or password");
+            //  const data = await createUser(username, password, email, title, firstName, lastName, role);
          } catch (error) {
             return;
          }

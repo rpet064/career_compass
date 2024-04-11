@@ -7,6 +7,8 @@ import { AuthFooter } from "../app/components/loginComponents/AuthFooter";
 
 const Login = () => {
 
+   const [username, setUsername] = useState<string | undefined>(undefined);
+   const [password, setPassword] = useState<string | undefined>(undefined);
    const [loginContainerHeight, setContainerHeight] = useState<string>("30%");
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
@@ -20,7 +22,11 @@ const Login = () => {
          <AuthLoginBody passwordErrorMessage={passwordErrorMessage} 
          setPasswordErrorMessage={setPasswordErrorMessage}
          setButtonDisabled={setButtonDisabled}
-         setContainerHeight={setContainerHeight}/>
+         setContainerHeight={setContainerHeight}
+         username={username}
+         password={password}
+         setUsername={setUsername}
+         setPassword={setPassword}/>
 
          <AuthFooter buttonDisabled={buttonDisabled} 
          setPasswordErrorMessage={setPasswordErrorMessage} />

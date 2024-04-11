@@ -10,8 +10,15 @@ const CreateAccount = () => {
 
    const [newAccountContainerHeight, setNewAccountContainerHeight] = useState<string>("50%");
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
-   const [, ] = useState<boolean>(true);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
+
+   const [username, setUsername] = useState<string | undefined>(undefined);
+   const [password, setPassword] = useState<string | undefined>(undefined);
+   const [email, setEmail] = useState<string | undefined>(undefined);
+   const [title, setTitle] = useState<string | undefined>(undefined);
+   const [firstName, setFirstName] = useState<string | undefined>(undefined);
+   const [lastName, setLastName] = useState<string | undefined>(undefined);
+   const [role, setRole] = useState<string>("User");
 
    return (
       <div style={{ height: newAccountContainerHeight }} 
@@ -22,10 +29,31 @@ const CreateAccount = () => {
          <AuthSignUpBody passwordErrorMessage={passwordErrorMessage} 
          setPasswordErrorMessage={setPasswordErrorMessage}
          setButtonDisabled={setButtonDisabled}
-         setNewAccountContainerHeight={setNewAccountContainerHeight}/>
+         setNewAccountContainerHeight={setNewAccountContainerHeight}
+         username={username}
+         password={password}
+         email={email}
+         title={title}
+         firstName={firstName}
+         lastName={lastName}
+         role={role}
+         setUsername={setUsername}
+         setPassword={setPassword}
+         setEmail={setEmail}
+         setTitle={setTitle}
+         setFirstName={setFirstName}
+         setLastName={setLastName}
+         setRole={setRole}/>
 
          <SignupFooter buttonDisabled={buttonDisabled} 
-         setPasswordErrorMessage={setPasswordErrorMessage} />
+         setPasswordErrorMessage={setPasswordErrorMessage}
+         username={username}
+         password={password}
+         email={email}
+         title={title}
+         firstName={firstName}
+         lastName={lastName}
+         role={role}/>
       </div>
    );
 }
