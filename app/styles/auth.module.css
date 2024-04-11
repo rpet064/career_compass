@@ -98,7 +98,7 @@
     color: white;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 576px){
     .loginContainer{
         width: 90vw;
         min-width: 325px;
