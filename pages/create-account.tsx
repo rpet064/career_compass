@@ -4,12 +4,10 @@ import signup from "../app/styles/signup.module.css";
 import colour from "../app/styles/colour.module.css";
 import { SignupHeader } from "../app/components/signupComponents/SignupHeader";
 import { AuthSignUpBody } from "../app/components/AuthSignUpBody";
-import { SignupFooter } from "../app/components/signupComponents/SignupFooter";
 
 const CreateAccount = () => {
 
    const [newAccountContainerHeight, setNewAccountContainerHeight] = useState<string>("50%");
-   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
 
    const [username, setUsername] = useState<string | undefined>(undefined);
@@ -28,7 +26,6 @@ const CreateAccount = () => {
 
          <AuthSignUpBody passwordErrorMessage={passwordErrorMessage} 
          setPasswordErrorMessage={setPasswordErrorMessage}
-         setButtonDisabled={setButtonDisabled}
          setNewAccountContainerHeight={setNewAccountContainerHeight}
          username={username}
          password={password}
@@ -44,16 +41,6 @@ const CreateAccount = () => {
          setFirstName={setFirstName}
          setLastName={setLastName}
          setRole={setRole}/>
-
-         <SignupFooter buttonDisabled={buttonDisabled} 
-         setPasswordErrorMessage={setPasswordErrorMessage}
-         username={username}
-         password={password}
-         email={email}
-         title={title}
-         firstName={firstName}
-         lastName={lastName}
-         role={role}/>
       </div>
    );
 }

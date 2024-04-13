@@ -7,10 +7,10 @@ import { AuthSignUpBodyProps } from "../interfaces/interfaces";
 import signup from "../styles/signup.module.css";
 
 export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
-    passwordErrorMessage, setPasswordErrorMessage, setButtonDisabled, setNewAccountContainerHeight,
+    passwordErrorMessage, setPasswordErrorMessage, setNewAccountContainerHeight,
     username, password, email, title, firstName, lastName, role,
-    setUsername, setPassword, setEmail, setTitle, setFirstName, setLastName, setRole  }) => {
-        
+    setUsername, setPassword, setEmail, setTitle, setFirstName, setLastName, setRole }) => {
+
     const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
 
@@ -29,6 +29,7 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
     const [displayLastNameInputLabel, setDisplayLastNameInputLabel] = useState<{ display: string }>({ display: "block" });
 
     const [isAdmin, setIsAdmin] = useState<boolean>(true);
+    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
 
     // Increase container width if displaying error message
     useEffect(() => {
@@ -70,11 +71,44 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
         setRole(e.target.value);
     }
 
+    const [formData, setFormData] = useState({
+        username: '',
+        password: '',
+        email: '',
+        title: '',
+        firstName: '',
+        lastName: '',
+        role: '',
+     });
+    
+     const handleChange = (e: any) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+     };
+    
+     const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const response = await fetch('/api/authentication/createAccount', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Account created:', data);
+          // Optionally, clear the form or redirect the user
+        } else {
+          console.error('Error creating account:', await response.text());
+        }
+     };
+
     return (
         <div className={signup.newAccountBody}>
             <SignupRedirectLink />
 
-            <div className={signup.newAccountInputContainer}>
+            <form className={signup.newAccountInputContainer}>
                 <div className={globals.halfWidthInputContainer}>
                     {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
                     >Username</span>}
@@ -170,7 +204,8 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                             <option value="user">User</option>
                         </select>
                     </div>}
-            </div >
+            <button type="submit" className={colour.grayBorder} disabled={buttonDisabled}>Create Account</button>
+            </form>
         </div>
     )
 }

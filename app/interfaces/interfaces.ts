@@ -1,7 +1,6 @@
 export interface AuthSignUpBodyProps {
     passwordErrorMessage: string | null;
     setPasswordErrorMessage: (passwordErrorMessage: string | null) => void;
-    setButtonDisabled: (buttonDisabled: boolean) => void;
     setNewAccountContainerHeight: (loginContainerHeight: string) => void;
     username?: string;
     password?: string;
@@ -34,16 +33,4 @@ export interface AuthFooterProps {
     setPasswordErrorMessage: (message: string) => void;
     username?: string;
     password?: string;
-}
-
-export interface SignupFooterProps {
-    buttonDisabled: boolean;
-    setPasswordErrorMessage: (message: string) => void;
-    username?: string;
-    password?: string;
-    email?: string;
-    title?: string;
-    firstName?: string;
-    lastName?: string;
-    role?: string;
 }
