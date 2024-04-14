@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       res.status(201).json(newUser);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating account' });
+      res.status(500).json({ error: `Error creating account: ${error}`});
     }
  } else {
     // Handle any other HTTP method

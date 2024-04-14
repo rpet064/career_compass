@@ -3,16 +3,14 @@ import globals from "../styles/global.module.css";
 import colour from "../styles/colour.module.css";
 import { FC, useState, useEffect } from "react";
 import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
-import { AuthSignUpBodyProps } from "../interfaces/interfaces";
 import signup from "../styles/signup.module.css";
+import { AuthLoginBodyProps } from "../interfaces/interfaces";
 
-export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
-    passwordErrorMessage, setPasswordErrorMessage, setNewAccountContainerHeight,
-    username, password, email, title, firstName, lastName, role,
-    setUsername, setPassword, setEmail, setTitle, setFirstName, setLastName, setRole }) => {
+export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
 
     const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
 
     const [IsUsernameInputFocused, setIsUsernameInputFocused] = useState<boolean>(false);
     const [isPasswordInputFocused, setIsPasswordInputFocused] = useState<boolean>(false);
@@ -29,47 +27,43 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
     const [displayLastNameInputLabel, setDisplayLastNameInputLabel] = useState<{ display: string }>({ display: "block" });
 
     const [isAdmin, setIsAdmin] = useState<boolean>(true);
-    const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
-    // Increase container width if displaying error message
-    useEffect(() => {
-        if (usernameErrorMessage !== null || passwordErrorMessage !== null) {
-            setNewAccountContainerHeight("52.5%");
-        } else {
-            setNewAccountContainerHeight("50%");
-        }
-    }, [usernameErrorMessage, passwordErrorMessage, setNewAccountContainerHeight]);
+    // // Increase container width if displaying error message
+    // useEffect(() => {
+    //     if (usernameErrorMessage !== null || passwordErrorMessage !== null) {
+    //         setNewAccountContainerHeight("52.5%");
+    //     } else {
+    //         setNewAccountContainerHeight("50%");
+    //     }
+    // }, [usernameErrorMessage, passwordErrorMessage, setNewAccountContainerHeight]);
 
-    // Manage username error message
-    useEffect(() => {
-        if (username === undefined) {
-            setUsernameErrorMessage(null);
-            return;
-        }
-        username.length > 0 ? setUsernameErrorMessage(null) : setUsernameErrorMessage("This field is required");
-    }, [username]);
+    // // Manage username error message
+    // useEffect(() => {
+    //     if (username === undefined) {
+    //         setUsernameErrorMessage(null);
+    //         return;
+    //     }
+    //     username.length > 0 ? setUsernameErrorMessage(null) : setUsernameErrorMessage("This field is required");
+    // }, [username]);
 
-    // Manage password error message
-    useEffect(() => {
-        if (password === undefined) {
-            setPasswordErrorMessage(null);
-            return;
-        }
-        password.length > 0 ? setPasswordErrorMessage(null) : setPasswordErrorMessage("This field is required");
-    }, [password, setPasswordErrorMessage]);
+    // // Manage password error message
+    // useEffect(() => {
+    //     if (password === undefined) {
+    //         setPasswordErrorMessage(null);
+    //         return;
+    //     }
+    //     password.length > 0 ? setPasswordErrorMessage(null) : setPasswordErrorMessage("This field is required");
+    // }, [password, setPasswordErrorMessage]);
 
-    // Manage button validation
-    useEffect(() => {
-        if (username !== undefined && password !== undefined && username.length > 0 && password.length > 0) {
-            setButtonDisabled(false);
-        } else {
-            setButtonDisabled(true);
-        }
-    }, [username, password, setButtonDisabled]);
-
-    const changeRole = (e: any) => {
-        setRole(e.target.value);
-    }
+    // // Manage button validation
+    // useEffect(() => {
+    //     if (username !== undefined && password !== undefined && username.length > 0 && password.length > 0) {
+    //         setButtonDisabled(false);
+    //     } else {
+    //         setButtonDisabled(true);
+    //     }
+    // }, [username, password, setButtonDisabled]);
 
     const [formData, setFormData] = useState({
         username: '',
@@ -108,17 +102,18 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
         <div className={signup.newAccountBody}>
             <SignupRedirectLink />
 
-            <form className={signup.newAccountInputContainer}>
+            <form onSubmit={handleSubmit} className={signup.newAccountInputContainer}>
                 <div className={globals.halfWidthInputContainer}>
                     {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
                     >Username</span>}
                     <input
                         className={colour.grayBorder}
                         type="username"
-                        value={username}
+                        name="username"
+                        value={formData.username}
                         onFocus={() => setIsUsernameInputFocused(true)}
                         onBlur={() => setIsUsernameInputFocused(false)}
-                        onChange={(e) => setUsername(e.target.value)} />
+                        onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{usernameErrorMessage}</span>
                 </div>
@@ -130,10 +125,11 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     <input
                         className={colour.grayBorder}
                         type="email"
-                        value={email}
+                        name="email"
+                        value={formData.email}
                         onFocus={() => setIsEmailInputFocused(true)}
                         onBlur={() => setIsEmailInputFocused(false)}
-                        onChange={(e) => setEmail(e.target.value)} />
+                        onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
@@ -144,10 +140,11 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     <input
                         className={colour.grayBorder}
                         type="password"
-                        value={password}
+                        name="password"
+                        value={formData.password}
                         onFocus={() => setIsPasswordInputFocused(true)}
                         onBlur={() => setIsPasswordInputFocused(false)}
-                        onChange={(e) => setPassword(e.target.value)} />
+                        onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{passwordErrorMessage}</span>
                 </div>
@@ -159,10 +156,11 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     <input
                         className={colour.grayBorder}
                         type="Title"
-                        value={title}
+                        name="title"
+                        value={formData.title}
                         onFocus={() => setIsTitleInputFocused(true)}
                         onBlur={() => setIsTitleInputFocused(false)}
-                        onChange={(e) => setTitle(e.target.value)} />
+                        onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
@@ -173,11 +171,12 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     <input
                         className={colour.grayBorder}
                         type="First Name"
-                        value={firstName}
+                        name="firstName"
+                        value={formData.firstName}
                         onFocus={() => setIsFirstNameInputFocused(true)}
                         onBlur={() => setIsFirstNameInputFocused(false)}
-                        onChange={(e) => setFirstName(e.target.value)} />
-                    <span className={styles.authenticationLabel}
+                        onChange={handleChange}/>
+                        <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
 
@@ -188,10 +187,11 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                     <input
                         className={colour.grayBorder}
                         type="Last Name"
-                        value={lastName}
+                        name="lastName"
+                        value={formData.lastName}
                         onFocus={() => setIsLastNameInputFocused(true)}
                         onBlur={() => setIsLastNameInputFocused(false)}
-                        onChange={(e) => setLastName(e.target.value)} />
+                        onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
@@ -199,7 +199,8 @@ export const AuthSignUpBody: FC<AuthSignUpBodyProps> = ({
                 {isAdmin &&
                     <div className={signup.selectContainer} >
                         <label>Role: </label>
-                        <select value={role} onChange={changeRole}>
+                        <select value={formData.role} name="role"
+                            onChange={handleChange}>
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
