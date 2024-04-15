@@ -12,20 +12,6 @@ export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
     const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
 
-    const [IsUsernameInputFocused, setIsUsernameInputFocused] = useState<boolean>(false);
-    const [isPasswordInputFocused, setIsPasswordInputFocused] = useState<boolean>(false);
-    const [isEmailInputFocused, setIsEmailInputFocused] = useState<boolean>(false);
-    const [isTitleInputFocused, setIsTitleInputFocused] = useState<boolean>(false);
-    const [isFirstNameInputFocused, setIsFirstNameInputFocused] = useState<boolean>(false);
-    const [isLastNameInputFocused, setIsLastNameInputFocused] = useState<boolean>(false);
-
-    const [displayUsernameInputLabel, setDisplayUsernameInputLabel] = useState<{ display: string }>({ display: "block" });
-    const [displayPasswordInputLabel, setDisplayPasswordInputLabel] = useState<{ display: string }>({ display: "block" });
-    const [displayEmailInputLabel, setDisplayEmailInputLabel] = useState<{ display: string }>({ display: "block" });
-    const [displayTitleInputLabel, setDisplayTitleInputLabel] = useState<{ display: string }>({ display: "block" });
-    const [displayFirstNameInputLabel, setDisplayFirstNameInputLabel] = useState<{ display: string }>({ display: "block" });
-    const [displayLastNameInputLabel, setDisplayLastNameInputLabel] = useState<{ display: string }>({ display: "block" });
-
     const [isAdmin, setIsAdmin] = useState<boolean>(true);
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
@@ -104,93 +90,72 @@ export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
 
             <form onSubmit={handleSubmit} className={signup.newAccountInputContainer}>
                 <div className={globals.halfWidthInputContainer}>
-                    {<span style={displayUsernameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
-                    >Username</span>}
                     <input
                         className={colour.grayBorder}
                         type="username"
                         name="username"
+                        placeholder="Username"
                         value={formData.username}
-                        onFocus={() => setIsUsernameInputFocused(true)}
-                        onBlur={() => setIsUsernameInputFocused(false)}
                         onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{usernameErrorMessage}</span>
                 </div>
 
                 <div className={globals.halfWidthInputContainer}>
-                    {<span style={displayEmailInputLabel} className={`${styles.inputLabel} 
-                    ${globals.secondHalfWidthInputLabel} ${colour.lightGrayFont}`}
-                    >Email</span>}
                     <input
                         className={colour.grayBorder}
                         type="email"
                         name="email"
+                        placeholder="Email"
                         value={formData.email}
-                        onFocus={() => setIsEmailInputFocused(true)}
-                        onBlur={() => setIsEmailInputFocused(false)}
                         onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
 
                 <div className={globals.halfWidthInputContainer}>
-                    {<span style={displayPasswordInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
-                    >Password</span>}
                     <input
                         className={colour.grayBorder}
                         type="password"
                         name="password"
+                        placeholder="Password"
                         value={formData.password}
-                        onFocus={() => setIsPasswordInputFocused(true)}
-                        onBlur={() => setIsPasswordInputFocused(false)}
                         onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{passwordErrorMessage}</span>
                 </div>
 
                 <div className={globals.oneThirdWidthInputContainer}>
-                    {<span style={displayTitleInputLabel} className={`${styles.inputLabel} 
-                    ${globals.secondHalfWidthInputLabel} ${colour.lightGrayFont}`}
-                    >Title</span>}
                     <input
                         className={colour.grayBorder}
                         type="Title"
                         name="title"
+                        placeholder="Title"
                         value={formData.title}
-                        onFocus={() => setIsTitleInputFocused(true)}
-                        onBlur={() => setIsTitleInputFocused(false)}
                         onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
 
                 <div className={globals.oneThirdWidthInputContainer}>
-                    {<span style={displayFirstNameInputLabel} className={`${styles.inputLabel} ${colour.lightGrayFont}`}
-                    >First Name</span>}
                     <input
                         className={colour.grayBorder}
                         type="First Name"
                         name="firstName"
+                        placeholder="First Name"
                         value={formData.firstName}
-                        onFocus={() => setIsFirstNameInputFocused(true)}
-                        onBlur={() => setIsFirstNameInputFocused(false)}
                         onChange={handleChange}/>
                         <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
 
                 <div className={globals.oneThirdWidthInputContainer}>
-                    {<span style={displayLastNameInputLabel} className={`${styles.inputLabel} 
-                    ${globals.secondThirdWidthInputLabel} ${colour.lightGrayFont}`}
-                    >Last Name</span>}
                     <input
                         className={colour.grayBorder}
                         type="Last Name"
                         name="lastName"
+                        placeholder="Last Name"
                         value={formData.lastName}
-                        onFocus={() => setIsLastNameInputFocused(true)}
-                        onBlur={() => setIsLastNameInputFocused(false)}
                         onChange={handleChange}/>
                     <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>

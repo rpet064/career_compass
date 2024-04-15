@@ -108,6 +108,7 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({setContainerHeight}) => {
                className={colour.grayBorder}
                type="password"
                name="password"
+               placeholder="Username"
                value={formData.password}
                onChange={handleChange} />
             <span className={auth.authenticationLabel}
