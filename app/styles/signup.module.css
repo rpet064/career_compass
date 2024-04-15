@@ -24,42 +24,15 @@
     margin: 1rem;
 }
 
-.selectContainer{
-    margin: auto 0;
-    font-size: 1.1rem;
-    padding-left: 1rem;
-}
-
-.selectContainer > select{
-    width: 12.5vw;
-    font-size: 3rem;
-    margin-left: 0.5rem;
-}
-
 @media screen and (max-width: 1200px){
     .newAccountContainer{
         top: 50vh !important;
         height: 80vh !important;
-    }
-
-    .selectContainer > select{
-        width: 47.5vw;
-        margin-top: 1.5rem;
     }
 }
 
 @media screen and (max-width: 768px){
     .newAccountContainer{
         width: 95vw;
-    }
-
-    .selectContainer > select{
-        width: 77.5vw;
-    }
-}
-
-@media screen and (max-width: 568px){
-    .selectContainer > select{
-        width: 72.5vw;
     }
 }

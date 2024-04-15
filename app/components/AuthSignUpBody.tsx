@@ -160,16 +160,6 @@ export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
                     <span className={styles.authenticationLabel}
                     >{emailErrorMessage}</span>
                 </div>
-
-                {isAdmin &&
-                    <div className={signup.selectContainer} >
-                        <label>Role: </label>
-                        <select value={formData.role} name="role"
-                            onChange={handleChange}>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
-                    </div>}
             <button type="submit" className={colour.grayBorder} disabled={buttonDisabled}>Create Account</button>
             </form>
         </div>

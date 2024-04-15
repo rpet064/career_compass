@@ -5,8 +5,12 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
- if (req.method === 'POST') {
-    const { username, password, email, title, firstName, lastName, role } = req.body;
+    if (req.method !== 'POST') {
+        res.setHeader('Allow', ['POST']);
+        res.status(405).end(`Method ${req.method} Not Allowed`)
+        }
+
+    const { username, password, email, title, firstName, lastName } = req.body;
 
     try {
       // Consider hashing the password before storing it
@@ -18,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           title: title,
           firstname: firstName,
           lastname: lastName,
-          roleid: 2 // TODO: implement getRoleId
+          roleid: 2 // user
         },
       });
 
@@ -26,9 +30,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch (error) {
       res.status(500).json({ error: `Error creating account: ${error}`});
     }
- } else {
-    // Handle any other HTTP method
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
  }
-}
