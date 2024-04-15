@@ -8,57 +8,48 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({setContainerHeight}) => {
 
    const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
-   const [displayUsernameInputLabel, setDisplayUsernameInputLabel] = useState<{ display: string }>({ display: "block" });
-   const [displayPasswordInputLabel, setDisplayPasswordInputLabel] = useState<{ display: string }>({ display: "block" });
-   const [IsUsernameInputFocused, setIsUsernameInputFocused] = useState<boolean>(false);
-   const [isPasswordInputFocused, setIsPasswordInputFocused] = useState<boolean>(false);
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
-
-   // Increase container width if displaying error message
-   // useEffect(() => {
-   //    if (usernameErrorMessage !== null || passwordErrorMessage !== null) {
-   //       setContainerHeight("32.5%");
-   //    } else {
-   //       setContainerHeight("30%");
-   //    }
-   // }, [usernameErrorMessage, passwordErrorMessage, setContainerHeight]);
-
-   // // Manage username error message
-   // useEffect(() => {
-   //    if (username === undefined) {
-   //       setUsernameErrorMessage(null);
-   //       return;
-   //    }
-   //    username.length > 0 ? setUsernameErrorMessage(null) : setUsernameErrorMessage("This field is required");
-   // }, [username]);
-
-   // // Manage password error message
-   // useEffect(() => {
-   //    if (password === undefined) {
-   //       setPasswordErrorMessage(null);
-   //       return;
-   //    }
-   //    password.length > 0 ? setPasswordErrorMessage(null) : setPasswordErrorMessage("This field is required");
-   // }, [password, setPasswordErrorMessage]);
-
-   // // Manage button validation
-   // useEffect(() => {
-   //    if (username !== undefined && password !== undefined && username.length > 0 && password.length > 0) {
-   //       setButtonDisabled(false);
-   //    } else {
-   //       setButtonDisabled(true);
-   //    }
-   // }, [username, password, setButtonDisabled]);
 
    const [formData, setFormData] = useState({
       username: '',
       password: '',
-      email: '',
-      title: '',
-      firstName: '',
-      lastName: '',
-      role: '',
    });
+
+   // Increase container width if displaying error message
+   useEffect(() => {
+      if (usernameErrorMessage !== null || passwordErrorMessage !== null) {
+         setContainerHeight("32.5%");
+      } else {
+         setContainerHeight("30%");
+      }
+   }, [usernameErrorMessage, passwordErrorMessage, setContainerHeight]);
+
+   // Manage username error message
+   useEffect(() => {
+      if (formData.username === undefined) {
+         setUsernameErrorMessage(null);
+         return;
+      }
+      formData.username.length > 0 ? setUsernameErrorMessage(null) : setUsernameErrorMessage("This field is required");
+   }, [formData]);
+
+   // Manage password error message
+   useEffect(() => {
+      if (formData.password === undefined) {
+         setPasswordErrorMessage(null);
+         return;
+      }
+      formData.password .length > 0 ? setPasswordErrorMessage(null) : setPasswordErrorMessage("This field is required");
+   }, [formData, setPasswordErrorMessage]);
+
+   // Manage button validation
+   useEffect(() => {
+      if (formData.username !== undefined && formData.password !== undefined && formData.username.length > 0 && formData.password .length > 0) {
+         setButtonDisabled(false);
+      } else {
+         setButtonDisabled(true);
+      }
+   }, [formData, setButtonDisabled]);
   
    const handleChange = (e: any) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -101,30 +92,23 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({setContainerHeight}) => {
 
          <form onSubmit={handleLogin} className={auth.loginContainer}>
          <div className={auth.fullWidthInputContainer}>
-            {<span style={displayUsernameInputLabel} className={`${auth.inputLabel} ${colour.lightGrayFont}`}
-            >Username</span>}
             <input
                className={colour.grayBorder}
                type="username"
                name="username"
+               placeholder="Username"
                value={formData.username}
-               onFocus={() => setIsUsernameInputFocused(true)}
-               onBlur={() => setIsUsernameInputFocused(false)}
                onChange={handleChange} />
             <span className={auth.authenticationLabel}
             >{usernameErrorMessage}</span>
          </div>
 
          <div className={auth.fullWidthInputContainer}>
-            {<span style={displayPasswordInputLabel} className={`${auth.inputLabel} ${colour.lightGrayFont}`}
-            >Password</span>}
             <input
                className={colour.grayBorder}
                type="password"
                name="password"
                value={formData.password}
-               onFocus={() => setIsPasswordInputFocused(true)}
-               onBlur={() => setIsPasswordInputFocused(false)}
                onChange={handleChange} />
             <span className={auth.authenticationLabel}
             >{passwordErrorMessage}</span>
