@@ -1,4 +1,4 @@
-/* input containers */
+/* input container styling */
 
 .oneThirdWidthInputContainer{
     width: 33%;
@@ -14,23 +14,9 @@
     padding: 1rem 0rem;
 }
 
-/* input label */
-
-.secondHalfWidthInputLabel{
-    margin-left: 49%;
-}
-
-.secondThirdWidthInputLabel{
-    margin-left: 36%;
-}
-
 @media screen and (max-width: 1200px){
     .oneThirdWidthInputContainer, .halfWidthInputContainer{
         display: block;
         width: 100%;
-    }
-
-    .secondHalfWidthInputLabel, .secondThirdWidthInputLabel{
-        margin-left: 0 !important;
     }
 }
