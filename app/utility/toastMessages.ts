@@ -1,4 +1,4 @@
-import {toast} from "react-hot-toast";
+import {toast} from "react-toastify";
 
 export const errorMessage = (toastMessage: string) => toast.error(toastMessage);
 export const notifyMessage = (toastMessage: string) => toast(toastMessage);
