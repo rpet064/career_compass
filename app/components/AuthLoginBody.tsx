@@ -3,6 +3,9 @@ import { AuthRedirectLink } from "./loginComponents/AuthRedirectLink";
 import { useState, useEffect, FC } from "react";
 import colour from "../styles/colour.module.css";
 import { AuthLoginBodyProps } from "../interfaces/interfaces";
+import { useNavigation } from "../../app/utility/navigation";
+import { errorMessage, successMessage } from "../../app/utility/toastMessages";
+import globals from "../styles/global.module.css";
 
 export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
 
@@ -10,10 +13,18 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
-   const [formData, setFormData] = useState({
-      username: '',
-      password: '',
+   type FormData = {
+      username: string | undefined;
+      password: string | undefined;
+   };
+
+   const [formData, setFormData] = useState<FormData>({
+      username: undefined,
+      password: undefined,
    });
+
+   const navigate = useNavigation();
+
 
    // Increase container width if displaying error message
    useEffect(() => {
@@ -24,27 +35,31 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
       }
    }, [usernameErrorMessage, passwordErrorMessage, setContainerHeight]);
 
+
    // Manage username error message
    useEffect(() => {
-      if (formData.username === undefined) {
+      if (!formData.username) {
          setUsernameErrorMessage(null);
          return;
       }
       formData.username.length > 0 ? setUsernameErrorMessage(null) : setUsernameErrorMessage("This field is required");
    }, [formData]);
 
+
    // Manage password error message
    useEffect(() => {
-      if (formData.password === undefined) {
+      if (!formData.password) {
          setPasswordErrorMessage(null);
          return;
       }
       formData.password.length > 0 ? setPasswordErrorMessage(null) : setPasswordErrorMessage("This field is required");
    }, [formData, setPasswordErrorMessage]);
 
+
    // Manage button validation
    useEffect(() => {
-      if (formData.username !== undefined && formData.password !== undefined && formData.username.length > 0 && formData.password.length > 0) {
+      if (formData.username !== undefined && formData.password !== undefined
+         && formData.username.length > 0 && formData.password.length > 0) {
          setButtonDisabled(false);
       } else {
          setButtonDisabled(true);
@@ -56,42 +71,38 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
    };
 
    const handleLogin = async () => {
-      var username = "test";
-      var password = "password";
-      try {
-         if (!username || !password) {
-            setPasswordErrorMessage('Username and password are required');
-            return;
-         }
+   //    try {
+   //       if (!formData.username || !formData.password) {
+   //          setPasswordErrorMessage("Username and password are required");
+   //          return;
+   //       }
 
-         const response = await fetch('/api/authentication/login', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-         });
+   //       const response = await fetch("/api/authentication/login", {
+   //          method: "POST",
+   //          headers: {
+   //             "Content-Type": "application/json",
+   //          },
+   //          body: JSON.stringify(formData),
+   //       });
 
-         if (response.ok) {
-            const data = await response.json();
-            console.log('Account created:', data);
-            // Optionally, clear the form or redirect the user
-         } else {
-            console.error('Error creating account:', await response.text());
-         }
-
-         // Check if user exists
-      } catch (error) {
-         return;
-      }
+   //       const data = await response.json();
+   //       if (response.ok) {
+   //          navigate("/home");
+   //       } else {
+   //          errorMessage(`Error logging in: ${await data.text()}`);
+   //       }
+   //    } catch (error) {
+   //       errorMessage(`Error logging in: ${await error}`);
+   //    }
    }
 
    return (
       <div className={auth.loginBody}>
          <AuthRedirectLink />
 
-         <form onSubmit={handleLogin} className={auth.loginContainer}>
-            <div className={auth.fullWidthInputContainer}>
+         <form onSubmit={handleLogin} className={auth.authForm}>
+            
+            <div className={globals.fullWidthInputContainer}>
                <input
                   className={colour.grayBorder}
                   type="username"
@@ -103,7 +114,7 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
                >{usernameErrorMessage}</span>
             </div>
 
-            <div className={auth.fullWidthInputContainer}>
+            <div className={globals.fullWidthInputContainer}>
                <input
                   className={colour.grayBorder}
                   type="password"

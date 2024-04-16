@@ -1,4 +1,11 @@
 /* input container styling */
+.fullWidthInputContainer{
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+    flex-direction: column;
+}
 
 .oneThirdWidthInputContainer{
     width: 33%;
@@ -8,10 +15,10 @@
     width: 50%;
 }
 
-.oneThirdWidthInputContainer input, .halfWidthInputContainer input{
-    width: 90%;
-    margin: 0.5rem 0rem;
-    padding: 1rem 0rem;
+.oneThirdWidthInputContainer input, .halfWidthInputContainer input, .fullWidthInputContainer input{
+    width: 100%;
+    padding: 0.65rem 0rem;
+    font-size: 0.85rem;
 }
 
 @media screen and (max-width: 1200px){

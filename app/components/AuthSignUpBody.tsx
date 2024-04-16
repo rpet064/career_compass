@@ -6,6 +6,8 @@ import { FC, useState, useEffect } from "react";
 import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
 import signup from "../styles/signup.module.css";
 import { AuthLoginBodyProps } from "../interfaces/interfaces";
+import { useNavigation } from "../../app/utility/navigation";
+import { errorMessage, successMessage } from "../../app/utility/toastMessages";
 
 export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
 
@@ -27,6 +29,8 @@ export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
         role: "",
         confirmPassword: "",
     });
+
+    const navigate = useNavigation();
 
     // // Increase container width if displaying error message
     // useEffect(() => {
@@ -91,7 +95,6 @@ export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
     };
 
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
         const response = await fetch("/api/authentication/createAccount", {
             method: "POST",
             headers: {
@@ -100,12 +103,12 @@ export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
             body: JSON.stringify(formData),
         });
 
+        const data = await response.json();
         if (response.ok) {
-            const data = await response.json();
-            console.log("Account created:", data);
-            // Optionally, clear the form or redirect the user
+            // successMessage("Account created successfully");
+            navigate('/login');
         } else {
-            console.error("Error creating account:", await response.text());
+            // errorMessage(`Error creating account:, ${await data.text()}`);
         }
     };
 
