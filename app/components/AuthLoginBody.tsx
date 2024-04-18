@@ -14,13 +14,13 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
    type FormData = {
-      username: string | undefined;
-      password: string | undefined;
+      username: string;
+      password: string;
    };
 
    const [formData, setFormData] = useState<FormData>({
-      username: undefined,
-      password: undefined,
+      username: "",
+      password: "",
    });
 
    const navigate = useNavigation();
@@ -70,30 +70,32 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
    };
 
-   const handleLogin = async () => {
-   //    try {
-   //       if (!formData.username || !formData.password) {
-   //          setPasswordErrorMessage("Username and password are required");
-   //          return;
-   //       }
+   const handleLogin = async (e: any) => {
+      e.preventDefault();
+      try {
+         if (!formData.username || !formData.password) {
+            setPasswordErrorMessage("Username and password are required");
+            return;
+         }
 
-   //       const response = await fetch("/api/authentication/login", {
-   //          method: "POST",
-   //          headers: {
-   //             "Content-Type": "application/json",
-   //          },
-   //          body: JSON.stringify(formData),
-   //       });
 
-   //       const data = await response.json();
-   //       if (response.ok) {
-   //          navigate("/home");
-   //       } else {
-   //          errorMessage(`Error logging in: ${await data.text()}`);
-   //       }
-   //    } catch (error) {
-   //       errorMessage(`Error logging in: ${await error}`);
-   //    }
+         const response = await fetch("/api/authentication/login", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+         });
+
+         const data = await response.json();
+         if (response.status === 200) {
+            navigate("/home");
+         } else {
+            errorMessage(`Error logging in: ${await data.text()}`);
+         }
+      } catch (error) {
+         errorMessage(`Error logging in: ${await error}`);
+      }
    }
 
    return (
@@ -128,8 +130,8 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
 
             {/* Footer */}
             <div className={auth.loginFooter}>
-               <button type="submit" className={`${auth.authButton} ${colour.grayBorder}`} disabled={buttonDisabled}
-                  onClick={() => handleLogin()}>Login</button>
+               <button type="submit" className={`${auth.authButton} ${colour.grayBorder}`} 
+                  disabled={buttonDisabled}>Login</button>
             </div>
          </form>
       </div >
