@@ -2,7 +2,7 @@ import auth from "../styles/auth.module.css";
 import { AuthRedirectLink } from "./loginComponents/AuthRedirectLink";
 import { useState, useEffect, FC } from "react";
 import colour from "../styles/colour.module.css";
-import { AuthLoginBodyProps } from "../interfaces/interfaces";
+import AuthLoginBodyProps from "../interfaces/authLoginBodyProps";
 import { useNavigation } from "../../app/utility/navigation";
 import { errorMessage, successMessage } from "../../app/utility/toastMessages";
 import globals from "../styles/global.module.css";
@@ -24,7 +24,6 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
    });
 
    const navigate = useNavigation();
-
 
    // Increase container width if displaying error message
    useEffect(() => {
@@ -72,12 +71,14 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
 
    const handleLogin = async (e: any) => {
       e.preventDefault();
+
       try {
          if (!formData.username || !formData.password) {
             setPasswordErrorMessage("Username and password are required");
             return;
          }
 
+         CheckIfExistingToken()
 
          const response = await fetch("/api/authentication/login", {
             method: "POST",
@@ -95,6 +96,30 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
          }
       } catch (error) {
          errorMessage(`Error logging in: ${await error}`);
+      }
+   }
+
+   const CheckIfExistingToken = async () => {
+      // Get token from local storage
+
+      // If no token, return null
+
+      try {
+         const response = await fetch("/api/authentication/token", {
+            method: "GET",
+            headers: {
+               "Content-Type": "application/json",
+            },
+         });
+
+         const data = await response.json();
+         if (response.status === 200) {
+            successMessage(`Existing token: ${data.token}`);
+         } else {
+            errorMessage(`Error getting existing token: ${await data.text()}`);
+         }
+      } catch (error) {
+         errorMessage(`Error getting existing token: ${await error}`);
       }
    }
 

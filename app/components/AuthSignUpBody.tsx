@@ -5,11 +5,11 @@ import auth from "../styles/auth.module.css";
 import { FC, useState, useEffect } from "react";
 import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
 import signup from "../styles/signup.module.css";
-import { AuthLoginBodyProps } from "../interfaces/interfaces";
+import AuthSignupBodyProps from "../interfaces/authSignupBodyProps";
 import { useNavigation } from "../../app/utility/navigation";
 import { errorMessage, successMessage } from "../../app/utility/toastMessages";
 
-export const AuthSignUpBody: FC<AuthLoginBodyProps> = (setContainerHeight) => {
+export const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
 
     const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
