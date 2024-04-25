@@ -4,14 +4,13 @@ import { checkAuth } from '../app/utility/checkAuth';
 import UserProps from "@/app/interfaces/userProps";
 import { NextPageContext } from 'next';
 
-  export default function JobApplication({ username }: UserProps) {
-
+  export default function JobApplication({ user }: UserProps) {
     return (
       <main>
-      <Navbar />
+      <Navbar user={user.userid} />
       <section>
         <h1>This is the job application</h1>
-        <div>Welcome, {username}!</div>;
+        <div>Welcome, {user.username}!</div>
       </section>
       <Footer />
       </main>

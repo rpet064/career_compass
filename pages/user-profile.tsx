@@ -4,13 +4,13 @@ import { checkAuth } from '../app/utility/checkAuth';
 import UserProps from "@/app/interfaces/userProps";
 import { NextPageContext } from 'next';
 
-  export default function UserProfile({ username }: UserProps) {
+  export default function UserProfile({  userid, username }: UserProps) {
     return (
       <main>
-      <Navbar />
+      <Navbar userid={userid} />
       <section>
         <h1>This is the user profile</h1>
-        <div>Welcome, {username}!</div>;
+        <div>Welcome, {username}!</div>
       </section>
       <Footer />
       </main>

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, users } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
@@ -14,23 +14,26 @@ export default async function loginHandler (req: NextApiRequest, res: NextApiRes
     if (!username || !password) {
         return res.status(400).json({ message: 'Username and password are required' });
     }
-    // TODO: Check if user is already authenticated
-
     // Check if user exists
-    let isUserAuthenticated = await authenticateUser(username, password)
-    if (!isUserAuthenticated) {
+    let userObject = await authenticateUser(username, password)
+    if (!userObject) {
         return res.status(300).json({ message: 'Username or password not valid' });
     }
 
-    return res.status(200).json({ message: 'User Authenticated' });
+    return res.status(200).json({ 
+        message: 'User Authenticated',
+        userId: userObject.userid,
+        username: userObject.username
+    });
 };
 
-const authenticateUser = async (username: string, password: string) => {
+// TODO: seperate API and data layer
+async function authenticateUser(username: string, password: string): Promise<users | null> {
     const isExistingUser = await prisma.users.findFirst({
         where: {
             username: username,
             password: password
         }
     })
-    return isExistingUser ? true : false;
+    return isExistingUser;
 }

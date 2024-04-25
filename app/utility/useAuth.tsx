@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAuthToken } from "./localStorageManager";
+import { getTokenFromLocalStorage } from './localStorageManager';
 
 export const useAuth = () => {
  const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
@@ -10,7 +10,7 @@ export const useAuth = () => {
  };
 
  useEffect(() => {
-    const authToken = getAuthToken();
+    const authToken = getTokenFromLocalStorage();
     if (authToken) {
       setIsUserAuthenticated(checkAuthTokenValid());
     } else {
