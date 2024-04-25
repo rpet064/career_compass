@@ -1,20 +1,40 @@
 import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass } from "react-icons/fi";
-import { useState } from "react";
+import { FC } from "react";
 import styles from '../styles/navbar.module.css';
 import colour from '../styles/colour.module.css';
 import { useNavigation } from '../utility/navigation';
-import { logOutHandler } from '../../pages/api/authentication/logout';
+import { clearAuthTokenFromLocalStorage } from '../utility/localStorageManager';
+import NavbarProps from "../interfaces/navbarProps";
 
-export default function Navbar() {
-
+const Navbar : FC<NavbarProps> = ({ userid }) => {
    const navigate = useNavigation();
-
    const handleLogout = async () => {
+
+      let logoutData = {
+         userid: userid,
+      }
+
       try {
-          const data = await logOutHandler();
+         const response = await fetch("/api/authentication/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(logoutData),
+        });
+
+         const data = await response.json();
+
           if(!data){
             throw Error("Error logging out. Please try again.")
           }
+          // Clear token from client local storage
+          let isTokenClearedFromLocalStorge = clearAuthTokenFromLocalStorage();
+          if(!isTokenClearedFromLocalStorge){
+            throw new Error("Token could not be cleared from local storage")
+          }
+
+          // navigate user to login again
           navigate("/login");
       } catch (error) {
          console.log(error);
@@ -47,3 +67,5 @@ export default function Navbar() {
       </div>
    );
 }
+
+export default Navbar;
