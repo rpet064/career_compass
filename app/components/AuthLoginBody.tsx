@@ -4,11 +4,11 @@ import { useState, useEffect, FC } from "react";
 import colour from "../styles/colour.module.css";
 import AuthLoginBodyProps from "../interfaces/authLoginBodyProps";
 import { useNavigation } from "../../app/utility/navigation";
-import { errorMessage, successMessage } from "../../app/utility/toastMessages";
+import { errorMessage } from "../../app/utility/toastMessages";
 import globals from "../styles/global.module.css";
+import { createNewTokenInLocalStorage } from "../../app/utility/localStorageManager";
 
 export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
-
    const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
@@ -78,8 +78,6 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
             return;
          }
 
-         CheckIfExistingToken()
-
          const response = await fetch("/api/authentication/login", {
             method: "POST",
             headers: {
@@ -90,6 +88,24 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
 
          const data = await response.json();
          if (response.status === 200) {
+
+            // Create token and get from server
+            let token = await createNewToken(data.userid, data.username)
+
+            if(!token){
+               throw new Error("Token could not be created")
+            }
+
+            // Create token in local storage
+            if(!token){
+               throw new Error("Token could not be saved to database")
+            }
+            let savedToLocalStorage = createNewTokenInLocalStorage(token)
+
+            if(!savedToLocalStorage){
+               throw new Error("Token could not be saved to local storage")
+            }
+
             navigate("/home");
          } else {
             errorMessage(`Error logging in: ${await data.text()}`);
@@ -99,28 +115,34 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
       }
    }
 
-   const CheckIfExistingToken = async () => {
-      // Get token from local storage
+   const createNewToken = async (userid: string, username : string): Promise<string | null> => {
 
-      // If no token, return null
+      let tokenData = {
+         userid: userid,
+         username: username,
+      }
 
-      try {
+      try{
          const response = await fetch("/api/authentication/token", {
-            method: "GET",
+            method: "POST",
             headers: {
                "Content-Type": "application/json",
             },
+            body: JSON.stringify(tokenData),
          });
 
          const data = await response.json();
+
          if (response.status === 200) {
-            successMessage(`Existing token: ${data.token}`);
-         } else {
-            errorMessage(`Error getting existing token: ${await data.text()}`);
+            return data.token
          }
-      } catch (error) {
-         errorMessage(`Error getting existing token: ${await error}`);
+         throw new Error(`Error creating new token: ${await data.response.text()}`);
+
+      } catch (error){
+         errorMessage(`Error creating new token: ${await error}`);
+         return null;
       }
+
    }
 
    return (
