@@ -10,9 +10,10 @@ export default async function tokenHandler (req: NextApiRequest, res: NextApiRes
         return res.status(405).json({ message: 'Method Not Allowed' });
     }
 
-    const { userid, username } = req.body;
+    const username = req.body.username;
+    const userid = parseInt(req.body.userid);
 
-    if (!userid || !username) {
+    if (!userid || !username || isNaN(userid)) {
         // Don't specify what details are required (to protect endpoint)
         return res.status(400).json({ message: 'Insufficient details to create new token' });
     }
@@ -23,18 +24,19 @@ export default async function tokenHandler (req: NextApiRequest, res: NextApiRes
     clearExistingToken(userid);
 
     // Save in datbase
-    let tokenMessage = await saveTokenInDatabase(userid, token);
+    let isTokenSavedInDatabase  = await saveTokenInDatabase(userid, token);
 
     // Return token to save in client local storage
-    if(tokenMessage){
+    if(isTokenSavedInDatabase){
         return res.status(200).json({
+            message: "Token created successfully",
             token: token
         });
     }
 
     // Return internal server error if unable to save token
     return res.status(500).json({
-        message: tokenMessage,
+        message: isTokenSavedInDatabase,
     }); 
 };
 

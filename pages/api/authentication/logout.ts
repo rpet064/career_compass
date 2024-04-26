@@ -4,14 +4,17 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const prisma = new PrismaClient();
 
 export default async function logOutHandler (req: NextApiRequest, res: NextApiResponse){
+    if (req.method !== 'POST') {
+        return res.status(405).json({ message: 'Method Not Allowed' });
+    }
 
-    const { userid } = req.body;
+    const userid = parseInt(req.body.userid);
 
     let clearExistingTokenMessage = await clearExistingToken(userid);
 
     // Return error message to client
     if(clearExistingTokenMessage){
-        return { message: clearExistingTokenMessage };
+        return res.status(500).json({ message: clearExistingTokenMessage });
     }
     return res.status(200).json({ 
         message: 'Logout successful',
@@ -24,7 +27,6 @@ async function clearExistingToken(userid: number): Promise<string | null> {
         await prisma.sessiontokens.updateMany({
             where: {
                 userid: userid,
-                whenexpired: undefined
             },
             data: {
                 whenexpired: new Date()
