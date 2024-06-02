@@ -6,8 +6,8 @@ import { FC, useState, useEffect } from "react";
 import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
 import signup from "../styles/signup.module.css";
 import AuthSignupBodyProps from "../interfaces/authSignupBodyProps";
-import { useNavigation } from "../../app/utility/navigation";
-import { errorMessage, successMessage } from "../../app/utility/toastMessages";
+import { useNavigation } from "../utility/navigation";
+import { errorMessage, successMessage } from "../utility/toastMessages";
 
 export const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
 
