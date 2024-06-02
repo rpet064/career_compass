@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "../app/styles/auth.module.css";
 import colour from "../app/styles/colour.module.css";
-import { AuthHeader } from "../app/components/loginComponents/AuthHeader";
-import { AuthLoginBody } from "../app/components/AuthLoginBody";
+import { AuthHeader } from "../app/customComponents/loginComponents/AuthHeader";
+import { AuthLoginBody } from "../app/customComponents/AuthLoginBody";
 
 const Login = () => {
    const [containerHeight, setContainerHeight] = useState<string>("30%");
