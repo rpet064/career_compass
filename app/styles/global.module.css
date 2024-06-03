@@ -27,3 +27,12 @@
         width: 100%;
     }
 }
+
+.buttonContainer{
+    display: flex;
+    justify-content: right;
+}
+
+.buttonContainer button{
+    margin: 0.25rem;
+}

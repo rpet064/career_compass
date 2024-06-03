@@ -5,82 +5,90 @@ import UserProps from "@/app/interfaces/userProps";
 import { NextPageContext } from 'next';
 import JobApplicationDataTable from "@/app/primeReactComponents/JobApplicationDataTable";
 import LoadingSpinner from "../app/customComponents/LoadingSpinner";
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import globals from "../app/styles/global.module.css";
 
-  export default function JobApplication({ userid, username }: UserProps) {
-    const [userId, setUserId] = useState(1);
-    const [jobApplicationData, setJobApplicationData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+import { Card } from 'primereact/card';
+import {Button} from 'primereact/button';
+export default function JobApplication({ userid, username }: UserProps) {
+  const [userId, setUserId] = useState(1);
+  const [jobApplicationData, setJobApplicationData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    if (userid === -1){
-      userid = 1;
-      setUserId(userid);
+  if (userid === -1) {
+    userid = 1;
+    setUserId(userid);
+  }
+
+  const getJobApplication = async (userId: number) => {
+    try {
+      const url = new URL('http://localhost:3000/api/job-applications/get');
+      url.searchParams.append('userid', userId.toString());
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching job application:', error);
     }
+  };
 
-    const getJobApplication = async (userId: number) => {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const url = new URL('http://localhost:3000/api/job-applications/get');
-        url.searchParams.append('userid', userId.toString());
-    
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded', 
-          },
-        });
-    
-        if (!response.ok) {
-          throw new Error(`HTTP error status: ${response.status}`);
+        const data = await getJobApplication(userId);
+        if (data.jobApplicationsList.length < 1) {
+          return;
         }
-    
-        const data = await response.json();
-        return data;
+
+        console.log(data.jobApplicationsList)
+
+        setJobApplicationData(data.jobApplicationsList);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching job application:', error);
       }
     };
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const data = await getJobApplication(userId);
-          if(data.jobApplicationsList.length < 1) {
-            return;
-          }
+    fetchData();
+  }, [userId]);
 
-          console.log(data.jobApplicationsList)
 
-          setJobApplicationData(data.jobApplicationsList);
-          setIsLoading(false); 
-        } catch (error) {
-          console.error('Error fetching job application:', error);
-        }
-      };
-  
-      fetchData();
-    }, [userId]);
-  
-
-    return (
-      <main>
+  return (
+    <main>
       <Navbar userid={userid} />
       <section>
-        <div>Welcome, {userId}!</div>
-        {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        jobApplicationData ? (
-          <JobApplicationDataTable jobApplicationData={jobApplicationData} />
-        ) : (
-          <p>No job applications found.</p>
-        )
-      )}
+        <Card title="Job applications">
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            jobApplicationData ? (
+              <JobApplicationDataTable jobApplicationData={jobApplicationData} />
+            ) : (
+              <p>No job applications found.</p>
+            )
+          )}
+        </Card>
+        <div className={globals.buttonContainer}>
+          <Button label="Save" onClick={() => alert('Button clicked')} />
+          <Button label="Cancel" onClick={() => alert('Button clicked')} />
+        </div>
       </section>
       <Footer />
-      </main>
-    );
+    </main>
+  );
 }
 
 export async function getServerSideProps(context: NextPageContext) {
   return checkAuth(context);
- }
+}

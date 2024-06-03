@@ -9,7 +9,6 @@ main{
 section{
     display: flex;
     flex-direction: column;
-    align-items: center;
     height: 87.5%;
 }
 
