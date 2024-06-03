@@ -1,4 +1,4 @@
-import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass } from "react-icons/fi";
+import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass, FiHome } from "react-icons/fi";
 import { FC } from "react";
 import styles from '../styles/navbar.module.css';
 import colour from '../styles/colour.module.css';
@@ -34,7 +34,6 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
             throw new Error("Token could not be cleared from local storage")
           }
 
-          // navigate user to login again
           navigate("/login");
       } catch (error) {
          console.log(error);
@@ -45,8 +44,8 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
 
       // TODO: Implement local storage token
       let loggedIn = true
-      if(!loggedIn)
-         navigate("/login");
+      if (!loggedIn)
+        navigate("/login");
 
       navigate(`/${nextPage}`);
    }
@@ -59,8 +58,9 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
          </div>
 
          <div>
-            <FiBriefcase onClick={() => navigateUser("jobApplication")}/>
-            <FiUser onClick={() => navigateUser("userProfile")}/>
+            <FiHome onClick={() => navigateUser("home")}/>
+            <FiBriefcase onClick={() => navigateUser("job-application")}/>
+            <FiUser onClick={() => navigateUser("user-profile")}/>
             <FiRefreshCcw onClick={() => location.reload()}/>
             <FiLogOut onClick={() => handleLogout}/>
          </div>
