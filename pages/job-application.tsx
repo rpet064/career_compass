@@ -65,7 +65,6 @@ import React, { useState, useEffect } from 'react';
       <main>
       <Navbar userid={userid} />
       <section>
-        <h1>This is the job application</h1>
         <div>Welcome, {userId}!</div>
         {isLoading ? (
         <LoadingSpinner />

@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 2rem;
-    height: calc(7.5% + 0.5rem);
+    height: 7.5%;
 }
 
 .navbar .logoText{

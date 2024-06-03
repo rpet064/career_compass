@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { jobapplications } from "@prisma/client";
@@ -13,7 +13,7 @@ const columnsConfiguration: Array<{ field: keyof jobapplications; header: string
   { field: 'whencreated', header: 'When applied' },
 ];
 
-const JobApplicationDataTable: React.FC<{ jobApplicationData: jobapplications[] }> = ({ jobApplicationData }) => {
+const JobApplicationDataTable: FC<{ jobApplicationData: jobapplications[] }> = ({ jobApplicationData }) => {
   if (Array.isArray(jobApplicationData)) {
   return (
     <DataTable value={jobApplicationData}>
