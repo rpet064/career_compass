@@ -3,20 +3,135 @@ import Footer from "../app/customComponents/Footer";
 import { checkAuth } from '../app/utility/checkAuth';
 import UserProps from "@/app/interfaces/userProps";
 import { NextPageContext } from 'next';
+import { useState, useEffect } from 'react';
+import LoadingSpinner from "../app/customComponents/LoadingSpinner";
+import { Card } from 'primereact/card';
+import { InputText } from "primereact/inputtext";
+import globals from "../app/styles/global.module.css";
 
-  export default function UserProfile({  userid, username }: UserProps) {
-    return (
-      <main>
+export default function UserProfile({ userid, username }: UserProps) {
+
+  interface UserDetails {
+    userid: string;
+    roleid: string;
+    username: string;
+    email: string;
+    title: string;
+    firstname: string;
+    lastname: string;
+    whencreated: string;
+  }
+
+  const [userDetails, setUserDetails] = useState<UserDetails>({
+    userid: '',
+    roleid: '',
+    username: '',
+    email: '',
+    title: '',
+    firstname: '',
+    lastname: '',
+    whencreated: '',
+  });
+  const [isLoading, setIsLoading] = useState(true);
+
+  let userId = 1;
+
+  const getUserDetails = async (userId: number) => {
+    try {
+      const url = new URL('http://localhost:3000/api/user/get');
+      url.searchParams.append('userid', userId.toString());
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserDetails(userId);
+        if (data.userDetails.length < 1) {
+          return;
+        }
+
+        setUserDetails(data.userDetails);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  return (
+    <main>
       <Navbar userid={userid} />
       <section>
-        <h1>This is the user profile</h1>
-        <div>Welcome, {username}!</div>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <Card className={globals.container} title="User Details">
+            <div>
+              <label><b>User ID:</b></label>
+              <InputText value={userDetails.userid} readOnly />
+            </div>
+
+            <div>
+              <label><b>Role ID:</b></label>
+              <InputText value={userDetails.roleid} readOnly />
+            </div>
+
+            <div>
+              <label><b>Username:</b></label>
+              <InputText value={userDetails.username} readOnly />
+            </div>
+
+            <div>
+              <label><b>Email:</b></label>
+              <InputText value={userDetails.email} readOnly />
+            </div>
+
+            <div>
+              <label><b>Title:</b></label>
+              <InputText value={userDetails.title} readOnly />
+            </div>
+
+            <div>
+              <label><b>First Name:</b></label>
+              <InputText value={userDetails.firstname} readOnly />
+            </div>
+
+            <div>
+              <label><b>Last Name:</b></label>
+              <InputText value={userDetails.lastname} readOnly />
+            </div>
+
+            <div>
+              <label><b>Created At:</b></label>
+              <InputText value={userDetails.whencreated} readOnly />
+            </div>
+          </Card>
+        )}
       </section>
       <Footer />
-      </main>
-    );
+    </main>
+  );
 }
 
 export async function getServerSideProps(context: NextPageContext) {
   return checkAuth(context);
- }
+}
