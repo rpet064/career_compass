@@ -8,6 +8,7 @@ import LoadingSpinner from "../app/customComponents/LoadingSpinner";
 import { Card } from 'primereact/card';
 import { InputText } from "primereact/inputtext";
 import globals from "../app/styles/global.module.css";
+import { getUserDetails } from "@/app/proxyApi/users/getUserDetails";
 
 export default function UserProfile({ userid, username }: UserProps) {
 
@@ -35,29 +36,6 @@ export default function UserProfile({ userid, username }: UserProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   let userId = 1;
-
-  const getUserDetails = async (userId: number) => {
-    try {
-      const url = new URL('http://localhost:3000/api/user/get');
-      url.searchParams.append('userid', userId.toString());
-
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching user details:', error);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {

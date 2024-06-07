@@ -7,10 +7,12 @@ import JobApplicationDataTable from "@/app/primeReactComponents/JobApplicationDa
 import LoadingSpinner from "../app/customComponents/LoadingSpinner";
 import { useState, useEffect } from 'react';
 import globals from "../app/styles/global.module.css";
-
 import { Card } from 'primereact/card';
-import {Button} from 'primereact/button';
+import { Button } from 'primereact/button';
+import { getJobApplications } from "@/app/proxyApi/jobApplications/getJobApplications";
+
 export default function JobApplication({ userid, username }: UserProps) {
+
   const [userId, setUserId] = useState(1);
   const [jobApplicationData, setJobApplicationData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,33 +22,10 @@ export default function JobApplication({ userid, username }: UserProps) {
     setUserId(userid);
   }
 
-  const getJobApplication = async (userId: number) => {
-    try {
-      const url = new URL('http://localhost:3000/api/job-applications/get');
-      url.searchParams.append('userid', userId.toString());
-
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching job application:', error);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getJobApplication(userId);
+        const data = await getJobApplications(userId);
         if (data.jobApplicationsList.length < 1) {
           return;
         }
