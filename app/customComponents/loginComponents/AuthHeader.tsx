@@ -1,5 +1,5 @@
-import styles from "../../styles/auth.module.css";
-import colour from "../../styles/colour.module.css";
+import styles from "@app/styles/auth.module.css";
+import colour from "@app/styles/colour.module.css";
 import { FaCompass } from "react-icons/fa";
 
  export const AuthHeader = () => {

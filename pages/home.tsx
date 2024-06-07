@@ -1,6 +1,6 @@
-import Navbar from "../app/customComponents/Navbar";
-import Footer from "../app/customComponents/Footer";
-import { checkAuth } from '../app/utility/checkAuth';
+import Navbar from "@/app/customComponents/Navbar";
+import Footer from "@/app/customComponents/Footer";
+import { checkAuth } from '@/app/utility/checkAuth';
 import UserProps from "@/app/interfaces/userProps";
 import { NextPageContext } from 'next';
 import { Chart } from 'primereact/chart';

@@ -1,7 +1,7 @@
 import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass, FiHome } from "react-icons/fi";
 import { FC } from "react";
-import styles from '../styles/navbar.module.css';
-import colour from '../styles/colour.module.css';
+import styles from '@app/styles/navbar.module.css';
+import colour from '@app/styles/colour.module.css';
 import { useNavigation } from '../utility/navigation';
 import { clearAuthTokenFromLocalStorage } from '../utility/localStorageManager';
 import NavbarProps from "../interfaces/navbarProps";

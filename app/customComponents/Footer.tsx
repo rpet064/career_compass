@@ -1,6 +1,6 @@
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
-import styles from '../styles/footer.module.css';
-import colour from '../styles/colour.module.css';
+import styles from '@app/styles/footer.module.css';
+import colour from '@app/styles/colour.module.css';
 
 export default function Navbar() {
     return (

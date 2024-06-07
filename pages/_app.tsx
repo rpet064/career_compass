@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import '../app/styles/globals.css';
+import '@/app/styles/globals.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PrimeReactProvider } from 'primereact/api';
