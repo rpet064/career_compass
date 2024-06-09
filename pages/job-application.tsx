@@ -1,15 +1,15 @@
-import Navbar from "@/app/customComponents/Navbar";
-import Footer from "@/app/customComponents/Footer";
-import { checkAuth } from '@/app/utility/checkAuth';
-import UserProps from "@/app/interfaces/userProps";
+import Navbar from '@/customComponents/Navbar';
+import Footer from '@/customComponents/Footer';
+import { checkAuth } from '@/utility/checkAuth';
+import UserProps from '@/interfaces/userProps';
 import { NextPageContext } from 'next';
-import JobApplicationDataTable from "@/app/primeReactComponents/JobApplicationDataTable";
-import LoadingSpinner from "@/app/customComponents/LoadingSpinner";
+import JobApplicationDataTable from '@/primeReactComponents/JobApplicationDataTable';
+import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { useState, useEffect } from 'react';
-import globals from "@/app/styles/global.module.css";
+import globals from "./app/styles/global.module.css";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-import { getJobApplications } from "@/app/proxyApi/jobApplications/getJobApplications";
+import { getJobApplications } from '@/proxyApi/jobApplications/getJobApplications';
 
 export default function JobApplication({ userid, username }: UserProps) {
 

@@ -1,11 +1,11 @@
-import auth from "@app/styles/auth.module.css";
+import auth from "../styles/auth.module.css";
 import { AuthRedirectLink } from "./loginComponents/AuthRedirectLink";
 import { useState, useEffect, FC } from "react";
-import colour from "@app/styles/colour.module.css";
+import colour from "../styles/colour.module.css";
 import AuthLoginBodyProps from "../interfaces/authLoginBodyProps";
 import { useNavigation } from "../utility/navigation";
 import { errorMessage } from "../utility/toastMessages";
-import globals from "@app/styles/global.module.css";
+import globals from "../styles/global.module.css";
 import { createNewTokenInLocalStorage } from "../utility/localStorageManager";
 
 export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {

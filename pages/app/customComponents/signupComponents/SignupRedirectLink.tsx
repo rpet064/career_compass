@@ -1,6 +1,6 @@
-import styles from "@app/styles/auth.module.css";
-import colours from "@app/styles/colour.module.css";
-import { useNavigation } from "../../utility/navigation";
+import styles from "../../styles/auth.module.css";
+import colours from "../../styles/colour.module.css";
+import { useNavigation } from "@/utility/navigation";
 
  export const SignupRedirectLink = () => {
     const navigate = useNavigation();

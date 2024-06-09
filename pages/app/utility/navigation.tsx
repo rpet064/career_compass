@@ -6,6 +6,7 @@ export const useNavigation = () => {
  const isUserAuthenticated = useAuth();
 
  const navigate = (route: string) => {
+  let isUserAuthenticated = true;
     if (isUserAuthenticated || route.includes("/create-account")) {
       router.push(route);
     } else {

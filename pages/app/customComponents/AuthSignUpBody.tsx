@@ -1,10 +1,10 @@
-import styles from "@app/styles/auth.module.css";
-import globals from "@app/styles/global.module.css";
-import colour from "@app/styles/colour.module.css";
-import auth from "@app/styles/auth.module.css";
+import styles from "../styles/auth.module.css";
+import globals from "../styles/global.module.css";
+import colour from "../styles/colour.module.css";
+import auth from "../styles/auth.module.css";
 import { FC, useState, useEffect } from "react";
 import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
-import signup from "@app/styles/signup.module.css";
+import signup from "../styles/signup.module.css";
 import AuthSignupBodyProps from "../interfaces/authSignupBodyProps";
 import { useNavigation } from "../utility/navigation";
 import { errorMessage, successMessage } from "../utility/toastMessages";

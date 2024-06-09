@@ -1,14 +1,14 @@
-import Navbar from "@/app/customComponents/Navbar";
-import Footer from "@/app/customComponents/Footer";
-import { checkAuth } from '@/app/utility/checkAuth';
-import UserProps from "@/app/interfaces/userProps";
+import Navbar from '@/customComponents/Navbar';
+import Footer from '@/customComponents/Footer';
+import { checkAuth } from '@/utility/checkAuth';
+import UserProps from '@/interfaces/userProps';
 import { NextPageContext } from 'next';
 import { useState, useEffect } from 'react';
-import LoadingSpinner from "@/app/customComponents/LoadingSpinner";
+import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { Card } from 'primereact/card';
 import { InputText } from "primereact/inputtext";
-import globals from "@/app/styles/global.module.css";
-import { getUserDetails } from "@/app/proxyApi/users/getUserDetails";
+import globals from "./app/styles/global.module.css";
+import { getUserDetails } from '@/proxyApi/users/getUserDetails';
 
 export default function UserProfile({ userid, username }: UserProps) {
 

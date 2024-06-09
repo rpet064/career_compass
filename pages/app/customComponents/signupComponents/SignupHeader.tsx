@@ -1,6 +1,6 @@
-import colour from "@app/styles/colour.module.css";
-import signup from "@app/styles/signup.module.css";
-import auth from "@app/styles/auth.module.css";
+import colour from "../../styles/colour.module.css";
+import signup from "../../styles/signup.module.css";
+import auth from "../../styles/auth.module.css";
 import { FaCompass } from "react-icons/fa";
 
  export const SignupHeader = () => {

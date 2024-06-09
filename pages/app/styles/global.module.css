@@ -36,3 +36,16 @@
 .buttonContainer button{
     margin: 0.25rem;
 }
+
+.container {
+    display: inline-block;
+    width: 100%;
+}
+
+.container div {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc(33.333% - 20px);
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
