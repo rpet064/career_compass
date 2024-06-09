@@ -6,7 +6,7 @@ import { NextPageContext } from 'next';
 import JobApplicationDataTable from '@/primeReactComponents/JobApplicationDataTable';
 import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { useState, useEffect } from 'react';
-import globals from "./app/styles/global.module.css";
+import globals from "../app/styles/global.module.css";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { getJobApplications } from '@/proxyApi/jobApplications/getJobApplications';

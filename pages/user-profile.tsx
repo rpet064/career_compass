@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { Card } from 'primereact/card';
 import { InputText } from "primereact/inputtext";
-import globals from "./app/styles/global.module.css";
+import globals from "../app/styles/global.module.css";
 import { getUserDetails } from '@/proxyApi/users/getUserDetails';
 
 export default function UserProfile({ userid, username }: UserProps) {

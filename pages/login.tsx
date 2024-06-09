@@ -1,6 +1,6 @@
 import { useState } from "react";
-import styles from "./app/styles/auth.module.css";
-import colour from "./app/styles/colour.module.css";
+import styles from "../app/styles/auth.module.css";
+import colour from "../app/styles/colour.module.css";
 import AuthHeader from "@/customComponents/loginComponents/AuthHeader";
 import AuthLoginBody from '@/customComponents/AuthLoginBody';
 
