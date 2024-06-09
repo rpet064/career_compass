@@ -1,12 +1,13 @@
-import Navbar from "@/app/customComponents/Navbar";
-import Footer from "@/app/customComponents/Footer";
-import { checkAuth } from '@/app/utility/checkAuth';
-import UserProps from "@/app/interfaces/userProps";
+import Navbar from '@/customComponents/Navbar';
+import Footer from '@/customComponents/Footer';
+import { checkAuth } from '@/utility/checkAuth';
+import UserProps from '@/interfaces/userProps';
 import { NextPageContext } from 'next';
 import { Chart } from 'primereact/chart';
-import { getJobApplications } from "@/app/proxyApi/jobApplications/getJobApplications";
+import { getJobApplications } from '@/proxyApi/jobApplications/getJobApplications';
 import { useState, useEffect } from 'react';
-import LoadingSpinner from "@/app/customComponents/LoadingSpinner";
+import LoadingSpinner from '@/customComponents/LoadingSpinner';
+import { monthNames } from '@/utility/dateFormatter';
 
 export default function Home({ userid, username }: UserProps) {
   const [userId, setUserId] = useState(1);
@@ -27,6 +28,7 @@ export default function Home({ userid, username }: UserProps) {
         }
         setJobApplicationData(data.jobApplicationsList);
         setIsLoading(false);
+        console.log()
       } catch (error) {
         console.error('Error fetching job application:', error);
       }
