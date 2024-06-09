@@ -2,8 +2,8 @@ import { useState } from "react";
 import styles from "./app/styles/auth.module.css";
 import signup from "./app/styles/signup.module.css";
 import colour from "./app/styles/colour.module.css";
-import { SignupHeader } from '@/customComponents/signupComponents/SignupHeader';
-import { AuthSignUpBody } from '@/customComponents/AuthSignUpBody';
+import SignupHeader  from '@/customComponents/signupComponents/SignupHeader';
+import AuthSignUpBody from '@/customComponents/AuthSignUpBody';
 
 const CreateAccount = () => {
    const [containerHeight, setContainerHeight] = useState<string>("50%");

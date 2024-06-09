@@ -1,5 +1,5 @@
 import auth from "../styles/auth.module.css";
-import { AuthRedirectLink } from "./loginComponents/AuthRedirectLink";
+import AuthRedirectLink from "./loginComponents/AuthRedirectLink";
 import { useState, useEffect, FC } from "react";
 import colour from "../styles/colour.module.css";
 import AuthLoginBodyProps from "../interfaces/authLoginBodyProps";
@@ -8,7 +8,7 @@ import { errorMessage } from "../utility/toastMessages";
 import globals from "../styles/global.module.css";
 import { createNewTokenInLocalStorage } from "../utility/localStorageManager";
 
-export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
+const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
    const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
@@ -184,3 +184,5 @@ export const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) =>
       </div >
    )
 }
+
+export default AuthLoginBody;

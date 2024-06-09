@@ -2,7 +2,7 @@ import styles from "../../styles/auth.module.css";
 import colours from "../../styles/colour.module.css";
 import { useNavigation } from "@/utility/navigation";
 
- export const AuthRedirectLink = () => {
+const AuthRedirectLink = () => {
     const navigate = useNavigation();
     return(
         <p>Create Account
@@ -10,3 +10,5 @@ import { useNavigation } from "@/utility/navigation";
         className={`${styles.redirectAuthSpan} ${colours.lightBlueFont}`}>Sign up here</span></p>
     )
 }
+
+export default AuthRedirectLink;

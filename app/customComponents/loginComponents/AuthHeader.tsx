@@ -2,7 +2,7 @@ import styles from "../../styles/auth.module.css";
 import colour from "../../styles/colour.module.css";
 import { FaCompass } from "react-icons/fa";
 
- export const AuthHeader = () => {
+const AuthHeader = () => {
     return(
         <div className={`${styles.header} ${colour.orangeBackground}`}>
         <FaCompass className={colour.whiteFont} />
@@ -11,3 +11,5 @@ import { FaCompass } from "react-icons/fa";
      </div>
     )
 }
+
+export default AuthHeader;

@@ -9,7 +9,7 @@ import AuthSignupBodyProps from "../interfaces/authSignupBodyProps";
 import { useNavigation } from "../utility/navigation";
 import { errorMessage, successMessage } from "../utility/toastMessages";
 
-export const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
+const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
 
     const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
@@ -210,3 +210,5 @@ export const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
         </div>
     )
 }
+
+export default AuthSignUpBody;

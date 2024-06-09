@@ -3,7 +3,7 @@ import signup from "../../styles/signup.module.css";
 import auth from "../../styles/auth.module.css";
 import { FaCompass } from "react-icons/fa";
 
- export const SignupHeader = () => {
+const SignupHeader = () => {
     return(
         <div className={`${signup.newAccountHeader} ${auth.newAccountHeader} ${colour.orangeBackground}`}>
         <FaCompass className={colour.whiteFont} />
@@ -12,3 +12,5 @@ import { FaCompass } from "react-icons/fa";
      </div>
     )
 }
+
+export default SignupHeader;
