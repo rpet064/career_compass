@@ -29,7 +29,7 @@ export default async function getUserJobApplications(req: NextApiRequest, res: N
     });
   }
 
-async function getAllJobApplicationsFromDatabase(userid: number): Promise<jobapplications[] | null> {
+export async function getAllJobApplicationsFromDatabase(userid: number): Promise<jobapplications[] | null> {
     try{
         let jobApplicationsForUser = await prisma.jobapplications.findMany({
             where: {
