@@ -1,11 +1,11 @@
-export const deleteJobApplication = async (jobapplicationid: number, userid: number) => {
+export const deleteJobApplication = async (jobapplicationsid: number, userid: number) => {
     try {
       const url = new URL('http://localhost:3000/api/job-applications/delete');
-      url.searchParams.append('userid', jobapplicationid.toString());
+      url.searchParams.append('jobApplicationsId', jobapplicationsid.toString());
       url.searchParams.append('userid', userid.toString());
 
       const response = await fetch(url, {
-        method: 'GET',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },

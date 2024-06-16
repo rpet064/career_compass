@@ -23,7 +23,10 @@ const deleteApplication = (jobapplicationsid: number) => {
   if(!jobapplicationsid)
     errorMessage("Unable to delete job application: job application id was blank")
 
-  deleteJobApplication(jobapplicationsid, userid)
+  let isJobApplicationDeleted = deleteJobApplication(jobapplicationsid, userid)
+
+  if(!isJobApplicationDeleted)
+    errorMessage("Unable to delete job application")
 
   successMessage("Job application successfully deleted")
 }
