@@ -49,3 +49,8 @@
     box-sizing: border-box;
     margin-bottom: 10px;
 }
+
+.deleteIconStyle{
+    background-color: white;
+    color: #FFAF45;
+}
