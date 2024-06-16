@@ -9,6 +9,7 @@ import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { monthNames } from '@/utility/dateFormatter';
 import { getJobApplicationsByMonth } from '@/proxyApi/jobApplications/getJobApplicationsByMonth';
 import { jobApplicationsByMonth } from '@/interfaces/jobApplicationsByMonth';
+import { Card } from 'primereact/card';
 
 export default function Home({ userid, username }: UserProps) {
   const [userId, setUserId] = useState(1);
@@ -100,12 +101,13 @@ export default function Home({ userid, username }: UserProps) {
       <main>
       <Navbar userid={userid} />
       <section>
-        <h1>Home</h1>
+      <Card title="Home">
         {jobApplicationsByMonth ? (
           <Chart type="bar" data={chartData} options={chartOptions} />
           ) : (
             <LoadingSpinner />
           )}
+          </Card>
       </section>
       <Footer />
       </main>
