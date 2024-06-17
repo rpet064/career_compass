@@ -1,6 +1,6 @@
 export const getUserDetails = async (userId: number) => {
     try {
-      const url = new URL('http://localhost:3000/api/user/get');
+      const url = new URL('http://localhost:3000/api/user/get-user');
       url.searchParams.append('userid', userId.toString());
 
       const response = await fetch(url, {
