@@ -10,7 +10,6 @@ import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteJobApplication } from "../proxyApi/jobApplication/deleteJobApplication"
 
 const userid = 1;
-
 type componentType = 'label' | 'dropdown' | 'inputText' | 'dateLabel' | 'deleteIcon';
 
 type ColumnConfig = {
@@ -20,14 +19,16 @@ type ColumnConfig = {
 };
 
 const deleteApplication = (jobapplicationsid: number) => {
-  if(!jobapplicationsid)
+  if(!jobapplicationsid){
     errorMessage("Unable to delete job application: job application id was blank")
-
+    return;
+  }
   let isJobApplicationDeleted = deleteJobApplication(jobapplicationsid, userid)
 
-  if(!isJobApplicationDeleted)
+  if(!isJobApplicationDeleted){
     errorMessage("Unable to delete job application")
-
+    return;
+  }
   successMessage("Job application successfully deleted")
 }
 

@@ -7,9 +7,10 @@ import { formatDate } from '../utility/dateFormatter';
 import { FiTrash2 } from "react-icons/fi";
 import globals from "../styles/global.module.css";
 import { errorMessage, successMessage } from "../utility/toastMessages";
-import { deleteUser } from "../proxyApi/user/deleteUser"
+import { deleteUserFromDatabase } from "../proxyApi/user/deleteUser"
 
 const userid = 1;
+const roleId = 1;
 
 type componentType = 'label' | 'dropdown' | 'inputText' | 'dateLabel' | 'deleteIcon';
 
@@ -19,30 +20,32 @@ type ColumnConfig = {
   componentType?: componentType;
 };
 
-const deleteuser = (usersid: number) => {
-  if(!usersid)
-    errorMessage("Unable to delete job user: job user id was blank")
+const deleteUser = (userid: number) => {
+  if(!userid){
+    errorMessage("Unable to delete user: user id was blank")
+    return;
+  }
 
-//   let isUserDeleted = deleteUser(userid)
-const isUserDeleted = false;
-
-  if(!isUserDeleted)
-    errorMessage("Unable to delete job user")
-
-  successMessage("Job user successfully deleted")
+  let isUserDeleted = deleteUserFromDatabase(userid, roleId)
+  if(!isUserDeleted){
+    errorMessage("Unable to delete user")
+    return;
+  }
+  successMessage("User successfully deleted")
 }
 
 const columnsConfiguration: Array<ColumnConfig> = [
-//   { field: 'usersid', header: 'user id', componentType: 'label' },
-//   { field: 'resumeid', header: 'Resume id', componentType: 'inputText' },
-//   { field: 'progress', header: 'Progress', componentType: 'inputText' },
-//   { field: 'sentiment', header: 'Sentiment', componentType: 'inputText' },
-//   { field: 'joburl', header: 'Job url', componentType: 'inputText' },
-  { field: 'whencreated', header: 'When applied', componentType: 'dateLabel' },
-  { field: 'whendeleted', header: '', componentType: 'deleteIcon' },
+  { field: 'userid', header: 'User Id', componentType: 'label' },
+  { field: 'title', header: 'Title', componentType: 'inputText' },
+  { field: 'firstname', header: 'First Name', componentType: 'inputText' },
+  { field: 'lastname', header: 'Last Name', componentType: 'inputText' },
+  { field: 'roleid', header: 'Role', componentType: 'inputText' },
+  { field: 'email', header: 'Email', componentType: 'inputText' },
+  { field: 'whencreated', header: 'When Created', componentType: 'dateLabel' },
+  { field: 'whendeleted', header: 'When Deleted', componentType: 'deleteIcon' },
 ];
 
-const userDataTable: FC<{ userData: users[] }> = ({ userData }) => {
+const UserDataTable: FC<{ userData: users[] }> = ({ userData }) => {
 
   if (Array.isArray(userData)) {
   return (
@@ -60,7 +63,7 @@ const userDataTable: FC<{ userData: users[] }> = ({ userData }) => {
                 const safeValue = rowData[col.field]?? "";
                 return <InputText type="text" value={safeValue} />;
               case 'deleteIcon':
-                return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteuser(rowData.usersid))} />
+                return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteUser(rowData.userid))} />
             default:
               return <span>{rowData[col.field]}</span>;
           }
@@ -70,8 +73,8 @@ const userDataTable: FC<{ userData: users[] }> = ({ userData }) => {
   </DataTable>
   );
 } else {
-  return <div>No job users found</div>;
+  return <div>No users found</div>;
 }
 };
 
-export default userDataTable;
+export default UserDataTable;
