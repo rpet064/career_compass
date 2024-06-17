@@ -7,7 +7,7 @@ import { Chart } from 'primereact/chart';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { monthNames } from '@/utility/dateFormatter';
-import { getJobApplicationsByMonth } from '@/proxyApi/jobApplications/getJobApplicationsByMonth';
+import { getJobApplicationsByMonth } from '@/proxyApi/jobApplication/getJobApplicationsByMonth';
 import { jobApplicationsByMonth } from '@/interfaces/jobApplicationsByMonth';
 import { Card } from 'primereact/card';
 

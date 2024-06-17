@@ -8,7 +8,7 @@ import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { Card } from 'primereact/card';
 import { InputText } from "primereact/inputtext";
 import globals from "../app/styles/global.module.css";
-import { getUserDetails } from '@/proxyApi/users/getUserDetails';
+import { getUserDetails } from '@/proxyApi/user/getUserDetails';
 
 export default function UserProfile({ userid, username }: UserProps) {
 

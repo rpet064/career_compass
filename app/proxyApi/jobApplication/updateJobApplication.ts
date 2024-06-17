@@ -1,0 +1,2 @@
+export const updateJobApplication = async () => {
+};
