@@ -29,7 +29,7 @@ export default async function getUserDetails(req: NextApiRequest, res: NextApiRe
     });
   }
 
-async function getUserDetailsFromDatabase(userid: number): Promise<users | null> {
+export async function getUserDetailsFromDatabase(userid: number): Promise<users | null> {
     try{
         let userDetails = await prisma.users.findFirst({
             where: {
