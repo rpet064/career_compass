@@ -1,3 +1,3 @@
-export const createNewJobApplication = () => {
+export const updateJobApplicationHandler = () => {
     
 }

@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function deleteJobApplication(req: NextApiRequest, res: NextApiResponse) {
+export default async function deleteJobApplicationHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'PUT') {
         return res.status(405).json({ message: 'Method Not Allowed' });
     }

@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export default async function getUserJobApplications(req: NextApiRequest, res: NextApiResponse) {
+export default async function getUserJobApplicationsHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method!== 'GET') {
       return res.status(405).json({ message: 'Method Not Allowed' });
     }

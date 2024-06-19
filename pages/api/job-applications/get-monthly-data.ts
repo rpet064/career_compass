@@ -7,7 +7,7 @@ interface jobApplicationsByMonth {
     "count": 0
   };
 
-export default async function getUserJobApplicationsByMonth(req: NextApiRequest, res: NextApiResponse) {
+export default async function getUserJobApplicationsByMonthHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method!== 'GET') {
       return res.status(405).json({ message: 'Method Not Allowed' });
     }

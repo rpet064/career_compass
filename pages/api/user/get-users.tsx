@@ -6,7 +6,7 @@ import { getUserDetailsFromDatabase } from "./get-user"
 const prisma = new PrismaClient();
 const admin = 1;
 
-export default async function getUsers(req: NextApiRequest, res: NextApiResponse) {
+export default async function getUsersHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method!== 'GET') {
       return res.status(405).json({ message: 'Method Not Allowed' });
     }
