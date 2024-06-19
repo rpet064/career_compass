@@ -3,18 +3,18 @@ import Footer from '@/customComponents/Footer';
 import { checkAuth } from '@/utility/checkAuth';
 import UserProps from '@/interfaces/userProps';
 import { NextPageContext } from 'next';
-import JobApplicationDataTable from '@/primeReactComponents/JobApplicationDataTable';
+import ResumeDataTable from '@/primeReactComponents/ResumeDataTable';
 import LoadingSpinner from '@/customComponents/LoadingSpinner';
 import { useState, useEffect } from 'react';
 import globals from "../app/styles/global.module.css";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-import { getJobApplications } from '@/proxyApi/jobApplication/getJobApplications';
+import { getResumes } from '@/proxyApi/resume/getResumes';
 
-export default function JobApplication({ userid, username }: UserProps) {
+export default function ManageResumes({ userid, username }: UserProps) {
 
   const [userId, setUserId] = useState(1);
-  const [jobApplicationData, setJobApplicationData] = useState([]);
+  const [resumeData, setResumeData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   if (userid === -1) {
@@ -22,24 +22,22 @@ export default function JobApplication({ userid, username }: UserProps) {
     setUserId(userid);
   }
 
-  const newJobApplication = () => {
-    alert("New job application");
+  const newResume = () => {
+    alert("New resume");
   }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getJobApplications(userId);
-        if (data.jobApplicationsList.length < 1) {
+        const data = await getResumes(userId);
+        if (data.resumeList.length < 1) {
           return;
         }
 
-        console.log(data.jobApplicationsList)
-
-        setJobApplicationData(data.jobApplicationsList);
+        setResumeData(data.resumeList);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching job application:', error);
+        console.error('Error fetching resumes:', error);
       }
     };
 
@@ -51,18 +49,18 @@ export default function JobApplication({ userid, username }: UserProps) {
     <main>
       <Navbar userid={userid} />
       <section>
-        <Card title="Job applications">
+        <Card title="Resumes">
           {isLoading ? (
             <LoadingSpinner />
           ) : (
-            jobApplicationData ? (
-              <JobApplicationDataTable jobApplicationData={jobApplicationData} />
+            resumeData ? (
+              <ResumeDataTable resumeData={resumeData} />
             ) : (
-              <p>No job applications found.</p>
+              <p>No resumes found.</p>
             )
           )}
           <div className={globals.buttonContainer}>
-            <Button onClick={() => newJobApplication()}>New</Button>
+            <Button onClick={() => newResume()}>New</Button>
           </div>
         </Card>
         <div className={globals.buttonContainer}>

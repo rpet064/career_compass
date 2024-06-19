@@ -14,7 +14,7 @@ import { getUsers } from '@/proxyApi/user/getUsers';
 export default function ManageUsers({ userid, username }: UserProps) {
 
   const [userId, setUserId] = useState(1);
-  const [userData, setuserData] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   if (userid === -1) {
@@ -24,6 +24,10 @@ export default function ManageUsers({ userid, username }: UserProps) {
 
   const roleId = 1;
 
+  const newUser = () => {
+    alert("New user");
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,13 +35,10 @@ export default function ManageUsers({ userid, username }: UserProps) {
         if (data.userList.length < 1) {
           return;
         }
-
-        console.log(data.userList)
-
-        setuserData(data.userList);
+        setUserData(data.userList);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching job application:', error);
+        console.error('Error fetching users:', error);
       }
     };
 
@@ -49,16 +50,19 @@ export default function ManageUsers({ userid, username }: UserProps) {
     <main>
       <Navbar userid={userid} />
       <section>
-        <Card title="Job applications">
+        <Card title="Users">
           {isLoading ? (
             <LoadingSpinner />
           ) : (
             userData ? (
               <UserDataTable userData={userData} />
             ) : (
-              <p>No job applications found.</p>
+              <p>No users found.</p>
             )
           )}
+        <div className={globals.buttonContainer}>
+            <Button onClick={() => newUser()}>New</Button>
+        </div>
         </Card>
         <div className={globals.buttonContainer}>
           <Button label="Save" onClick={() => alert('Button clicked')} />
