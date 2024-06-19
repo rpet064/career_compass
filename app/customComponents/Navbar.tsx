@@ -1,4 +1,4 @@
-import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass, FiHome } from "react-icons/fi";
+import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass, FiHome, FiFileText } from "react-icons/fi";
 import { FC } from "react";
 import styles from '../styles/navbar.module.css';
 import colour from '../styles/colour.module.css';
@@ -28,6 +28,7 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
 
          <div>
             <FiHome onClick={() => navigateUser("home")}/>
+            <FiFileText onClick={() => navigateUser("manage-resume")}/>
             <FiBriefcase onClick={() => navigateUser("job-application")}/>
             <FiUser onClick={() => navigateUser("manage-users")}/>
             <FiUser onClick={() => navigateUser("user-profile")}/>
