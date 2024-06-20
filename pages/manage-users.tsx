@@ -67,6 +67,7 @@ export default function ManageUsers({ userid, username }: UserProps) {
             <LoadingSpinner />
           ) : (
             userData ? (
+              <UserDataTable userData={userData}/>
             ) : (
               <p>No users found.</p>
             )

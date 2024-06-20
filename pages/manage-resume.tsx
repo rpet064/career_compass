@@ -63,6 +63,7 @@ export default function ManageResumes({ userid, username }: UserProps) {
             <LoadingSpinner />
           ) : (
             resumeData ? (
+              <ResumeDataTable resumeData={resumeData}/>
             ) : (
               <p>No resumes found.</p>
             )
