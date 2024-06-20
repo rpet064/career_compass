@@ -10,11 +10,12 @@ import globals from "../app/styles/global.module.css";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { getUsers } from '@/proxyApi/user/getUsers';
+import { users } from '@prisma/client';
 
 export default function ManageUsers({ userid, username }: UserProps) {
 
   const [userId, setUserId] = useState(1);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState<users[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   if (userid === -1) {
@@ -24,27 +25,38 @@ export default function ManageUsers({ userid, username }: UserProps) {
 
   const roleId = 1;
 
-  const newUser = () => {
-    alert("New user");
-  }
+  const createNewUser = () => {
+    let newUser = {
+        userid: -1,
+        roleid: 2, // set as regular user
+        username: "",
+        password: "",
+        email: "",
+        title: "",
+        firstname: "",
+        lastname: "",
+        whencreated: new Date(Date.now()),
+        whendeleted: null
+      }
+      setUserData((prevUserData) => [...prevUserData, newUser]);
+    }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getUsers(userId, roleId);
-        if (data.userList.length < 1) {
-          return;
-        }
-        setUserData(data.userList);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
     fetchData();
   }, [userId]);
 
+  const fetchData = async () => {
+    try {
+      const data = await getUsers(userId, roleId);
+      if (data.userList.length < 1) {
+        return;
+      }
+      setUserData(data.userList);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
 
   return (
     <main>
@@ -55,13 +67,12 @@ export default function ManageUsers({ userid, username }: UserProps) {
             <LoadingSpinner />
           ) : (
             userData ? (
-              <UserDataTable userData={userData} />
             ) : (
               <p>No users found.</p>
             )
           )}
         <div className={globals.buttonContainer}>
-            <Button onClick={() => newUser()}>New</Button>
+            <Button onClick={() => createNewUser()}>New</Button>
         </div>
         </Card>
         <div className={globals.buttonContainer}>

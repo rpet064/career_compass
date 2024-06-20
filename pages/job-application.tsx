@@ -10,11 +10,12 @@ import globals from "../app/styles/global.module.css";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { getJobApplications } from '@/proxyApi/jobApplication/getJobApplications';
+import { jobapplications } from '@prisma/client';
 
 export default function JobApplication({ userid, username }: UserProps) {
 
   const [userId, setUserId] = useState(1);
-  const [jobApplicationData, setJobApplicationData] = useState([]);
+  const [jobApplicationData, setJobApplicationData] = useState<jobapplications[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   if (userid === -1) {
@@ -22,30 +23,40 @@ export default function JobApplication({ userid, username }: UserProps) {
     setUserId(userid);
   }
 
-  const newJobApplication = () => {
-    alert("New job application");
+  const createNewJobApplication = () => {
+    let newJobApplication = {
+      jobapplicationsid: -1,
+      userid: userid,
+      resumeid: 1,
+      joburl: "",
+      progress: "",
+      sentiment: 1,
+      notes: "",
+      whencreated: new Date(Date.now()),
+      whendeleted: null
+    }
+    setJobApplicationData(prevJobApplications => [...prevJobApplications, newJobApplication]);
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getJobApplications(userId);
-        if (data.jobApplicationsList.length < 1) {
-          return;
-        }
-
-        console.log(data.jobApplicationsList)
-
-        setJobApplicationData(data.jobApplicationsList);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching job application:', error);
-      }
-    };
-
     fetchData();
   }, [userId]);
 
+  const fetchData = async () => {
+    try {
+      const data = await getJobApplications(userId);
+      if (data.jobApplicationsList.length < 1) {
+        return;
+      }
+
+      console.log(data.jobApplicationsList)
+
+      setJobApplicationData(data.jobApplicationsList);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching job application:', error);
+    }
+  };
 
   return (
     <main>
@@ -62,7 +73,7 @@ export default function JobApplication({ userid, username }: UserProps) {
             )
           )}
           <div className={globals.buttonContainer}>
-            <Button onClick={() => newJobApplication()}>New</Button>
+            <Button onClick={() => createNewJobApplication()}>New</Button>
           </div>
         </Card>
         <div className={globals.buttonContainer}>
