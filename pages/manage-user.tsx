@@ -1,5 +1,5 @@
 export default function ManageResume(){
     return (
-        <div>This is ManageResume</div>
+        <div>This is ManageUser</div>
     );
 }
