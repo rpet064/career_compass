@@ -1,9 +1,9 @@
 import styles from "../../styles/auth.module.css";
 import colours from "../../styles/colour.module.css";
-import { useNavigation } from "@/utility/navigation";
+import { useAuthNavigation } from "@/utility/navigation";
 
 const AuthRedirectLink = () => {
-    const navigate = useNavigation();
+    const navigate = useAuthNavigation();
     return(
         <p>Create Account
         <span onClick={() => navigate('/create-account')}

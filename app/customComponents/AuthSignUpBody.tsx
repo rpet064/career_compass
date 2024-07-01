@@ -6,7 +6,7 @@ import { FC, useState, useEffect } from "react";
 import { SignupRedirectLink } from "./signupComponents/SignupRedirectLink";
 import signup from "../styles/signup.module.css";
 import AuthSignupBodyProps from "../interfaces/authSignupBodyProps";
-import { useNavigation } from "../utility/navigation";
+import { useAuthNavigation } from "../utility/navigation";
 import { errorMessage, successMessage } from "../utility/toastMessages";
 
 const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
@@ -30,7 +30,7 @@ const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
         confirmPassword: "",
     });
 
-    const navigate = useNavigation();
+    const navigate = useAuthNavigation();
 
     // // Increase container width if displaying error message
     // useEffect(() => {

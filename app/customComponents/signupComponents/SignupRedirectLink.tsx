@@ -1,9 +1,9 @@
 import styles from "../../styles/auth.module.css";
 import colours from "../../styles/colour.module.css";
-import { useNavigation } from "@/utility/navigation";
+import { useAuthNavigation } from "@/utility/navigation";
 
  export const SignupRedirectLink = () => {
-    const navigate = useNavigation();
+    const navigate = useAuthNavigation();
     return(
         <p>Have existing account?
         <span onClick={() => navigate('/login')}

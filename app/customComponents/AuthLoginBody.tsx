@@ -3,7 +3,7 @@ import AuthRedirectLink from "./loginComponents/AuthRedirectLink";
 import { useState, useEffect, FC } from "react";
 import colour from "../styles/colour.module.css";
 import AuthLoginBodyProps from "../interfaces/authLoginBodyProps";
-import { useNavigation } from "../utility/navigation";
+import { useAuthNavigation } from "../utility/navigation";
 import { errorMessage } from "../utility/toastMessages";
 import globals from "../styles/global.module.css";
 import { createNewTokenInLocalStorage } from "../utility/localStorageManager";
@@ -23,7 +23,7 @@ const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
       password: "",
    });
 
-   const navigate = useNavigation();
+   const navigate = useAuthNavigation();
 
    // Increase container width if displaying error message
    useEffect(() => {

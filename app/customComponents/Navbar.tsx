@@ -2,12 +2,12 @@ import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass, FiHome, FiFileT
 import { FC } from "react";
 import styles from '../styles/navbar.module.css';
 import colour from '../styles/colour.module.css';
-import { useNavigation } from '../utility/navigation';
+import { useAuthNavigation } from '../utility/navigation';
 import NavbarProps from "../interfaces/navbarProps";
 import { HandleLogout } from '../proxyApi/authentication/handleLogout';
 
 const Navbar : FC<NavbarProps> = ({ userid }) => {
-   const navigate = useNavigation();
+   const navigate = useAuthNavigation();
 
    const navigateUser = (nextPage: string) => {
 

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useNavigation } from '@/utility/navigation';
+import { useAuthNavigation } from '@/utility/navigation';
 import LoadingSpinner from '@/customComponents/LoadingSpinner';
 
 export default function Main() {
-  const navigate = useNavigation();
+  const navigate = useAuthNavigation();
 
   useEffect(() => {
     navigate('/home');

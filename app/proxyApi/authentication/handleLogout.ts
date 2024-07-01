@@ -1,9 +1,9 @@
 import { clearAuthTokenFromLocalStorage } from '../../utility/localStorageManager';
-import { useNavigation } from '../../utility/navigation';
+import { useAuthNavigation } from '../../utility/navigation';
 
 export const HandleLogout = async (userid: number) => {
 
-    const navigate = useNavigation();
+    const navigate = useAuthNavigation();
 
     let logoutData = {
        userid: userid,
