@@ -7,76 +7,78 @@ import { formatDate } from '../utility/dateFormatter';
 import { FiTrash2 } from "react-icons/fi";
 import globals from "../styles/global.module.css";
 import { errorMessage, successMessage } from "../utility/toastMessages";
-import { deleteResumeFromDatabase } from "../proxyApi/resume/deleteResumeFromDatabase"
+import { deleteResumeFromDatabase } from "../proxyApi/resume/deleteResumeFromDatabase";
+import { dataTableComponentType } from "../interfaces/dataTableComponentType";
 
 const userid = 1;
-
-type componentType = 'label' | 'dropdown' | 'inputText' | 'dateLabel' | 'deleteIcon';
 
 type ColumnConfig = {
   field: keyof resume;
   header: string;
-  componentType?: componentType;
+  dataTableComponentType?: dataTableComponentType;
 };
 
 const deleteResume = (resumeid: number) => {
-  if(!resumeid){
+  if (!resumeid) {
     errorMessage("Unable to delete resume: resume id was blank")
     return;
   }
 
-  if(!userid){
+  if (!userid) {
     errorMessage("Unable to delete resume: userid id was blank")
     return;
   }
 
   let isResumeDeleted = deleteResumeFromDatabase(userid, resumeid)
-  if(!isResumeDeleted){
+  if (!isResumeDeleted) {
     errorMessage("Unable to delete resume")
     return;
   }
-  successMessage("Resume successfully deleted")
+  location.reload();
 }
 
 const columnsConfiguration: Array<ColumnConfig> = [
-  { field: 'resumeid', header: 'Resume Id', componentType: 'label' },
-  { field: 'resumename', header: 'Name', componentType: 'inputText' },
-  { field: 'resumedescription', header: 'Description', componentType: 'inputText' },
-  { field: 'resumeurl', header: 'URL', componentType: 'inputText' },
-  { field: 'whencreated', header: 'When Created', componentType: 'dateLabel' },
-  { field: 'whendeleted', header: 'When Deleted', componentType: 'deleteIcon' },
+  { field: 'resumeid', header: 'Resume Id', dataTableComponentType: 'redirectLink' },
+  { field: 'resumename', header: 'Name', dataTableComponentType: 'inputText' },
+  { field: 'resumedescription', header: 'Description', dataTableComponentType: 'inputText' },
+  { field: 'resumeurl', header: 'URL', dataTableComponentType: 'inputText' },
+  { field: 'whencreated', header: 'When Created', dataTableComponentType: 'dateLabel' },
+  { field: 'whendeleted', header: 'When Deleted', dataTableComponentType: 'deleteIcon' },
 ];
 
-const ResumeDataTable: FC<{ resumeData: resume[]}> = ({ resumeData }) => {
+const ResumeDataTable: FC<{ resumeData: resume[] }> = ({ resumeData }) => {
 
   if (Array.isArray(resumeData)) {
-  return (
-    <DataTable value={resumeData}>
-    {columnsConfiguration.map((col, index) => (
-      <Column 
-        key={index} 
-        field={col.field} 
-        header={col.header} 
-        body={(rowData) => {
-          switch (col.componentType) {
-            case 'dateLabel':
-              return <span>{formatDate(rowData[col.field])}</span>;
-              case 'inputText':
-                const safeValue = rowData[col.field]?? "";
-                return <InputText type="text" value={safeValue} />;
-              case 'deleteIcon':
-                return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteResume(rowData.resumeid))} />
-            default:
-              return <span>{rowData[col.field]}</span>;
-          }
-        }}
-      />
-    ))}
-  </DataTable>
-  );
-} else {
-  return <div>No resumes found</div>;
-}
+    return (
+      <DataTable value={resumeData}>
+        {columnsConfiguration.map((col, index) => (
+          <Column
+            key={index}
+            field={col.field}
+            header={col.header}
+            body={(rowData) => {
+              switch (col.dataTableComponentType) {
+                case 'dateLabel':
+                  return <span>{formatDate(rowData[col.field])}</span>;
+                case 'inputText':
+                  const safeValue = rowData[col.field] ?? "";
+                  return <InputText type="text" value={safeValue} />;
+                case 'redirectLink':
+                  return <h1>Hey</h1>
+                  // return <Route path="/details/:id" Component={ManageResume}/>
+                case 'deleteIcon':
+                  return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteResume(rowData.resumeid))} />
+                default:
+                  return <span>{rowData[col.field]}</span>;
+              }
+            }}
+          />
+        ))}
+      </DataTable>
+    );
+  } else {
+    return <div>No resumes found</div>;
+  }
 };
 
 export default ResumeDataTable;
