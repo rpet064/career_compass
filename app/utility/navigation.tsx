@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router';
 import { useAuth } from './useAuth';
 
-export const useNavigation = () => {
 export const useAuthNavigation = () => {
  const router = useRouter();
- const isUserAuthenticated = useAuth();
 //  const isUserAuthenticated = useAuth();
 let isUserAuthenticated = true;
 
@@ -19,3 +17,24 @@ let isUserAuthenticated = true;
 
  return navigate;
 };
+
+export const useNavigationWithParams = () => {
+  const router = useRouter();
+  // const isUserAuthenticated = useAuth();
+  let isUserAuthenticated = true;
+ 
+  const navigate = (pathName: string, paramName: string, id: string) => {
+     if (isUserAuthenticated && pathName && paramName && id){
+      router.push({
+        pathname: `${pathName}/${id}`,
+      });
+
+     } else {
+       // Redirect to login page if not authenticated
+       router.push('/login');
+     }
+  };
+ 
+  return navigate;
+ };
+
