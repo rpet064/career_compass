@@ -34,6 +34,7 @@ export async function getUserDetailsFromDatabase(userid: number): Promise<users 
         let userDetails = await prisma.users.findFirst({
             where: {
                 userid: userid,
+                whendeleted: null
             }
         });
         return userDetails

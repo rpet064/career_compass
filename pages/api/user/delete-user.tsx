@@ -5,7 +5,7 @@ import { getUserDetailsFromDatabase } from "./get-user"
 const admin = 1;
 const prisma = new PrismaClient();
 
-export default async function deleteUser(req: NextApiRequest, res: NextApiResponse) {
+export default async function deleteUserHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'PUT') {
         return res.status(405).json({ message: 'Method Not Allowed' });
     }

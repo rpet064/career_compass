@@ -28,8 +28,8 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
 
          <div>
             <FiHome onClick={() => navigateUser("home")}/>
-            <FiFileText onClick={() => navigateUser("manage-resume")}/>
-            <FiBriefcase onClick={() => navigateUser("job-application")}/>
+            <FiFileText onClick={() => navigateUser("manage-resumes")}/>
+            <FiBriefcase onClick={() => navigateUser("manage-job-applications")}/>
             <FiUser onClick={() => navigateUser("manage-users")}/>
             <FiUser onClick={() => navigateUser("user-profile")}/>
             <FiRefreshCcw onClick={() => location.reload()}/>
