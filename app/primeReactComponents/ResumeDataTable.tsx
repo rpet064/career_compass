@@ -8,16 +8,10 @@ import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import globals from "../styles/global.module.css";
 import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteResumeFromDatabase } from "../proxyApi/resume/deleteResumeFromDatabase";
-import { dataTableComponentType } from "../interfaces/dataTableComponentType";
+import { dataTableComponentType } from "../types/dataTableComponentType";
 import { useNavigationWithParams } from "../utility/navigation"
 
 const userid = 1;
-
-type ColumnConfig = {
-  field: keyof resume;
-  header: string;
-  dataTableComponentType?: dataTableComponentType;
-};
 
 const deleteResume = (resumeid: number) => {
   if (!resumeid) {
@@ -38,16 +32,6 @@ const deleteResume = (resumeid: number) => {
   location.reload();
 }
 
-const columnsConfiguration: Array<ColumnConfig> = [
-  { field: 'resumeid', header: 'Resume', dataTableComponentType: 'redirectLink' },
-  { field: 'resumename', header: 'Name', dataTableComponentType: 'label' },
-  { field: 'resumedescription', header: 'Description', dataTableComponentType: 'label' },
-  { field: 'resumeurl', header: 'URL', dataTableComponentType: 'label' },
-  { field: 'whencreated', header: 'When Created', dataTableComponentType: 'dateLabel' },
-  { field: 'resumeid', header: '', dataTableComponentType: 'editIcon' },
-  { field: 'whendeleted', header: '', dataTableComponentType: 'deleteIcon' },
-];
-
 const ResumeDataTable: FC<{ resumeData: resume[] }> = ({ resumeData }) => {
 
   let navigateWithParams = useNavigationWithParams();
@@ -55,7 +39,7 @@ const ResumeDataTable: FC<{ resumeData: resume[] }> = ({ resumeData }) => {
   if (Array.isArray(resumeData)) {
     return (
       <DataTable value={resumeData}>
-        {columnsConfiguration.map((col, index) => (
+        {resumeDataTableColumnConfiguration.map((col, index) => (
           <Column
             key={index}
             field={col.field}

@@ -8,16 +8,10 @@ import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import globals from "../styles/global.module.css";
 import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteJobApplication } from "../proxyApi/jobApplication/deleteJobApplication"
-import { dataTableComponentType } from "../interfaces/dataTableComponentType";
+import { dataTableComponentType } from "../types/dataTableComponentType";
 import { useNavigationWithParams } from "../utility/navigation"
 
 const userid = 1;
-
-type ColumnConfig = {
-  field: keyof jobapplications;
-  header: string;
-  dataTableComponentType?: dataTableComponentType;
-};
 
 const deleteApplication = (jobapplicationsid: number) => {
   if (!jobapplicationsid) {
@@ -33,17 +27,6 @@ const deleteApplication = (jobapplicationsid: number) => {
   location.reload();
 }
 
-const columnsConfiguration: Array<ColumnConfig> = [
-  { field: 'jobapplicationsid', header: 'Application', dataTableComponentType: 'redirectLink' },
-  { field: 'resumeid', header: 'Resume id', dataTableComponentType: 'label' },
-  { field: 'progress', header: 'Progress', dataTableComponentType: 'label' },
-  { field: 'sentiment', header: 'Sentiment', dataTableComponentType: 'label' },
-  { field: 'joburl', header: 'Job url', dataTableComponentType: 'label' },
-  { field: 'whencreated', header: 'When applied', dataTableComponentType: 'dateLabel' },
-  { field: 'jobapplicationsid', header: '', dataTableComponentType: 'editIcon' },
-  { field: 'whendeleted', header: '', dataTableComponentType: 'deleteIcon' },
-];
-
 const JobApplicationDataTable: FC<{ jobApplicationData: jobapplications[] }> = ({ jobApplicationData }) => {
 
   let navigateWithParams = useNavigationWithParams();
@@ -51,7 +34,7 @@ const JobApplicationDataTable: FC<{ jobApplicationData: jobapplications[] }> = (
   if (Array.isArray(jobApplicationData)) {
     return (
       <DataTable value={jobApplicationData}>
-        {columnsConfiguration.map((col, index) => (
+        {applicationDataTableColumnConfiguration.map((col, index) => (
           <Column
             key={index}
             field={col.field}

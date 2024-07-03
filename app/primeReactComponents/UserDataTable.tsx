@@ -8,8 +8,9 @@ import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import globals from "../styles/global.module.css";
 import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteUserFromDatabase } from "../proxyApi/user/deleteUser";
-import { dataTableComponentType } from "../interfaces/dataTableComponentType";
+import { dataTableComponentType } from "../types/dataTableComponentType";
 import { useNavigationWithParams } from "../utility/navigation"
+import { userColumnConfiguration } from '@/configurations/userColumnConfiguration';
 
 const userid = 1;
 const roleId = 1;
@@ -34,18 +35,6 @@ const deleteUser = (userid: number) => {
     location.reload();
 }
 
-const columnsConfiguration: Array<ColumnConfig> = [
-    { field: 'userid', header: 'User', dataTableComponentType: 'redirectLink' },
-    { field: 'title', header: 'Title', dataTableComponentType: 'label' },
-    { field: 'firstname', header: 'First Name', dataTableComponentType: 'label' },
-    { field: 'lastname', header: 'Last Name', dataTableComponentType: 'label' },
-    { field: 'roleid', header: 'Role', dataTableComponentType: 'label' },
-    { field: 'email', header: 'Email', dataTableComponentType: 'label' },
-    { field: 'whencreated', header: 'When Created', dataTableComponentType: 'dateLabel' },
-    { field: 'userid', header: '', dataTableComponentType: 'editIcon' },
-    { field: 'whendeleted', header: '', dataTableComponentType: 'deleteIcon' },
-];
-
 const UserDataTable: FC<{ userData: users[] }> = ({ userData }) => {
 
     let navigateWithParams = useNavigationWithParams();
@@ -53,7 +42,7 @@ const UserDataTable: FC<{ userData: users[] }> = ({ userData }) => {
     if (Array.isArray(userData)) {
         return (
             <DataTable value={userData}>
-                {columnsConfiguration.map((col, index) => (
+                {userColumnConfiguration.map((col, index) => (
                     <Column
                         key={index}
                         field={col.field}
