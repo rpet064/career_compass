@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { resume } from "@prisma/client";
 import { InputText } from 'primereact/inputtext';
 import { formatDate } from '../utility/dateFormatter';
-import { FiTrash2 } from "react-icons/fi";
+import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import globals from "../styles/global.module.css";
 import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteResumeFromDatabase } from "../proxyApi/resume/deleteResumeFromDatabase";
@@ -39,12 +39,13 @@ const deleteResume = (resumeid: number) => {
 }
 
 const columnsConfiguration: Array<ColumnConfig> = [
-  { field: 'resumeid', header: 'Resume Id', dataTableComponentType: 'redirectLink' },
-  { field: 'resumename', header: 'Name', dataTableComponentType: 'inputText' },
-  { field: 'resumedescription', header: 'Description', dataTableComponentType: 'inputText' },
-  { field: 'resumeurl', header: 'URL', dataTableComponentType: 'inputText' },
+  { field: 'resumeid', header: 'Resume', dataTableComponentType: 'redirectLink' },
+  { field: 'resumename', header: 'Name', dataTableComponentType: 'label' },
+  { field: 'resumedescription', header: 'Description', dataTableComponentType: 'label' },
+  { field: 'resumeurl', header: 'URL', dataTableComponentType: 'label' },
   { field: 'whencreated', header: 'When Created', dataTableComponentType: 'dateLabel' },
-  { field: 'whendeleted', header: 'When Deleted', dataTableComponentType: 'deleteIcon' },
+  { field: 'resumeid', header: '', dataTableComponentType: 'editIcon' },
+  { field: 'whendeleted', header: '', dataTableComponentType: 'deleteIcon' },
 ];
 
 const ResumeDataTable: FC<{ resumeData: resume[] }> = ({ resumeData }) => {
@@ -61,6 +62,8 @@ const ResumeDataTable: FC<{ resumeData: resume[] }> = ({ resumeData }) => {
             header={col.header}
             body={(rowData) => {
               switch (col.dataTableComponentType) {
+                case 'label':
+                  return <span>{rowData[col.field]}</span>;
                 case 'dateLabel':
                   return <span>{formatDate(rowData[col.field])}</span>;
                 case 'inputText':
