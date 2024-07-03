@@ -46,7 +46,9 @@ const columnsConfiguration: Array<ColumnConfig> = [
 ];
 
 const UserDataTable: FC<{ userData: users[] }> = ({ userData }) => {
+
     let navigateWithParams = useNavigationWithParams();
+
     if (Array.isArray(userData)) {
         return (
             <DataTable value={userData}>
@@ -63,9 +65,12 @@ const UserDataTable: FC<{ userData: users[] }> = ({ userData }) => {
                                     const safeValue = rowData[col.field] ?? "";
                                     return <InputText type="text" value={safeValue} />;
                                 case 'redirectLink':
-                                    return  <button
-                                    type="button"
-                                    onClick={() => navigateWithParams('/manage-user', 'id', rowData.userid)}></button>
+                                    return  <button className={globals.dataTableButton} type="button"
+                                    onClick={() => navigateWithParams('/manage-user', 'id', rowData.userid)}>{rowData.userid}</button>
+                                case 'editIcon':
+                                    return  <button className={globals.dataTableButton} type="button"
+                                        onClick={() => navigateWithParams('/manage-job-application', 'id', rowData.userid)}>
+                                        <FiEdit2 className={globals.editIconStyle}/></button>
                                 case 'deleteIcon':
                                     return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteUser(rowData.userid))} />
                                 default:

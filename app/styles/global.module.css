@@ -52,6 +52,7 @@
 }
 
 .deleteIconStyle{
+.deleteIconStyle, .editIconStyle{
     background-color: white;
     color: #FFAF45;
 }
