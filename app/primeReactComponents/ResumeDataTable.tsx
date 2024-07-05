@@ -10,6 +10,7 @@ import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteResumeFromDatabase } from "../proxyApi/resume/deleteResumeFromDatabase";
 import { dataTableComponentType } from "../types/dataTableComponentType";
 import { useNavigationWithParams } from "../utility/navigation"
+import { resumeDataTableColumnConfiguration } from '@/configurations/resumeColumnConfiguration';
 
 const userid = 1;
 

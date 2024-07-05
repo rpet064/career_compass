@@ -9,19 +9,9 @@ import { Card } from 'primereact/card';
 import { InputText } from "primereact/inputtext";
 import globals from "../app/styles/global.module.css";
 import { getUserDetails } from '@/proxyApi/user/getUserDetails';
+import { UserDetails } from '@/interfaces/userDetails'
 
 export default function UserProfile({ userid, username }: UserProps) {
-
-  interface UserDetails {
-    userid: string;
-    roleid: string;
-    username: string;
-    email: string;
-    title: string;
-    firstname: string;
-    lastname: string;
-    whencreated: string;
-  }
 
   const [userDetails, setUserDetails] = useState<UserDetails>({
     userid: '',

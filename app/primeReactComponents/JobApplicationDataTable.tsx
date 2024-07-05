@@ -10,6 +10,7 @@ import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteJobApplication } from "../proxyApi/jobApplication/deleteJobApplication"
 import { dataTableComponentType } from "../types/dataTableComponentType";
 import { useNavigationWithParams } from "../utility/navigation"
+import { applicationDataTableColumnConfiguration } from '@/configurations/jobApplicationColumnConfiguration';
 
 const userid = 1;
 

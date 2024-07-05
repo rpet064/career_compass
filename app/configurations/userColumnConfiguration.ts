@@ -1,4 +1,6 @@
-export const userColumnConfiguration: Array<ColumnConfig> = [
+import { userColumnType } from "@/types/userColumnType";
+
+export const userColumnConfiguration: Array<userColumnType> = [
     { field: 'userid', header: 'User', dataTableComponentType: 'redirectLink' },
     { field: 'title', header: 'Title', dataTableComponentType: 'label' },
     { field: 'firstname', header: 'First Name', dataTableComponentType: 'label' },

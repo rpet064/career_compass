@@ -1,4 +1,6 @@
-export const resumeDataTableColumnConfiguration: Array<ColumnConfig> = [
+import { resumeColumnType } from "@/types/resumeColumnType";
+
+export const resumeDataTableColumnConfiguration: Array<resumeColumnType> = [
     { field: 'resumeid', header: 'Resume', dataTableComponentType: 'redirectLink' },
     { field: 'resumename', header: 'Name', dataTableComponentType: 'label' },
     { field: 'resumedescription', header: 'Description', dataTableComponentType: 'label' },
