@@ -11,6 +11,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { getJobApplications } from '@/proxyApi/jobApplication/getJobApplications';
 import { jobapplications } from '@prisma/client';
+import { refreshPage } from '@/utility/refreshPage'
 
 export default function ManageJobApplications({ userid, username }: UserProps) {
 
@@ -78,7 +79,7 @@ export default function ManageJobApplications({ userid, username }: UserProps) {
         </Card>
         <div className={globals.buttonContainer}>
           <Button label="Save" onClick={() => alert('Button clicked')} />
-          <Button label="Cancel" onClick={() => alert('Button clicked')} />
+          <Button label="Cancel" onClick={() => refreshPage()} />
         </div>
       </section>
       <Footer />

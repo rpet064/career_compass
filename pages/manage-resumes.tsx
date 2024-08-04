@@ -11,6 +11,7 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { getResumes } from '@/proxyApi/resume/getResumes';
 import { resume } from '@prisma/client';
+import { refreshPage } from '@/utility/refreshPage'
 
 export default function ManageResumes({ userid, username }: UserProps) {
 
@@ -74,7 +75,7 @@ export default function ManageResumes({ userid, username }: UserProps) {
         </Card>
         <div className={globals.buttonContainer}>
           <Button label="Save" onClick={() => alert('Button clicked')} />
-          <Button label="Cancel" onClick={() => alert('Button clicked')} />
+          <Button label="Cancel" onClick={() => refreshPage()} />
         </div>
       </section>
       <Footer />

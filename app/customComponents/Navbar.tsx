@@ -5,6 +5,7 @@ import colour from '../styles/colour.module.css';
 import { useAuthNavigation } from '../utility/navigation';
 import NavbarProps from "../interfaces/navbarProps";
 import { HandleLogout } from '../proxyApi/authentication/handleLogout';
+import { refreshPage } from '@/utility/refreshPage'
 
 const Navbar : FC<NavbarProps> = ({ userid }) => {
    const navigate = useAuthNavigation();
@@ -35,6 +36,7 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
             <FiRefreshCcw onClick={() => location.reload()}/>
             <FiLogOut onClick={() => HandleLogout}/>
          </div>
+               <FiRefreshCcw onClick={() => refreshPage()}/>
       </div>
    );
 }
