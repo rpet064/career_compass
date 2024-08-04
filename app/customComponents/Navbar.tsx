@@ -1,5 +1,5 @@
-import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass, FiHome, FiFileText } from "react-icons/fi";
-import { FC } from "react";
+import { FiBriefcase, FiUser, FiRefreshCcw, FiLogOut, FiCompass, FiHome, FiFileText, FiSettings } from "react-icons/fi";
+import { FC, useState } from "react";
 import styles from '../styles/navbar.module.css';
 import colour from '../styles/colour.module.css';
 import { useAuthNavigation } from '../utility/navigation';
@@ -8,7 +8,13 @@ import { HandleLogout } from '../proxyApi/authentication/handleLogout';
 import { refreshPage } from '@/utility/refreshPage'
 
 const Navbar : FC<NavbarProps> = ({ userid }) => {
+   const [ isDropDownMenuDisplayed, toggleDropDownMenuDisplayed] = useState<boolean>(false);
+
    const navigate = useAuthNavigation();
+
+   const ToggleMenu = () => {
+      toggleDropDownMenuDisplayed(!isDropDownMenuDisplayed);
+   }
 
    const navigateUser = (nextPage: string) => {
 
@@ -32,11 +38,15 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
             <FiFileText onClick={() => navigateUser("manage-resumes")}/>
             <FiBriefcase onClick={() => navigateUser("manage-job-applications")}/>
             <FiUser onClick={() => navigateUser("manage-users")}/>
-            <FiUser onClick={() => navigateUser("user-profile")}/>
-            <FiRefreshCcw onClick={() => location.reload()}/>
-            <FiLogOut onClick={() => HandleLogout}/>
-         </div>
+            <FiSettings onClick={() => ToggleMenu()}/>
+            { isDropDownMenuDisplayed &&
+            <div className={styles.navDropdown}>
+               <FiUser onClick={() => navigateUser("user-profile")}/>
                <FiRefreshCcw onClick={() => refreshPage()}/>
+               <FiLogOut onClick={() => HandleLogout}/>
+            </div>
+            }
+            </div>
       </div>
    );
 }
