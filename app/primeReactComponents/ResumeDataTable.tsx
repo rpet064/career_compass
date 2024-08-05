@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { resume } from "@prisma/client";
 import { InputText } from 'primereact/inputtext';
 import { formatDate } from '../utility/dateFormatter';
 import { FiTrash2, FiEdit2 } from "react-icons/fi";
@@ -11,6 +10,7 @@ import { deleteResumeFromDatabase } from "../proxyApi/resume/deleteResumeFromDat
 import { dataTableComponentType } from "../types/dataTableComponentType";
 import { useNavigationWithParams } from "../utility/navigation"
 import { resumeDataTableColumnConfiguration } from '@/configurations/resumeColumnConfiguration';
+import { resumes } from '@prisma/client';
 
 const userid = 1;
 
@@ -33,7 +33,7 @@ const deleteResume = (resumeid: number) => {
   location.reload();
 }
 
-const ResumeDataTable: FC<{ resumeData: resume[] }> = ({ resumeData }) => {
+const ResumeDataTable: FC<{ resumeData: resumes[] }> = ({ resumeData }) => {
 
   let navigateWithParams = useNavigationWithParams();
     

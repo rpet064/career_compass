@@ -8,27 +8,17 @@ datasource db {
 }
 
 model jobapplications {
-  jobapplicationsid Int       @id @default(autoincrement())
-  userid            Int?
-  resumeid          Int?
-  joburl            String?   @db.VarChar(2048)
-  progress          String?   @db.VarChar(50)
-  sentiment         Int?
-  notes             String?
-  whencreated       DateTime? @default(now()) @db.Timestamp(6)
-  whendeleted       DateTime? @db.Timestamp(6)
-  resume            resume?   @relation(fields: [resumeid], references: [resumeid], onDelete: NoAction, onUpdate: NoAction)
-  users             users?    @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model resume {
-  resumeid          Int               @id @default(autoincrement())
-  resumename        String            @db.VarChar(255)
-  resumedescription String?
-  resumeurl         String?           @db.VarChar(2048)
-  whencreated       DateTime?         @default(now()) @db.Timestamp(6)
-  whendeleted       DateTime?         @db.Timestamp(6)
-  jobapplications   jobapplications[]
+  jobapplicationid Int       @id @default(autoincrement())
+  userid           Int?
+  resumeid         Int?
+  joburl           String?   @db.VarChar(255)
+  progress         String?   @db.VarChar(255)
+  sentiment        Int?
+  notes            String?   @db.VarChar(255)
+  whencreated      DateTime? @db.Timestamp(6)
+  whendeleted      DateTime? @db.Timestamp(6)
+  resume           resumes?  @relation(fields: [resumeid], references: [resumeid], onDelete: NoAction, onUpdate: NoAction)
+  users            users?    @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model roles {
@@ -58,6 +48,19 @@ model users {
   whendeleted     DateTime?         @db.Timestamptz(6)
   whencreated     DateTime          @default(now()) @db.Timestamptz(6)
   jobapplications jobapplications[]
+  resumes         resumes[]
   sessiontokens   sessiontokens[]
   roles           roles             @relation(fields: [roleid], references: [roleid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model resumes {
+  resumeid          Int               @id @default(autoincrement())
+  userid            Int?
+  resumename        String?           @db.VarChar(255)
+  resumedescription String?           @db.VarChar(1024)
+  resumeurl         String?           @db.VarChar(255)
+  whencreated       DateTime?         @db.Timestamp(6)
+  whendeleted       DateTime?         @db.Timestamp(6)
+  jobapplications   jobapplications[]
+  users             users?            @relation(fields: [userid], references: [userid], onDelete: NoAction, onUpdate: NoAction)
 }

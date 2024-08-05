@@ -1,7 +1,7 @@
-export const getJobApplicationDetails = async (jobApplicationId: number) => {
+export const getJobApplicationDetails = async (jobapplicationid: number) => {
     try {
       const url = new URL('http://localhost:3000/api/job-application/get-job-application');
-      url.searchParams.append('jobApplicationId', jobApplicationId.toString());
+      url.searchParams.append('jobapplicationid', jobapplicationid.toString());
 
       const response = await fetch(url, {
         method: 'GET',

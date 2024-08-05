@@ -10,13 +10,14 @@ import globals from "../app/styles/global.module.css";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { getResumes } from '@/proxyApi/resume/getResumes';
-import { resume } from '@prisma/client';
+import { resumes } from '@prisma/client';
 import { refreshPage } from '@/utility/refreshPage'
 
 export default function ManageResumes({ userid, username }: UserProps) {
 
   const [userId, setUserId] = useState(1);
   const [resumeData, setResumeData] = useState<resume[]>([]);
+  const [resumeData, setResumeData] = useState<resumes[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   if (userid === -1) {

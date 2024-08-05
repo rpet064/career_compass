@@ -1,7 +1,7 @@
 import { jobApplicationColumnType } from "@/types/jobApplicationColumnType";
 
 export const applicationDataTableColumnConfiguration: Array<jobApplicationColumnType> = [
-    { field: 'jobapplicationsid', header: 'Application', dataTableComponentType: 'redirectLink' },
+    { field: 'jobapplicationid', header: 'Application', dataTableComponentType: 'label' },
     { field: 'resumeid', header: 'Resume id', dataTableComponentType: 'label' },
     { field: 'progress', header: 'Progress', dataTableComponentType: 'label' },
     { field: 'sentiment', header: 'Sentiment', dataTableComponentType: 'label' },

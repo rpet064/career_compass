@@ -8,17 +8,17 @@ export default async function deleteJobApplicationHandler(req: NextApiRequest, r
         return res.status(405).json({ message: 'Method Not Allowed' });
     }
 
-    const { jobApplicationsId, userid } = req.query;
+    const { jobapplicationid, userid } = req.query;
 
     if (!userid || typeof userid !== 'string') {
         return res.status(400).json({ message: 'User id is required' });
     }
 
-    if (!jobApplicationsId || typeof jobApplicationsId !== 'string') {
+    if (!jobapplicationid || typeof jobapplicationid !== 'string') {
         return res.status(400).json({ message: 'Job application id is required' });
     }
 
-    let userIdAsInt, jobApplicationsIdAsInt;
+    let userIdAsInt, jobapplicationidAsInt;
     try {
         userIdAsInt = parseInt(userid, 10);
     } catch {
@@ -26,12 +26,12 @@ export default async function deleteJobApplicationHandler(req: NextApiRequest, r
     }
 
     try {
-        jobApplicationsIdAsInt = parseInt(jobApplicationsId, 10);
+        jobapplicationidAsInt = parseInt(jobapplicationid, 10);
     } catch {
         return res.status(400).json({ message: 'Job application id  must be a number' });
     }
 
-    let isJobApplicationDeleted = await deleteJobApplicationFromDatabase(userIdAsInt, jobApplicationsIdAsInt);
+    let isJobApplicationDeleted = await deleteJobApplicationFromDatabase(userIdAsInt, jobapplicationidAsInt);
 
     return res.status(200).json({
         message: `Job applications for user ${userid}`,
@@ -39,14 +39,12 @@ export default async function deleteJobApplicationHandler(req: NextApiRequest, r
     });
 }
 
-async function deleteJobApplicationFromDatabase(userid: number, jobApplicationId: number): Promise<boolean> {
-    console.log("id: " + userid)
-    console.log("jobApplicationId" + jobApplicationId)
+async function deleteJobApplicationFromDatabase(userid: number, jobapplicationid: number): Promise<boolean> {
     try {
-        let test = await prisma.jobapplications.update({
+        await prisma.jobapplications.update({
             where: {
                 userid: userid,
-                jobapplicationsid: jobApplicationId,
+                jobapplicationid: jobapplicationid,
             },
             data: {
                 whendeleted: new Date(),

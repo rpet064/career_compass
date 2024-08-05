@@ -48,7 +48,7 @@ export default async function deleteResumeHandler(req: NextApiRequest, res: Next
 
 async function deleteResumeFromDatabase(resumeId: number): Promise<boolean> {
     try {
-        await prisma.resume.update({
+        await prisma.resumes.update({
             where: {
                 resumeid: resumeId,
             },

@@ -1,4 +1,4 @@
-import { resume, PrismaClient } from "@prisma/client";
+import { resumes, PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getUserDetailsFromDatabase } from "../user/get-user";
 
@@ -35,9 +35,9 @@ export default async function getResumesHandler(req: NextApiRequest, res: NextAp
   }
 
 // TODO: Check if resumes belong to user
-async function getResumesFromDatabase(): Promise<resume[] | null> {
+async function getResumesFromDatabase(): Promise<resumes[] | null> {
     try{
-        let resumes = await prisma.resume.findMany({
+        let resumes = await prisma.resumes.findMany({
             where: {
                 whendeleted: null,
             }
