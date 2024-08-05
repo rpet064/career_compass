@@ -3,12 +3,11 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { formatDate } from '../utility/dateFormatter';
-import { FiTrash2, FiEdit2 } from "react-icons/fi";
+import { FiTrash2 } from "react-icons/fi";
 import globals from "../styles/global.module.css";
 import { errorMessage, successMessage } from "../utility/toastMessages";
 import { deleteResumeFromDatabase } from "../proxyApi/resume/deleteResumeFromDatabase";
 import { dataTableComponentType } from "../types/dataTableComponentType";
-import { useNavigationWithParams } from "../utility/navigation"
 import { resumeDataTableColumnConfiguration } from '@/configurations/resumeColumnConfiguration';
 import { resumes } from '@prisma/client';
 
@@ -35,8 +34,6 @@ const deleteResume = (resumeid: number) => {
 
 const ResumeDataTable: FC<{ resumeData: resumes[] }> = ({ resumeData }) => {
 
-  let navigateWithParams = useNavigationWithParams();
-    
   if (Array.isArray(resumeData)) {
     return (
       <DataTable value={resumeData}>
@@ -54,13 +51,6 @@ const ResumeDataTable: FC<{ resumeData: resumes[] }> = ({ resumeData }) => {
                 case 'inputText':
                   const safeValue = rowData[col.field] ?? "";
                   return <InputText type="text" value={safeValue} />;
-                  case 'redirectLink':
-                    return  <button className={globals.dataTableButton} type="button"
-                    onClick={() => navigateWithParams('/manage-resume', 'id', rowData.resumeid)}>{rowData.resumeid}</button>
-                  case 'editIcon':
-                    return  <button className={globals.dataTableButton} type="button"
-                      onClick={() => navigateWithParams('/manage-job-application', 'id', rowData.resumeid)}>
-                      <FiEdit2 className={globals.editIconStyle}/></button>
                 case 'deleteIcon':
                   return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteResume(rowData.resumeid))} />
                 default:
