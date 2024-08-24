@@ -16,9 +16,9 @@ import { refreshPage } from '@/utility/refreshPage'
 export default function ManageResumes({ userid, username }: UserProps) {
 
   const [userId, setUserId] = useState(1);
-  const [resumeData, setResumeData] = useState<resume[]>([]);
   const [resumeData, setResumeData] = useState<resumes[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [ isNewResumeSaved, setIsNewResumeSaved ] = useState(true);
 
   if (userid === -1) {
     userid = 1;
@@ -28,7 +28,7 @@ export default function ManageResumes({ userid, username }: UserProps) {
   const createNewResume = () => {
     let newResume = {
       resumeid: -1,
-      // TODO: userid
+      userid: -1,
       resumename: "",
       resumedescription: "",
       resumeurl: "",
@@ -37,6 +37,16 @@ export default function ManageResumes({ userid, username }: UserProps) {
     }
     setResumeData((prevResumeData) => [...prevResumeData, newResume]);
   }
+
+  useEffect(() => {
+    resumeData.forEach(resume => {
+      if(resume.resumeid < 1){
+        setIsNewResumeSaved(false);
+        return
+      }
+      setIsNewResumeSaved(true);
+    });
+  }, [resumeData]);
 
   useEffect(() => {
     fetchData();
@@ -70,9 +80,11 @@ export default function ManageResumes({ userid, username }: UserProps) {
               <p>No resumes found.</p>
             )
           )}
+          { isNewResumeSaved &&
           <div className={globals.buttonContainer}>
             <Button onClick={() => createNewResume()}>New</Button>
           </div>
+          }
         </Card>
         <div className={globals.buttonContainer}>
           <Button label="Save" onClick={() => alert('Button clicked')} />
