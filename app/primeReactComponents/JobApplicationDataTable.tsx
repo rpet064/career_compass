@@ -15,12 +15,12 @@ import { sentimentOptions } from '@/interfaces/sentimentOptions';
 
 const userid = 1;
 
-const deleteApplication = (jobapplicationsid: number) => {
-  if (!jobapplicationsid) {
+const deleteApplication = (jobapplicationid: number) => {
+  if (!jobapplicationid) {
     errorMessage("Unable to delete job application: job application id was blank");
     return;
   }
-  let isJobApplicationDeleted = deleteJobApplication(jobapplicationsid, userid);
+  let isJobApplicationDeleted = deleteJobApplication(jobapplicationid, userid);
 
   if (!isJobApplicationDeleted) {
     errorMessage("Unable to delete job application");
@@ -54,7 +54,7 @@ const JobApplicationDataTable: FC<{ jobApplicationData: jobapplications[] }> = (
                   return <Dropdown value={rowData[col.field]} options={sentimentOptions} optionLabel="name" 
                     placeholder="Select sentiment" />
                 case 'deleteIcon':
-                    return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteApplication(rowData.jobapplicationsid))} />
+                    return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteApplication(rowData.jobapplicationid))} />
                 default:
                   return <span>{rowData[col.field]}</span>;
               }
