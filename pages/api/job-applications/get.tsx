@@ -1,6 +1,7 @@
 import { jobapplications } from "@prisma/client";
 import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getUserDetailsFromDatabase } from "../user/get-user";
 
 const prisma = new PrismaClient();
 
@@ -20,6 +21,10 @@ export default async function getUserJobApplicationsHandler(req: NextApiRequest,
     } catch {
       return res.status(400).json({ message: 'User id must be a number' });
     }
+
+    let userDetails = await getUserDetailsFromDatabase(userIdAsInt)
+    if (!userDetails)
+      return res.status(400).json({ message: 'Invalid User'});
   
     let jobApplicationsList = await getAllJobApplicationsFromDatabase(userIdAsInt);
   

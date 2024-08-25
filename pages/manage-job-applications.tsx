@@ -13,6 +13,7 @@ import { getJobApplications } from '@/proxyApi/jobApplication/getJobApplications
 import { jobapplications } from '@prisma/client';
 import { refreshPage } from '@/utility/refreshPage'
 import { updateJobApplication } from '@/proxyApi/jobApplication/updateJobApplication';
+import { useAuthNavigation } from '@/utility/navigation';
 
 export default function ManageJobApplications({ userid, username }: UserProps) {
 
@@ -22,6 +23,8 @@ export default function ManageJobApplications({ userid, username }: UserProps) {
   const [dataHasChanged, setDataHasChanged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const navigate = useAuthNavigation();
 
   if (userid === -1) {
     userid = 1;
@@ -64,6 +67,11 @@ export default function ManageJobApplications({ userid, username }: UserProps) {
   const fetchData = async () => {
     try {
       const data = await getJobApplications(userId);
+
+      if(!data)
+        navigate('/create-account');
+
+      // User doesn't exist or not logged in 
       if (data.jobApplicationsList.length < 1) {
         return;
       }

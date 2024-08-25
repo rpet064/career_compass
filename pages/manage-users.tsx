@@ -12,12 +12,15 @@ import { Button } from 'primereact/button';
 import { getUsers } from '@/proxyApi/user/getUsers';
 import { users } from '@prisma/client';
 import { refreshPage } from '@/utility/refreshPage'
+import { useAuthNavigation } from '@/utility/navigation';
 
 export default function ManageUsers({ userid, username }: UserProps) {
 
   const [userId, setUserId] = useState(1);
   const [userData, setUserData] = useState<users[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useAuthNavigation();
 
   if (userid === -1) {
     userid = 1;
@@ -49,6 +52,11 @@ export default function ManageUsers({ userid, username }: UserProps) {
   const fetchData = async () => {
     try {
       const data = await getUsers(userId, roleId);
+
+      if(!data)
+        navigate('/create-account');
+
+      // User doesn't exist or not logged in 
       if (data.userList.length < 1) {
         return;
       }

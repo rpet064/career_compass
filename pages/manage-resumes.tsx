@@ -11,7 +11,8 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import { getResumes } from '@/proxyApi/resume/getResumes';
 import { resumes } from '@prisma/client';
-import { refreshPage } from '@/utility/refreshPage'
+import { refreshPage } from '@/utility/refreshPage';
+import { useAuthNavigation } from '@/utility/navigation';
 
 export default function ManageResumes({ userid, username }: UserProps) {
 
@@ -19,6 +20,8 @@ export default function ManageResumes({ userid, username }: UserProps) {
   const [resumeData, setResumeData] = useState<resumes[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ isNewResumeSaved, setIsNewResumeSaved ] = useState(true);
+
+  const navigate = useAuthNavigation();
 
   if (userid === -1) {
     userid = 1;
@@ -55,6 +58,12 @@ export default function ManageResumes({ userid, username }: UserProps) {
   const fetchData = async () => {
     try {
       const data = await getResumes(userId);
+
+      // User doesn't exist or not logged in 
+      if(!data)
+        navigate('/create-account');
+
+      // No resumes created
       if (data.resumeList.length < 1) {
         return;
       }
