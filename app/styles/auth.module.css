@@ -21,14 +21,12 @@
 }
 
  .header svg, .newAccountHeader svg{
-    padding-right: 0.5rem;
-    padding-left: 1rem;
-    padding-top: 0.75rem;
+    margin: 1rem 0.75rem 0.75rem 0.75rem;
 }
 
  .header span, .newAccountHeader span{
     font-size: 1.75rem;
-    padding-top: 0.75rem;
+    padding-top: 1rem;
 }
 
  .header > span:nth-child(3), .newAccountHeader > span:nth-child(3) {
@@ -63,6 +61,23 @@
 
 .authenticationLabel{
     text-align: left;
+    color: orangered;
+    font-size: 0.9rem;
+}
+
+.errorMessagesContainer{
+    display: flex;
+    flex-direction: column;
+    display: inline-flex;
+    width: 100%;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+}
+
+.authButton{
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-right: 1rem;
 }
 
 /* footer */
@@ -96,10 +111,7 @@
 
     .header span, .newAccountHeader span{
         font-size: 1.5rem !important;
-    }
-
-    .header svg{
-        padding-left: 1.5rem;
+        margin-top: 0.25rem;
     }
 }
 

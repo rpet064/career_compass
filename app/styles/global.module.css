@@ -7,27 +7,6 @@
     flex-direction: column;
 }
 
-.oneThirdWidthInputContainer{
-    width: 33%;
-}
-
-.halfWidthInputContainer{
-    width: 50%;
-}
-
-.oneThirdWidthInputContainer input, .halfWidthInputContainer input, .fullWidthInputContainer input{
-    width: 100%;
-    padding: 0.65rem 0rem;
-    font-size: 0.85rem;
-}
-
-@media screen and (max-width: 1200px){
-    .oneThirdWidthInputContainer, .halfWidthInputContainer{
-        display: block;
-        width: 100%;
-    }
-}
-
 .buttonContainer{
     display: flex;
     justify-content: right;

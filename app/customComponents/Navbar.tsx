@@ -27,7 +27,7 @@ const Navbar : FC<NavbarProps> = ({ userid }) => {
    }
 
    return (
-      <div className={`${styles.navbar} ${colour.lightGrayBoxShadow} ${colour.orangeBackground}`}>
+      <div className={`${styles.navbar} ${colour.lightGrayBoxShadow} ${colour.whiteBackground}`}>
          <div>
             <button onClick={() => navigateUser("home")}>
             <FiCompass /> <span className={styles.logoText}>Career Compass</span></button>

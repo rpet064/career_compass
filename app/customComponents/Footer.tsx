@@ -4,7 +4,7 @@ import colour from '../styles/colour.module.css';
 
 const Navbar = () => {
     return (
-        <div className={`${styles.footer} ${colour.lightGrayBoxShadow} ${colour.orangeBackground}`}>
+        <div className={`${styles.footer} ${colour.lightGrayBoxShadow} ${colour.whiteBackground}`}>
             <a href="https://github.com/rpet064" target="_blank" rel="noopener noreferrer">
                 <FiGithub title="Github" />
             </a>

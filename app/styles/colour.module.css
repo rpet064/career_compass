@@ -7,6 +7,11 @@
 }
 
 .orangeBackground{
+    background-color: white;
+    color: #FFAF45;
+}
+
+.whiteBackground{
     background-color: #FFAF45;
     color: white;
 }

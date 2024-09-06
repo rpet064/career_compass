@@ -24,15 +24,31 @@
     margin: 1rem;
 }
 
+.newAccountInputContainer input{
+    width: calc(33% - 1rem);
+    margin: 0.25rem;
+}
+
 @media screen and (max-width: 1200px){
+
     .newAccountContainer{
         top: 50vh !important;
         height: 80vh !important;
+        width: 95vw;
+    }
+
+    .newAccountInputContainer input{
+        width: calc(50% - 1.5rem);
     }
 }
 
 @media screen and (max-width: 768px){
+
     .newAccountContainer{
         width: 95vw;
+    }
+
+    .newAccountInputContainer input{
+        width: calc(100% - 2.25rem);
     }
 }

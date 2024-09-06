@@ -4,8 +4,8 @@ import { FaCompass } from "react-icons/fa";
 
 const AuthHeader = () => {
     return(
-        <div className={`${styles.header} ${colour.orangeBackground}`}>
-        <FaCompass className={colour.whiteFont} />
+        <div className={`${styles.header} ${colour.whiteBackground}`}>
+        <FaCompass className={`${colour.whiteFont}`} />
         <span>Sign In</span>
         <span>|</span> <span>Career Compass</span>
      </div>
