@@ -77,7 +77,6 @@
 .authButton{
     font-size: 0.75rem;
     font-weight: bold;
-    margin-right: 1rem;
 }
 
 /* footer */
@@ -86,7 +85,6 @@
     align-items: flex-end;
     justify-content: flex-end;
     width: 97.5%;
-    height: 40%;
     padding: 0.5rem 0rem;
 }
 
@@ -95,7 +93,7 @@
     height: 2.25rem;
     border-radius: 0.25rem;
     background: transparent;
-    font-weight: semibold;
+    margin-right: 1rem;
 }
 
 .loginFooter button:hover{

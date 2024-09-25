@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../app/styles/auth.module.css";
 import signup from "../app/styles/signup.module.css";
 import colour from "../app/styles/colour.module.css";
-import SignupHeader  from '@/customComponents/signupComponents/SignupHeader';
+import AuthHeader  from '@/customComponents/AuthHeader';
 import AuthSignUpBody from '@/customComponents/AuthSignUpBody';
 
 const CreateAccount = () => {
@@ -11,7 +11,7 @@ const CreateAccount = () => {
       <div style={{ height: containerHeight }} 
          className={`${styles.loginContainer} ${signup.newAccountContainer} ${colour.grayBoxShadow}`}>
 
-         <SignupHeader/>
+         <AuthHeader title={"Create Account"}/>
          <AuthSignUpBody setContainerHeight={setContainerHeight}/>
       </div>
    );

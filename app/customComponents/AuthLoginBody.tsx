@@ -7,6 +7,7 @@ import { useAuthNavigation } from "../utility/navigation";
 import { errorMessage } from "../utility/toastMessages";
 import globals from "../styles/global.module.css";
 import { createNewTokenInLocalStorage } from "../utility/localStorageManager";
+import { InputText } from "primereact/inputtext";
 
 const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
    const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
@@ -28,9 +29,9 @@ const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
    // Increase container width if displaying error message
    useEffect(() => {
       if (usernameErrorMessage !== null || passwordErrorMessage !== null) {
-         setContainerHeight("32.5%");
+         setContainerHeight("37.5%");
       } else {
-         setContainerHeight("30%");
+         setContainerHeight("35%");
       }
    }, [usernameErrorMessage, passwordErrorMessage, setContainerHeight]);
 
@@ -152,7 +153,7 @@ const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
          <form onSubmit={handleLogin} className={auth.authForm}>
             
             <div className={globals.fullWidthInputContainer}>
-               <input
+               <InputText
                   className={colour.grayBorder}
                   type="username"
                   name="username"
@@ -164,7 +165,7 @@ const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
             </div>
 
             <div className={globals.fullWidthInputContainer}>
-               <input
+               <InputText
                   className={colour.grayBorder}
                   type="password"
                   name="password"
@@ -177,8 +178,8 @@ const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
 
             {/* Footer */}
             <div className={auth.loginFooter}>
-               <button type="submit" className={`${auth.authButton} ${colour.grayBorder}`} 
-                  disabled={buttonDisabled}>Login</button>
+               <button type="submit" className={`${auth.authButton} ${colour.orangeBackground} ${colour.grayBorder} ${colour.lightGrayBoxShadow}`} 
+               disabled={buttonDisabled}>Login</button>
             </div>
          </form>
       </div >
