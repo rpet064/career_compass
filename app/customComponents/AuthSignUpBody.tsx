@@ -1,5 +1,5 @@
 import styles from "../styles/auth.module.css";
-import globals from "../styles/global.module.css";
+import { InputText } from 'primereact/inputtext';
 import colour from "../styles/colour.module.css";
 import auth from "../styles/auth.module.css";
 import { FC, useState, useEffect } from "react";
@@ -14,9 +14,6 @@ const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
     const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
     const [emailErrorMessage, setEmailErrorMessage] = useState<string | null>(null);
     const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
-
-    // Validation
-    let [passwordsMatch, setPasswordsMatch] = useState<boolean>(false);
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
     const [formData, setFormData] = useState({
@@ -32,58 +29,52 @@ const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
 
     const navigate = useAuthNavigation();
 
-    // // Increase container width if displaying error message
-    // useEffect(() => {
-    //     if (usernameErrorMessage !== null || passwordErrorMessage !== null) {
-    //         setNewAccountContainerHeight("52.5%");
-    //     } else {
-    //         setNewAccountContainerHeight("50%");
-    //     }
-    // }, [usernameErrorMessage, passwordErrorMessage, setNewAccountContainerHeight]);
-
-    // // Manage username error message
-    // useEffect(() => {
-    //     if (username === undefined) {
-    //         setUsernameErrorMessage(null);
-    //         return;
-    //     }
-    //     username.length > 0 ? setUsernameErrorMessage(null) : setUsernameErrorMessage("This field is required");
-    // }, [username]);
-
-    // // Manage password error message
-    // useEffect(() => {
-    //     if (password === undefined) {
-    //         setPasswordErrorMessage(null);
-    //         return;
-    //     }
-    //     password.length > 0 ? setPasswordErrorMessage(null) : setPasswordErrorMessage("This field is required");
-    // }, [password, setPasswordErrorMessage]);
-
-    // // Manage button validation
-    // useEffect(() => {
-    //     if (username !== undefined && password !== undefined && username.length > 0 && password.length > 0) {
-    //         setButtonDisabled(false);
-    //     } else {
-    //         setButtonDisabled(true);
-    //     }
-    // }, [username, password, setButtonDisabled]);
-
-    // Currently disable button if passwords don't match
-    // TODO: implement full validation
+    // Manage username error message
     useEffect(() => {
-        setButtonDisabled(passwordsMatch);
-    }, [passwordsMatch, setButtonDisabled]);
+        if (formData.username === undefined) {
+            setUsernameErrorMessage(null);
+            return;
+        }
+        formData.username.length > 0 ? setUsernameErrorMessage(null) : setUsernameErrorMessage("Username is required");
+    }, [formData.username]);
+
+    // Manage password error message
+    useEffect(() => {
+        if (formData.password === undefined) {
+            setPasswordErrorMessage(null);
+            return;
+        }
+        formData.password.length > 0 ? setPasswordErrorMessage(null) : setPasswordErrorMessage("Password is required");
+    }, [formData.password, setPasswordErrorMessage]);
+
+    // Manage button validation
+    useEffect(() => {
+        if (formData.username !== undefined && formData.password !== undefined && formData.username.length > 0 && formData.password.length > 0) {
+            setButtonDisabled(false);
+        } else {
+            setButtonDisabled(true);
+        }
+    }, [formData.username, formData.password, setButtonDisabled]);
+
+    
+    // Check if error messages are all empty
+    useEffect(() => {
+        var userDetailsvalid = usernameErrorMessage?.trim().length === 0
+        && emailErrorMessage?.trim().length === 0
+        && passwordErrorMessage?.trim().length === 0;
+        setButtonDisabled(userDetailsvalid);
+    }, [usernameErrorMessage, emailErrorMessage, passwordErrorMessage ]);
 
     // Check if password matches confirm password
     useEffect(() => {
         // User hasn't entered password
-        if(!formData.password && !formData.confirmPassword){
+        if (!formData.password && !formData.confirmPassword) {
             return;
         }
 
         // Check if passwords matches
         let passwordsMatch = formData.password !== formData.confirmPassword
-        if(passwordsMatch){
+        if (passwordsMatch) {
             setPasswordErrorMessage("");
             return;
         }
@@ -117,94 +108,71 @@ const AuthSignUpBody: FC<AuthSignupBodyProps> = (setContainerHeight) => {
             <SignupRedirectLink />
 
             <form onSubmit={handleSubmit} className={signup.newAccountInputContainer}>
-                <div className={globals.halfWidthInputContainer}>
-                    <input
-                        className={colour.grayBorder}
-                        type="username"
-                        name="username"
-                        placeholder="Username"
-                        value={formData.username}
-                        onChange={handleChange} />
-                    <span className={styles.authenticationLabel}
-                    >{usernameErrorMessage}</span>
-                </div>
+                <InputText
+                    className={colour.grayBorder}
+                    type="username"
+                    name="username"
+                    placeholder="Username"
+                    value={formData.username}
+                    onChange={handleChange} />
 
-                <div className={globals.halfWidthInputContainer}>
-                    <input
-                        className={colour.grayBorder}
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={handleChange} />
-                    <span className={styles.authenticationLabel}
-                    >{emailErrorMessage}</span>
-                </div>
+                <InputText
+                    className={colour.grayBorder}
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange} />
 
-                <div className={globals.halfWidthInputContainer}>
-                    <input
-                        className={colour.grayBorder}
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange} />
-                    <span className={styles.authenticationLabel}
-                    >{passwordErrorMessage}</span>
-                </div>
+                <InputText
+                    className={colour.grayBorder}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange} />
 
-                <div className={globals.halfWidthInputContainer}>
-                    <input
-                        className={colour.grayBorder}
-                        type="confirmPassword"
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        value={formData.confirmPassword}
-                        onChange={handleChange} />
-                    <span className={styles.authenticationLabel}
-                    >{passwordErrorMessage}</span>
-                </div>
+                <InputText
+                    className={colour.grayBorder}
+                    type="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange} />
 
-                <div className={globals.thirdWidthInputContainer}>
-                    <input
-                        className={colour.grayBorder}
-                        type="Title"
-                        name="title"
-                        placeholder="Title"
-                        value={formData.title}
-                        onChange={handleChange} />
-                    <span className={styles.authenticationLabel}
-                    >{emailErrorMessage}</span>
-                </div>
+                <InputText
+                    className={colour.grayBorder}
+                    type="Title"
+                    name="title"
+                    placeholder="Title"
+                    value={formData.title}
+                    onChange={handleChange} />
 
-                <div className={globals.thirdWidthInputContainer}>
-                    <input
-                        className={colour.grayBorder}
-                        type="First Name"
-                        name="firstName"
-                        placeholder="First Name"
-                        value={formData.firstName}
-                        onChange={handleChange} />
-                    <span className={styles.authenticationLabel}
-                    >{emailErrorMessage}</span>
-                </div>
+                <InputText
+                    className={colour.grayBorder}
+                    type="First Name"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleChange} />
 
-                <div className={globals.thirdWidthInputContainer}>
-                    <input
-                        className={colour.grayBorder}
-                        type="Last Name"
-                        name="lastName"
-                        placeholder="Last Name"
-                        value={formData.lastName}
-                        onChange={handleChange} />
-                    <span className={styles.authenticationLabel}
-                    >{emailErrorMessage}</span>
-                </div>
+                <InputText
+                    className={colour.grayBorder}
+                    type="Last Name"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleChange} />
+
+                    <div className={auth.errorMessagesContainer}>
+                        <span className={styles.authenticationLabel}>{usernameErrorMessage}</span>
+                        <span className={styles.authenticationLabel}>{emailErrorMessage}</span>
+                        <span className={styles.authenticationLabel}>{passwordErrorMessage}</span>
+                    </div>
 
                 {/* Footer */}
                 <div className={auth.loginFooter}>
-                    <button type="submit" className={`${auth.authButton} ${colour.grayBorder}`}
-                        disabled={buttonDisabled}>Create Account</button>
+                    <button type="submit" className={`${auth.authButton} ${colour.orangeBackground} ${colour.grayBorder} ${colour.lightGrayBoxShadow}`} disabled={buttonDisabled}>Create</button>
                 </div>
             </form>
         </div>
