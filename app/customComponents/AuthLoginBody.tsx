@@ -1,3 +1,5 @@
+'use client'
+
 import auth from "../styles/auth.module.css";
 import AuthRedirectLink from "./loginComponents/AuthRedirectLink";
 import { useState, useEffect, FC } from "react";
@@ -6,13 +8,14 @@ import AuthLoginBodyProps from "../interfaces/authLoginBodyProps";
 import { useAuthNavigation } from "../utility/navigation";
 import { errorMessage } from "../utility/toastMessages";
 import globals from "../styles/global.module.css";
-import { createNewTokenInLocalStorage } from "../utility/localStorageManager";
 import { InputText } from "primereact/inputtext";
+import { useCookies } from 'react-cookie';
 
 const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
    const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | null>(null);
    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | null>(null);
    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+   const [cookies, setCookie, removeCookie] = useCookies(['userId', 'username'])
 
    type FormData = {
       username: string;
@@ -90,22 +93,8 @@ const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
          const data = await response.json();
          if (response.status === 200) {
 
-            // Create token and get from server
-            let token = await createNewToken(data.userid, data.username)
-
-            if(!token){
-               throw new Error("Token could not be created")
-            }
-
-            // Create token in local storage
-            if(!token){
-               throw new Error("Token could not be saved to database")
-            }
-            let savedToLocalStorage = createNewTokenInLocalStorage(token)
-
-            if(!savedToLocalStorage){
-               throw new Error("Token could not be saved to local storage")
-            }
+            setCookie("userId", data.userId);
+            setCookie("username", data.username);
 
             navigate("/home");
          } else {
@@ -114,36 +103,6 @@ const AuthLoginBody: FC<AuthLoginBodyProps> = ({ setContainerHeight }) => {
       } catch (error) {
          errorMessage(`Error logging in: ${await error}`);
       }
-   }
-
-   const createNewToken = async (userid: string, username : string): Promise<string | null> => {
-
-      let tokenData = {
-         userid: userid,
-         username: username,
-      }
-
-      try{
-         const response = await fetch("/api/authentication/token", {
-            method: "POST",
-            headers: {
-               "Content-Type": "application/json",
-            },
-            body: JSON.stringify(tokenData),
-         });
-
-         const data = await response.json();
-
-         if (response.status === 200) {
-            return data.token
-         }
-         throw new Error(`Error creating new token: ${await data.response.text()}`);
-
-      } catch (error){
-         errorMessage(`Error creating new token: ${await error}`);
-         return null;
-      }
-
    }
 
    return (

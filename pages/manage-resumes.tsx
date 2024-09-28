@@ -13,20 +13,16 @@ import { getResumes } from '@/proxyApi/resume/getResumes';
 import { resumes } from '@prisma/client';
 import { refreshPage } from '@/utility/refreshPage';
 import { useAuthNavigation } from '@/utility/navigation';
+import { useCookies } from 'react-cookie'
 
-export default function ManageResumes({ userid, username }: UserProps) {
-
-  const [userId, setUserId] = useState(1);
+export default function ManageResumes() {
+  const [userId, setUserId] = useState<number | null>(null);
   const [resumeData, setResumeData] = useState<resumes[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ isNewResumeSaved, setIsNewResumeSaved ] = useState(true);
+  const [cookies, setCookie, removeCookie] = useCookies(['userId'])
 
   const navigate = useAuthNavigation();
-
-  if (userid === -1) {
-    userid = 1;
-    setUserId(userid);
-  }
 
   const createNewResume = () => {
     let newResume = {
@@ -57,6 +53,9 @@ export default function ManageResumes({ userid, username }: UserProps) {
 
   const fetchData = async () => {
     try {
+      if(!userId)
+        return;
+
       const data = await getResumes(userId);
 
       // User doesn't exist or not logged in 
@@ -75,16 +74,22 @@ export default function ManageResumes({ userid, username }: UserProps) {
     }
   };
 
+    // Set userId from cookies
+    useEffect(() => {
+      if(cookies.userId)
+        setUserId(cookies.userId)
+    }, [cookies]);
+
   return (
     <main>
-      <Navbar userid={userid} />
+      <Navbar userId={userId} />
       <section>
         <Card title="Resumes">
           {isLoading ? (
             <LoadingSpinner />
           ) : (
             resumeData ? (
-              <ResumeDataTable resumeData={resumeData}/>
+              <ResumeDataTable resumeData={resumeData} userIdParam={userId}/>
             ) : (
               <p>No resumes found.</p>
             )

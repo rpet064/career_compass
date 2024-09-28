@@ -11,7 +11,6 @@ import { deleteUserFromDatabase } from "../proxyApi/user/deleteUser";
 import { dataTableComponentType } from "../types/dataTableComponentType";
 import { userColumnConfiguration } from '@/configurations/userColumnConfiguration';
 
-const userid = 1;
 const roleId = 1;
 
 type ColumnConfig = {
@@ -20,7 +19,7 @@ type ColumnConfig = {
     dataTableComponentType?: dataTableComponentType;
 };
 
-const deleteUser = (userid: number) => {
+const deleteUser = (userid: number| null) => {
     if (!userid) {
         errorMessage("Unable to delete user: user id was blank")
         return;

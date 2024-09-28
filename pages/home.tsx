@@ -1,7 +1,6 @@
 import Navbar from '@/customComponents/Navbar';
 import Footer from '@/customComponents/Footer';
 import { checkAuth } from '@/utility/checkAuth';
-import UserProps from '@/interfaces/userProps';
 import { NextPageContext } from 'next';
 import { Chart } from 'primereact/chart';
 import { useState, useEffect } from 'react';
@@ -11,8 +10,8 @@ import { getJobApplicationsByMonth } from '@/proxyApi/jobApplication/getJobAppli
 import { jobApplicationsByMonth } from '@/interfaces/jobApplicationsByMonth';
 import { Card } from 'primereact/card';
 
-export default function Home({ userid, username }: UserProps) {
-  const [userId, setUserId] = useState(1);
+export default function Home() {
+  const [userId, setUserId] = useState<number | null>(null);
   const [jobApplicationsByMonth, setJobApplicationsByMonth] = useState<jobApplicationsByMonth[]>([]);
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
@@ -30,11 +29,8 @@ export default function Home({ userid, username }: UserProps) {
 
   const updateAtIndex = (index: number, newValue: number) => {
     setGraphData(prevState => {
-      // Create a copy of the previous state
       const newState = [...prevState];
-      // Update the value at the specified index
       newState[index] = newValue;
-      // Return the new state array
       return newState;
     });
   };
@@ -60,6 +56,9 @@ export default function Home({ userid, username }: UserProps) {
   };
 
   useEffect(() => {
+    if(!userId)
+      return
+
     fetchData(userId);
   }, [userId, isGraphDataFetched]);
 
@@ -99,7 +98,7 @@ export default function Home({ userid, username }: UserProps) {
 
   return (
       <main>
-      <Navbar userid={userid} />
+      <Navbar userId={userId} />
       <section>
       <Card title="Home">
         {jobApplicationsByMonth ? (

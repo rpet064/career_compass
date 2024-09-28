@@ -1,7 +1,6 @@
 import Navbar from '@/customComponents/Navbar';
 import Footer from '@/customComponents/Footer';
 import { checkAuth } from '@/utility/checkAuth';
-import UserProps from '@/interfaces/userProps';
 import { NextPageContext } from 'next';
 import { useState, useEffect } from 'react';
 import LoadingSpinner from '@/customComponents/LoadingSpinner';
@@ -10,9 +9,10 @@ import { InputText } from "primereact/inputtext";
 import globals from "../app/styles/global.module.css";
 import { getUserDetails } from '@/proxyApi/user/getUserDetails';
 import { UserDetails } from '@/interfaces/userDetails'
+import { useCookies } from 'react-cookie'
 
-export default function UserProfile({ userid, username }: UserProps) {
-
+export default function UserProfile() {
+  const [userId, setUserId] = useState<number | null>(null);
   const [userDetails, setUserDetails] = useState<UserDetails>({
     userid: '',
     roleid: '',
@@ -24,16 +24,18 @@ export default function UserProfile({ userid, username }: UserProps) {
     whencreated: '',
   });
   const [isLoading, setIsLoading] = useState(true);
-
-  let userId = 1;
+  const [cookies, setCookie, removeCookie] = useCookies(['userId'])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getUserDetails(userId);
-        if (data.userDetails.length < 1) {
+        if(!userId)
           return;
-        }
+
+        const data = await getUserDetails(userId);
+
+        if (data.userDetails.length < 1)
+          return;
 
         setUserDetails(data.userDetails);
         setIsLoading(false);
@@ -47,7 +49,7 @@ export default function UserProfile({ userid, username }: UserProps) {
 
   return (
     <main>
-      <Navbar userid={userid} />
+      <Navbar userId={userId} />
       <section>
         {isLoading ? (
           <LoadingSpinner />

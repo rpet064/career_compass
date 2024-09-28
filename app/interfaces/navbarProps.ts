@@ -1,3 +1,3 @@
 export default interface NavbarProps {
-    userid: number;
+    userId: number | null;
 }

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -11,20 +11,19 @@ import { dataTableComponentType } from "../types/dataTableComponentType";
 import { resumeDataTableColumnConfiguration } from '@/configurations/resumeColumnConfiguration';
 import { resumes } from '@prisma/client';
 
-const userid = 1;
+const deleteResume = (resumeid: number, userId: number| null) => {
 
-const deleteResume = (resumeid: number) => {
   if (!resumeid) {
     errorMessage("Unable to delete resume: resume id was blank")
     return;
   }
 
-  if (!userid) {
+  if (!userId) {
     errorMessage("Unable to delete resume: userid id was blank")
     return;
   }
 
-  let isResumeDeleted = deleteResumeFromDatabase(userid, resumeid)
+  let isResumeDeleted = deleteResumeFromDatabase(userId, resumeid)
   if (!isResumeDeleted) {
     errorMessage("Unable to delete resume")
     return;
@@ -32,7 +31,9 @@ const deleteResume = (resumeid: number) => {
   location.reload();
 }
 
-const ResumeDataTable: FC<{ resumeData: resumes[] }> = ({ resumeData }) => {
+const ResumeDataTable: FC<{ resumeData: resumes[]; userIdParam: number | null }> = ({ resumeData, userIdParam }) => {
+
+  const [userId, setUserId] = useState<number | null>(userIdParam);
 
   if (Array.isArray(resumeData)) {
     return (
@@ -52,7 +53,7 @@ const ResumeDataTable: FC<{ resumeData: resumes[] }> = ({ resumeData }) => {
                   const safeValue = rowData[col.field] ?? "";
                   return <InputText type="text" value={safeValue} />;
                 case 'deleteIcon':
-                  return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteResume(rowData.resumeid))} />
+                  return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteResume(rowData.resumeid, userId))} />
                 default:
                   return <span>{rowData[col.field]}</span>;
               }

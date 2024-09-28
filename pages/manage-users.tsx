@@ -13,21 +13,17 @@ import { getUsers } from '@/proxyApi/user/getUsers';
 import { users } from '@prisma/client';
 import { refreshPage } from '@/utility/refreshPage'
 import { useAuthNavigation } from '@/utility/navigation';
+import { useCookies } from 'react-cookie'
 
-export default function ManageUsers({ userid, username }: UserProps) {
+export default function ManageUsers() {
 
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState<number | null>(null);
   const [userData, setUserData] = useState<users[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cookies, setCookie, removeCookie] = useCookies(['userId'])
+
 
   const navigate = useAuthNavigation();
-
-  if (userid === -1) {
-    userid = 1;
-    setUserId(userid);
-  }
-
-  const roleId = 1;
 
   const createNewUser = () => {
     let newUser = {
@@ -50,7 +46,11 @@ export default function ManageUsers({ userid, username }: UserProps) {
   }, [userId]);
 
   const fetchData = async () => {
+    const roleId = 1;
     try {
+      if(!userId)
+        return;
+
       const data = await getUsers(userId, roleId);
 
       if(!data)
@@ -67,9 +67,15 @@ export default function ManageUsers({ userid, username }: UserProps) {
     }
   };
 
+    // Set userId from cookies
+    useEffect(() => {
+      if(cookies.userId)
+        setUserId(cookies.userId)
+    }, [cookies]);
+
   return (
     <main>
-      <Navbar userid={userid} />
+      <Navbar userId={userId} />
       <section>
         <Card title="Users">
           {isLoading ? (

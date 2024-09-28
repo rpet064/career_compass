@@ -14,29 +14,26 @@ import { jobapplications } from '@prisma/client';
 import { refreshPage } from '@/utility/refreshPage'
 import { updateJobApplication } from '@/proxyApi/jobApplication/updateJobApplication';
 import { useAuthNavigation } from '@/utility/navigation';
+import { useCookies } from 'react-cookie'
 
-export default function ManageJobApplications({ userid, username }: UserProps) {
-
-  const [userId, setUserId] = useState(1);
+export default function ManageJobApplications() {
+  const [userId, setUserId] = useState<number | null>(null);
   const [jobApplicationData, setJobApplicationData] = useState<jobapplications[]>([]);
   const [jobApplicationDataOnLoad, setJobApplicationDataOnLoad] = useState<jobapplications[]>([]);
   const [dataHasChanged, setDataHasChanged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['userId'])
+
 
   const navigate = useAuthNavigation();
-
-  if (userid === -1) {
-    userid = 1;
-    setUserId(userid);
-  }
 
   const jobApplicationOnLoadData = jobApplicationData;
 
   const createNewJobApplication = () => {
     let newJobApplication = {
       jobapplicationid: -1,
-      userid: userid,
+      userid: userId,
       resumeid: 1,
       joburl: "",
       progress: "",
@@ -66,6 +63,9 @@ export default function ManageJobApplications({ userid, username }: UserProps) {
 
   const fetchData = async () => {
     try {
+      if(!userId)
+        return;
+
       const data = await getJobApplications(userId);
 
       if(!data)
@@ -85,24 +85,30 @@ export default function ManageJobApplications({ userid, username }: UserProps) {
 
   const saveData = async () => {
     try {
-      if(dataHasChanged){
-        updateJobApplication(jobApplicationData, userid);
+      if(dataHasChanged && userId){
+        updateJobApplication(jobApplicationData, userId);
     }
   } catch (error) {
       console.error('Error saving job application:', error);
   }
   };
 
+    // Set userId from cookies
+    useEffect(() => {
+      if(cookies.userId)
+        setUserId(cookies.userId)
+    }, [cookies]);
+
   return (
     <main>
-      <Navbar userid={userid} />
+      <Navbar userId={userId} />
       <section>
         <Card title="Job applications">
           {isLoading ? (
             <LoadingSpinner />
           ) : (
             jobApplicationData ? (
-              <JobApplicationDataTable jobApplicationData={jobApplicationData} />
+              <JobApplicationDataTable jobApplicationData={jobApplicationData} userIdParam={userId}/>
             ) : (
               <p>No job applications found.</p>
             )

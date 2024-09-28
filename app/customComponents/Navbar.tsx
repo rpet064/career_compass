@@ -7,7 +7,7 @@ import NavbarProps from "../interfaces/navbarProps";
 import { HandleLogout } from '../proxyApi/authentication/handleLogout';
 import { refreshPage } from '@/utility/refreshPage'
 
-const Navbar : FC<NavbarProps> = ({ userid }) => {
+const Navbar : FC<NavbarProps> = ({ userId }) => {
    const [ isDropDownMenuDisplayed, toggleDropDownMenuDisplayed] = useState<boolean>(false);
 
    const navigate = useAuthNavigation();

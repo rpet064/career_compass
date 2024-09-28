@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Dropdown } from 'primereact/dropdown';
@@ -13,14 +13,13 @@ import { applicationDataTableColumnConfiguration } from '@/configurations/jobApp
 import { progressOptions } from '@/interfaces/progressOptions';
 import { sentimentOptions } from '@/interfaces/sentimentOptions';
 
-const userid = 1;
+const deleteApplication = (jobapplicationid: number, userId: number | null) => {
 
-const deleteApplication = (jobapplicationid: number) => {
-  if (!jobapplicationid) {
+  if (!jobapplicationid || !userId) {
     errorMessage("Unable to delete job application: job application id was blank");
     return;
   }
-  let isJobApplicationDeleted = deleteJobApplication(jobapplicationid, userid);
+  let isJobApplicationDeleted = deleteJobApplication(jobapplicationid, userId);
 
   if (!isJobApplicationDeleted) {
     errorMessage("Unable to delete job application");
@@ -29,7 +28,9 @@ const deleteApplication = (jobapplicationid: number) => {
   location.reload();
 }
 
-const JobApplicationDataTable: FC<{ jobApplicationData: jobapplications[] }> = ({ jobApplicationData }) => {
+const JobApplicationDataTable: FC<{ jobApplicationData: jobapplications[], userIdParam: number | null }> = ({ jobApplicationData, userIdParam }) => {
+  const [userId, setUserId] = useState<number | null>(userIdParam);
+
   if (Array.isArray(jobApplicationData)) {
     return (
       <DataTable value={jobApplicationData}>
@@ -54,7 +55,7 @@ const JobApplicationDataTable: FC<{ jobApplicationData: jobapplications[] }> = (
                   return <Dropdown value={rowData[col.field]} options={sentimentOptions} optionLabel="name" 
                     placeholder="Select sentiment" />
                 case 'deleteIcon':
-                    return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteApplication(rowData.jobapplicationid))} />
+                    return <FiTrash2 className={globals.deleteIconStyle} onClick={() => (deleteApplication(rowData.jobapplicationid, userId))} />
                 default:
                   return <span>{rowData[col.field]}</span>;
               }
