@@ -6,7 +6,7 @@ export default function Main() {
   const navigate = useAuthNavigation();
 
   useEffect(() => {
-    navigate('/home');
+    navigate('/login');
  }, [navigate]);
 
   return (
